@@ -32,6 +32,11 @@ public class CSC216ArrayListTest {
 	@Test
 	public void testCSC216ArrayList() {
 		//Test that the list field is created correctly.
+		/*try {
+			
+		} catch () {
+			
+		}*/
 	}
 
 	/**
