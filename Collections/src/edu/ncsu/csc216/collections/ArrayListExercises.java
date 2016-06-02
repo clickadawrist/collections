@@ -67,5 +67,5 @@ public class ArrayListExercises {
 			list.add(i, 42);
 		}
 	}
-
+	//weada
 }
