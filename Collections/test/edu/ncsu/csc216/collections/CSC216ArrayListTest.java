@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+
 /**
  * Tests CSC216ArrayList class.
  * @author SarahHeckman and Manaka Green and Jerry Zhang
@@ -53,7 +55,6 @@ public class CSC216ArrayListTest {
 	 * after each insertion.  Additionally, the bounds of the list should be checked and null
 	 * elements should not be added to the list.  Finally, test that the ArrayList with an
 	 * initial capacity of 10 grows when an 11th element is added.
-	 * Test method for {@link edu.ncsu.csc216.collections.CSC216ArrayList#add(int, java.lang.Object)}.
 	 */
 	@Test
 	public void testAddIntE() {
@@ -72,30 +73,66 @@ public class CSC216ArrayListTest {
 		assertEquals("apple", list.get(0));
 		
 		//Add element to the front of a list
-		
+		list.add(0, "banana");
+		assertEquals(2, list.size());
+		assertEquals("banana", list.get(0));
+		//**just to make sure apple is still there...
+		assertEquals("apple", list.get(1));
 		
 		//Add element to the middle of a list
-		
+		list.add(list.size() / 2, "cherry");
+		//**^ the division symbol cuts off anything past the decimal point (I think)
+		assertEquals(3, list.size());
+		assertEquals("cherry", list.get(1));
 		
 		//Add element to the back of a list
-		
+		//**currently the list is size 3, last index at 2.
+		//**vv index @ 3 dragonfruit; meaning list.size() = 4th element is dragonfruit
+		list.add(list.size(), "dragonfruit");
+		assertEquals(4, list.size());
+		assertEquals("dragonfruit", list.get(3));
 		
 		//Attempt to add a null element.  Check that the element
 		//was not added.
-		
+		try {
+			list.add(0, null);
+			fail();
+		} catch (NullPointerException e) {
+			assertEquals(4, list.size());
+			assertNotNull(list.get(0));
+		}
 		
 		//Attempt to add at index -1.  Check that the element was not
 		//added.
-		
+		try {
+			list.add(-1, "durian");
+			fail();
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(4, list.size());
+			assertEquals("banana", list.get(0));
+		}
 		
 		//Attempt to add at index 5 (since there are 4 elements in the list).
 		//Check that the element was not added.
-		
+		try {
+			list.add(5, "eggfruit");
+			fail();
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(4, list.size());
+			assertEquals("dragonfruit", list.get(3));
+		}
 		
 		//Test adding an 11th element to an ArrayList with an initial 
 		//capacity of 10.
-		
-				
+		list.add(list.size(), "elderberry");
+		list.add(list.size(), "fig");
+		list.add(list.size(), "grape");
+		list.add(list.size(), "huckleberry");
+		list.add(list.size(), "itapalmfruit");
+		list.add(list.size(), "jujube");
+		list.add(list.size(), "kiwi");
+		assertEquals(11, list.size());
+		assertEquals("kiwi", list.get(10));
 	}
 
 	/**
