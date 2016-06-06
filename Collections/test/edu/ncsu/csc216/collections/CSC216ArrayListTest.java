@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
+
 
 /**
  * Tests CSC216ArrayList class.
@@ -34,7 +34,7 @@ public class CSC216ArrayListTest {
 		//Test that the list is created correctly.
 		try {
 			list.remove(0);
-			list.set(0, null);
+			list.set(0, "fruit");
 			list.get(0);
 			fail("Didn't catch IndexOutOfBoundsException.");
 		} catch (IndexOutOfBoundsException e) {
@@ -222,73 +222,134 @@ public class CSC216ArrayListTest {
 	 * Tests setting an element in an empty list, the bounds of the list when
 	 * using the set() method, and setting an element at the front, middle, and back
 	 * of the list.  The set() method is also passed null.
-	 * Test method for {@link edu.ncsu.csc216.collections.CSC216ArrayList#set(int, java.lang.Object)}.
 	 */
 	@Test
 	public void testSetIntE() {
 		//Attempt to set a value in an empty list
-			
+		try {
+			list.set(0, "asparagus");
+		} catch(IndexOutOfBoundsException e) {
+			assertEquals(0, list.size());
+		}
 		
 		//Add 4 elements to the list and test that the contents are correct.
 		//Reuse code from your testAddIntE.
-		list.add(0, "orange");
-		list.add(1, "banana");
+		list.add(0, "banana");
+		list.add(1, "cherry");
 		list.add(2, "apple");
-		list.add(3, "kiwi");
+		list.add(3, "dragonfruit");
 		assertEquals(4, list.size());
-		assertEquals("orange", list.get(0));
-		assertEquals("banana", list.get(1));
+		assertEquals("banana", list.get(0));
+		assertEquals("cherry", list.get(1));
 		assertEquals("apple", list.get(2));
-		assertEquals("kiwi", list.get(3));
+		assertEquals("dragonfruit", list.get(3));
 		
 		//Test that IndexOutOfBoundsException is thrown when set() is passed
 		//a negative index.  Make sure the list is unchanged.
-		
+		try {
+			list.set(-1, "broccoli");
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(4, list.size()); 
+			assertEquals("banana", list.get(0));
+			assertEquals("cherry", list.get(1));
+			assertEquals("apple", list.get(2));
+			assertEquals("dragonfruit", list.get(3));
+		}
 		
 		//Test that IndexOutOfBoundsException is thrown when set() is passed
 		//an index > size() - 1.  Make sure the list is unchanged.
-		
+		try {
+			list.set(4, "carrot");
+			//index > size() - 1 in this case would be: index > 3 
+			//You can set at index = 3 but not above it b/c that 
+			//would be out of bounds. (highest index being @ 3)
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(4, list.size());
+			assertEquals("banana", list.get(0));
+			assertEquals("cherry", list.get(1));
+			assertEquals("apple", list.get(2));
+			assertEquals("dragonfruit", list.get(3));
+		}
 		
 		//Set middle element.  Test that the element is modified correctly, set() returns the
 		//right value, and that the rest of the list is correct.
 		String s1 = list.set(1, "strawberry");
-		assertEquals(s1, "banana");
+		//^^ what is set doing...
+		assertEquals(s1, "cherry");
 		assertEquals(4, list.size());
-		assertEquals("orange", list.get(0));
+		assertEquals("banana", list.get(0));
 		assertEquals("strawberry", list.get(1));
 		assertEquals("apple", list.get(2));
-		assertEquals("kiwi", list.get(3));
+		assertEquals("dragonfruit", list.get(3));
 		
 		//Set first element
-		
+		list.set(0, "blueberry");
+		assertEquals("blueberry", list.get(0));
+		assertEquals("strawberry", list.get(1));
+		assertEquals("apple", list.get(2));
+		assertEquals("dragonfruit", list.get(3));
 		
 		//Set last element
-		
+		list.set(list.size() - 1, "pineapple");
+		assertEquals("pineapple", list.get(3));
+		assertEquals("apple", list.get(2));
+		assertEquals("strawberry", list.get(1));
+		assertEquals("blueberry", list.get(0));
 		
 		//Attempt to set an element to null.  Check that the element
 		//was not modified.
-		
-
+		try {
+			list.set(0, null);
+		} catch (NullPointerException e) {
+			assertEquals(4, list.size());
+			assertEquals("blueberry", list.get(0));
+		}
 	}
 
 	/**
 	 * Main get() functionality is tested in the other test methods.  This method will
 	 * focus on testing the exceptions associated with bounds.
-	 * Test method for {@link edu.ncsu.csc216.collections.CSC216ArrayList#get(int)}.
 	 */
 	@Test
 	public void testGetInt() {
 		//Add 4 elements to the list and test that the contents are correct.
 		//Reuse code from your testAddIntE.
+		list.add(0, "banana");
+		list.add(1, "cherry");
+		list.add(2, "apple");
+		list.add(3, "dragonfruit");
+		assertEquals(4, list.size());
+		assertEquals("banana", list.get(0));
+		assertEquals("cherry", list.get(1));
+		assertEquals("apple", list.get(2));
+		assertEquals("dragonfruit", list.get(3));
 		
 		
 		//Test that IndexOutOfBoundsException is thrown when get() is passed
 		//a negative index.  Make sure the list is unchanged.
-		
+		try {
+			list.get(-1);
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(4, list.size());
+			assertEquals("banana", list.get(0));
+			assertEquals("cherry", list.get(1));
+			assertEquals("apple", list.get(2));
+			assertEquals("dragonfruit", list.get(3));
+		}
 		
 		//Test that IndexOutOfBoundsException is thrown when get() is passed
 		//an index > size() - 1.  Make sure the list is unchanged.
-		
+		//index > size() - 1 in this case would be: index > 3 
+		//You can set at index = 3 but not above it b/c that 
+		//would be out of bounds. (highest index being @ 3)
+		try {
+			list.get(list.size());
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(4, list.size());
+			assertEquals("banana", list.get(0));
+			assertEquals("cherry", list.get(1));
+			assertEquals("apple", list.get(2));
+			assertEquals("dragonfruit", list.get(3));
+		}
 	}
-
 }
