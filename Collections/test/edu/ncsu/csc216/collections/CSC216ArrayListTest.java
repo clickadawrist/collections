@@ -15,7 +15,7 @@ import org.junit.Test;
 public class CSC216ArrayListTest {
 	
 	private CSC216ArrayList<String> list;
-
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -32,11 +32,21 @@ public class CSC216ArrayListTest {
 	@Test
 	public void testCSC216ArrayList() {
 		//Test that the list field is created correctly.
-		/*try {
-			
-		} catch () {
-			
-		}*/
+		try {
+			list.remove(0);
+			list.set(0, null);
+			list.get(0);
+			fail("Didn't catch IndexOutOfBoundsException.");
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(0, list.size());
+		}
+		
+		try {
+			list.set(0, null);
+			fail("Didn't catch NullPointerException.");
+		} catch (NullPointerException e) {
+			assertEquals(0, list.size());
+		}
 	}
 
 	/**
