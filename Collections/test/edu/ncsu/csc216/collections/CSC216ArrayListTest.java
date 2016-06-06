@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
+
 
 /**
  * Tests CSC216ArrayList class.
@@ -34,7 +34,7 @@ public class CSC216ArrayListTest {
 		//Test that the list is created correctly.
 		try {
 			list.remove(0);
-			list.set(0, null);
+			list.set(0, "fruit");
 			list.get(0);
 			fail("Didn't catch IndexOutOfBoundsException.");
 		} catch (IndexOutOfBoundsException e) {
