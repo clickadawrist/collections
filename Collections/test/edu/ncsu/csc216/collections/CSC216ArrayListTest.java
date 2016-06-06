@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.ncsu.csc216.collections;
 
 import static org.junit.Assert.*;
@@ -9,14 +6,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author SarahHeckman
- *
+ * Tests CSC216ArrayList class.
+ * @author SarahHeckman and Manaka Green and Jerry Zhang
  */
 public class CSC216ArrayListTest {
 	
+	/** CSC216ArrayList named list for testing methods. */
 	private CSC216ArrayList<String> list;
 	
 	/**
+	 * Sets up variables for testing CSC216ArrayList class.
 	 * @throws java.lang.Exception
 	 */
 	@Before
@@ -27,11 +26,10 @@ public class CSC216ArrayListTest {
 	/**
 	 * Tests that a CSC216ArrayList is constructed correctly.  A CSC216ArrayList of
 	 * any generic type should be not null and empty, which implies a size of 0.
-	 * Test method for {@link edu.ncsu.csc216.collections.CSC216ArrayList#CSC216ArrayList()}.
 	 */
 	@Test
 	public void testCSC216ArrayList() {
-		//Test that the list field is created correctly.
+		//Test that the list is created correctly.
 		try {
 			list.remove(0);
 			list.set(0, null);
