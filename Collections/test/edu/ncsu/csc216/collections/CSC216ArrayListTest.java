@@ -144,7 +144,14 @@ public class CSC216ArrayListTest {
 	@Test
 	public void testRemoveInt() {
 		//Attempt to remove an element from an empty list
-		
+		try {
+			list.remove(0);
+			list.set(0, null);
+			list.get(0);
+			fail("Didn't catch IndexOutOfBoundsException.");
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(0, list.size());
+		}
 		
 		//Add 4 elements to the list and test that the contents are correct.
 		//Reuse code from your testAddIntE.
@@ -160,11 +167,28 @@ public class CSC216ArrayListTest {
 		
 		//Test that IndexOutOfBoundsException is thrown when remove() is passed
 		//a negative index.  Make sure the list is unchanged.
-		
-		
+		try {
+			list.remove(-1);
+			fail();
+		} catch (IndexOutOfBoundsException e){
+			assertEquals(4, list.size());
+			assertEquals("orange", list.get(0));
+			assertEquals("banana", list.get(1));
+			assertEquals("apple", list.get(2));
+			assertEquals("kiwi", list.get(3));
+		}
 		//Test that IndexOutOfBoundsException is thrown when remove() is passed
 		//an index > size() - 1.  Make sure the list is unchanged.
-		
+		try {
+			list.remove(5);
+			fail();
+		} catch (IndexOutOfBoundsException e){
+			assertEquals(4, list.size());
+			assertEquals("orange", list.get(0));
+			assertEquals("banana", list.get(1));
+			assertEquals("apple", list.get(2));
+			assertEquals("kiwi", list.get(3));
+		}
 		
 		//Remove middle element.  Test that the removed element is correct and
 		//that the remaining list is correct after the removal.
@@ -176,13 +200,22 @@ public class CSC216ArrayListTest {
 		assertEquals("kiwi", list.get(2));
 		
 		//Remove first element
-		
+		String s2 = list.remove(0);
+		assertEquals(s2, "orange");
+		assertEquals(2, list.size());
+		assertEquals("apple", list.get(0));
+		assertEquals("kiwi", list.get(1));
 		
 		//Remove last element
-		
+		String s3 = list.remove(1);
+		assertEquals(s3, "kiwi");
+		assertEquals(1, list.size());
+		assertEquals("apple", list.get(0));
 		
 		//Remove only element
-						
+		String s4 = list.remove(0);
+		assertEquals(s4, "apple");
+		assertEquals(0, list.size());		
 	}
 
 	/**
