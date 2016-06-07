@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-
-
 /**
  * Tests CSC216ArrayList class.
  * @author SarahHeckman and Manaka Green and Jerry Zhang
@@ -39,6 +37,7 @@ public class CSC216ArrayListTest {
 			fail("Didn't catch IndexOutOfBoundsException.");
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(0, list.size());
+			assertNotNull(list);
 		}
 		
 		try {
@@ -46,6 +45,7 @@ public class CSC216ArrayListTest {
 			fail("Didn't catch NullPointerException.");
 		} catch (NullPointerException e) {
 			assertEquals(0, list.size());
+			assertNotNull(list);
 		}
 	}
 
@@ -139,15 +139,12 @@ public class CSC216ArrayListTest {
 	 * Tests that elements are correctly removed from the front, middle, and back of an 
 	 * ArrayList.  Removing the last element should leave an empty list.  The bounds are
 	 * checked for the appropriate exceptions.
-	 * Test method for {@link edu.ncsu.csc216.collections.CSC216ArrayList#remove(int)}.
 	 */
 	@Test
 	public void testRemoveInt() {
 		//Attempt to remove an element from an empty list
 		try {
 			list.remove(0);
-			list.set(0, null);
-			list.get(0);
 			fail("Didn't catch IndexOutOfBoundsException.");
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(0, list.size());
@@ -155,15 +152,15 @@ public class CSC216ArrayListTest {
 		
 		//Add 4 elements to the list and test that the contents are correct.
 		//Reuse code from your testAddIntE.
-		list.add(0, "orange");
-		list.add(1, "banana");
+		list.add(0, "banana");
+		list.add(1, "cherry");
 		list.add(2, "apple");
-		list.add(3, "kiwi");
+		list.add(3, "dragonfruit");
 		assertEquals(4, list.size());
-		assertEquals("orange", list.get(0));
-		assertEquals("banana", list.get(1));
+		assertEquals("banana", list.get(0));
+		assertEquals("cherry", list.get(1));
 		assertEquals("apple", list.get(2));
-		assertEquals("kiwi", list.get(3));
+		assertEquals("dragonfruit", list.get(3));
 		
 		//Test that IndexOutOfBoundsException is thrown when remove() is passed
 		//a negative index.  Make sure the list is unchanged.
@@ -172,49 +169,50 @@ public class CSC216ArrayListTest {
 			fail();
 		} catch (IndexOutOfBoundsException e){
 			assertEquals(4, list.size());
-			assertEquals("orange", list.get(0));
-			assertEquals("banana", list.get(1));
+			assertEquals("banana", list.get(0));
+			assertEquals("cherry", list.get(1));
 			assertEquals("apple", list.get(2));
-			assertEquals("kiwi", list.get(3));
+			assertEquals("dragonfruit", list.get(3));
 		}
+		
 		//Test that IndexOutOfBoundsException is thrown when remove() is passed
 		//an index > size() - 1.  Make sure the list is unchanged.
 		try {
-			list.remove(5);
+			list.remove(list.size());
 			fail();
 		} catch (IndexOutOfBoundsException e){
 			assertEquals(4, list.size());
-			assertEquals("orange", list.get(0));
-			assertEquals("banana", list.get(1));
+			assertEquals("banana", list.get(0));
+			assertEquals("cherry", list.get(1));
 			assertEquals("apple", list.get(2));
-			assertEquals("kiwi", list.get(3));
+			assertEquals("dragonfruit", list.get(3));
 		}
 		
 		//Remove middle element.  Test that the removed element is correct and
 		//that the remaining list is correct after the removal.
-		String s1 = list.remove(1);
-		assertEquals(s1, "banana");
+		String s1 = list.remove(list.size() / 2);
+		assertEquals("apple", s1);
 		assertEquals(3, list.size());
-		assertEquals("orange", list.get(0));
-		assertEquals("apple", list.get(1));
-		assertEquals("kiwi", list.get(2));
-		
+		assertEquals("banana", list.get(0));
+		assertEquals("cherry", list.get(1));
+		assertEquals("dragonfruit", list.get(2));
+				
 		//Remove first element
 		String s2 = list.remove(0);
-		assertEquals(s2, "orange");
+		assertEquals("banana", s2);
 		assertEquals(2, list.size());
-		assertEquals("apple", list.get(0));
-		assertEquals("kiwi", list.get(1));
+		assertEquals("cherry", list.get(0));
+		assertEquals("dragonfruit", list.get(1));
 		
 		//Remove last element
-		String s3 = list.remove(1);
-		assertEquals(s3, "kiwi");
+		String s3 = list.remove(list.size() - 1);
+		assertEquals("dragonfruit", s3);
 		assertEquals(1, list.size());
-		assertEquals("apple", list.get(0));
+		assertEquals("cherry", list.get(0));
 		
 		//Remove only element
 		String s4 = list.remove(0);
-		assertEquals(s4, "apple");
+		assertEquals("cherry", s4);
 		assertEquals(0, list.size());		
 	}
 
@@ -259,7 +257,7 @@ public class CSC216ArrayListTest {
 		//Test that IndexOutOfBoundsException is thrown when set() is passed
 		//an index > size() - 1.  Make sure the list is unchanged.
 		try {
-			list.set(4, "carrot");
+			list.set(list.size(), "carrot");
 			//index > size() - 1 in this case would be: index > 3 
 			//You can set at index = 3 but not above it b/c that 
 			//would be out of bounds. (highest index being @ 3)
@@ -273,27 +271,31 @@ public class CSC216ArrayListTest {
 		
 		//Set middle element.  Test that the element is modified correctly, set() returns the
 		//right value, and that the rest of the list is correct.
-		String s1 = list.set(1, "strawberry");
+		String s1 = list.set(list.size() / 2, "strawberry");
 		//^^ what is set doing...
-		assertEquals(s1, "cherry");
+		assertEquals("apple", s1);
 		assertEquals(4, list.size());
 		assertEquals("banana", list.get(0));
-		assertEquals("strawberry", list.get(1));
-		assertEquals("apple", list.get(2));
+		assertEquals("cherry", list.get(1));
+		assertEquals("strawberry", list.get(2));
 		assertEquals("dragonfruit", list.get(3));
 		
 		//Set first element
-		list.set(0, "blueberry");
+		String s2 = list.set(0, "blueberry");
+		assertEquals("banana", s2);
+		assertEquals(4, list.size());
 		assertEquals("blueberry", list.get(0));
-		assertEquals("strawberry", list.get(1));
-		assertEquals("apple", list.get(2));
+		assertEquals("cherry", list.get(1));
+		assertEquals("strawberry", list.get(2));
 		assertEquals("dragonfruit", list.get(3));
 		
 		//Set last element
-		list.set(list.size() - 1, "pineapple");
+		String s3 = list.set(list.size() - 1, "pineapple");
+		assertEquals("dragonfruit", s3);
+		assertEquals(4, list.size());
 		assertEquals("pineapple", list.get(3));
-		assertEquals("apple", list.get(2));
-		assertEquals("strawberry", list.get(1));
+		assertEquals("strawberry", list.get(2));
+		assertEquals("cherry", list.get(1));
 		assertEquals("blueberry", list.get(0));
 		
 		//Attempt to set an element to null.  Check that the element
