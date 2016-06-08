@@ -19,6 +19,7 @@ public class Currency {
 	 */
 	private int count;
 	
+	private static final int TWENTY_DOLLARS = 2000;
 	/**
 	 * Constructs a currency object
 	 * @param value of the currency
@@ -26,9 +27,20 @@ public class Currency {
 	 * @param count of the currency
 	 */
 	public Currency(int value, String name, int count) {
+		setValue(value);
+		setName(name);
+		setCount(count);
+	}
+	
+	/**
+	 * Sets the currency's value.
+	 * @param value the value to set
+	 */
+	public void setValue(int value) {
+		if(value < 0 || value > TWENTY_DOLLARS) {	
+			throw new IllegalArgumentException();
+		}
 		this.value = value;
-		this.name = name;
-		this.count = count;
 	}
 	
 	/**
@@ -37,6 +49,17 @@ public class Currency {
 	 */
 	public int getValue() {
 		return value;
+	}
+
+	/**
+	 * Sets the currency's name.
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		if(name == null || name.length() == 0) {	
+			throw new NullPointerException();
+		}
+		this.name = name;
 	}
 	
 	/**
@@ -48,11 +71,22 @@ public class Currency {
 	}
 	
 	/**
+	 * Sets the currency's count.
+	 * @param count the count to set
+	 */
+	public void setCount(int count) {
+		if(count < 0) {	
+			throw new IllegalArgumentException();
+		}
+		this.count = count;
+	}
+	
+	/**
 	 * Returns the currency's count
 	 * @return the currency's count
 	 */
 	public int getCount() {
-		return count-1;
+		return count;
 	}
 	
 	/**
@@ -62,7 +96,8 @@ public class Currency {
 	 * @throws IllegalArgumentException if the resulting count would be negative
 	 */
 	public void modifyCount(int count) {
-		if (count < 0 && (this.count + count < 0)) {
+		if (//count < 0 && 
+			(this.count + count < 0)) {
 			throw new IllegalArgumentException();
 		}
 		this.count += count;
@@ -105,5 +140,4 @@ public class Currency {
 			return false;
 		return true;
 	}
-
 }

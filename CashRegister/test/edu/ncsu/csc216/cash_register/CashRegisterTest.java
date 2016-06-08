@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.ncsu.csc216.cash_register;
 
 import static org.junit.Assert.*;

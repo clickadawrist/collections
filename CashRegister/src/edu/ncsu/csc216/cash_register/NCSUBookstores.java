@@ -88,6 +88,8 @@ public class NCSUBookstores {
 	 */
 	public void handleBalance() {
 		System.out.printf("Current register balance: $%1$.2f\n", register.getCurrentBalance() / 100.00);
+		System.out.println();
+		userInterface();
 	}
 	
 	/**
@@ -100,16 +102,16 @@ public class NCSUBookstores {
 			System.out.println("What would you like to return?");
 			//Lists the items the customer can return
 			itemMenu();
-			
-			while (!console.hasNextInt()) {
-				System.out.println("Invalid option.");
-				console.nextLine(); //throw away input
-			}
-			
+
 			itemMenuNumber = console.nextInt();
 			console.nextLine(); //throw away rest of input
 			
-			break;
+			if (itemMenuNumber < BB_CAP_OPTION || itemMenuNumber > BACK_OPTION) {
+				System.out.println("Invalid option.");
+				System.out.println();
+			} else {
+				break;
+			}
 		}
 			
 		try {
@@ -131,13 +133,18 @@ public class NCSUBookstores {
 					printRefund(register.processRefund(PENCIL_PRICE));
 					break;
 				case BACK_OPTION:
+					System.out.println();
+					userInterface();
 					break;
 				default:
 					break; //should never reach here
 			}
 		} catch (IllegalArgumentException e) {
 			System.out.println("Cannot process refund at this time.");
+			System.out.println();
+			userInterface();
 		}
+
 	}
 	
 	/**
@@ -153,6 +160,9 @@ public class NCSUBookstores {
 		}
 		System.out.printf("For a total of:  $%1$.2f", c.getBalance() / 100.00);
 		System.out.println();
+		System.out.println();
+		
+		userInterface();
 	}
 	
 	/**
@@ -176,6 +186,7 @@ public class NCSUBookstores {
 			
 			if (itemMenuNumber < BB_CAP_OPTION || itemMenuNumber > BACK_OPTION) {
 				System.out.println("Invalid option.");
+				System.out.println();
 			} else {
 				break;
 			}
@@ -184,26 +195,33 @@ public class NCSUBookstores {
 		try {			
 			//Gets payment and change
 			CurrencyCollection change = null;
-			CurrencyCollection payment = processPayment();
+			CurrencyCollection payment;
 			
 			//Handles purchase
 			switch (itemMenuNumber) {
 				case BB_CAP_OPTION:
+					 payment = processPayment();
 					change = register.processPurchase(BB_CAP_PRICE, payment);
 					break;
 				case TSHIRT_OPTION:
+					payment = processPayment();
 					change = register.processPurchase(TSHIRT_PRICE, payment);
 					break;
 				case SWEATSHIRT_OPTION:
+					payment = processPayment();
 					change = register.processPurchase(SWEATSHIRT_PRICE, payment);
 					break;
 				case BABYDOLL_OPTION:
+					payment = processPayment();
 					change = register.processPurchase(BABYDOLL_PRICE, payment);
 					break;
 				case PENCIL_OPTION:
-					change = register.processPurchase(PENCIL_PRICE, processPayment());
+					payment = processPayment();
+					change = register.processPurchase(PENCIL_PRICE, payment);
 					break;
 				case BACK_OPTION:
+					System.out.println();
+					userInterface();
 					break;
 				default:
 					break; //do nothing
@@ -215,6 +233,8 @@ public class NCSUBookstores {
 		} catch (IllegalArgumentException e) {
 			//If not enough currency for change
 			System.out.println("Unable to make purchase.  Money returned.");
+			System.out.println();
+			userInterface();
 		}
 	}
 	

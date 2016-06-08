@@ -51,6 +51,9 @@ public class CashRegister {
 	public CurrencyCollection processPurchase(int purchaseAmount, CurrencyCollection payment) {
 		int paymentAmount = payment.getBalance();
 		int refundAmount = paymentAmount - purchaseAmount;
+		while (refundAmount < 0) {
+			throw new IllegalArgumentException();
+		}
 		
 		cashDrawer.depositCurrencyCollection(payment);
 		return cashDrawer.refundByAmount(refundAmount);

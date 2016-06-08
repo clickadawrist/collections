@@ -46,8 +46,7 @@ public class CurrencyCollection {
 	public static final int NUM_SLOTS = 8;
 	
 	/** Array storing all currency in the collection */
-	private Currency[] currency;
-
+	private Currency[] currency = new Currency[NUM_SLOTS];
 	/** 
 	 * Constructs the currency collection with default values
 	 */
@@ -62,6 +61,7 @@ public class CurrencyCollection {
 	 * in the currency collection
 	 */
 	public CurrencyCollection(int initialCount) {
+		//currency = new Currency[NUM_SLOTS];
 		currency[0] = new Currency(PENNY_VALUE, PENNY_NAME, initialCount);
 		currency[1] = new Currency(NICKEL_VALUE, NICKEL_NAME, initialCount);
 		currency[2] = new Currency(DIME_VALUE, DIME_NAME, initialCount);
@@ -95,16 +95,14 @@ public class CurrencyCollection {
 	 * @throws IllegalArgumentException if the value is invalid.
 	 */
 	public void modifyDenomination(int value, int count) {
-		boolean added = false;
+		/*boolean added = false;*/
+////////throw IllegalArgumentException somewhere in here...		
 		for (int i = 0; i < NUM_SLOTS; i++) {
 			if (currency[i].getValue() == value) {
 				currency[i].modifyCount(count);
-				added = true;
-				break;
+						//added = true;
+						break;
 			}
-		}
-		if (!added) {
-			throw new IllegalArgumentException(); //invalid value
 		}
 	}
 	
@@ -130,16 +128,19 @@ public class CurrencyCollection {
 	public CurrencyCollection refundByAmount(int refund) {
 		int amountLeft = refund;
 		CurrencyCollection refundCollection = new CurrencyCollection();
-		for (int i = NUM_SLOTS - 1; i >= 0; i++) {
+		for (int i = NUM_SLOTS - 1; i >= 0; i--) {
 			Currency c = currency[i];
+			////////
 			if (amountLeft < c.getValue()) {
 				continue; //no need to check this denomination
-			} 
+			}
+			////////
 			int numDenom = amountLeft / c.getValue(); //max possible bills/coins of this denomination
 			int min = Math.min(c.getCount(), numDenom); //how many bills/coins can we move
 			refundCollection.modifyDenomination(c.getValue(), min); //add all that we can to refundCollection
+			min = min * -1;
 			c.modifyCount(min); //reduce current Currency by refunded amount
-			amountLeft -= c.getValue() * min; //modify the amount left
+			amountLeft += c.getValue() * min; //modify the amount left
 		}
 		if (amountLeft != 0) {
 			//put refunded currency back into the current currency collection
