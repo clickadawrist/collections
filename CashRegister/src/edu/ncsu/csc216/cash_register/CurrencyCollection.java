@@ -104,7 +104,7 @@ public class CurrencyCollection {
 			}
 		}
 		if (!validValue) {
-			throw new IllegalArgumentException();//Invalid Value
+			throw new IllegalArgumentException(); //Invalid Value
 		}
 	}
 	
