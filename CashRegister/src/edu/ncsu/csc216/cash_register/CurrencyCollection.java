@@ -95,14 +95,16 @@ public class CurrencyCollection {
 	 * @throws IllegalArgumentException if the value is invalid.
 	 */
 	public void modifyDenomination(int value, int count) {
-		/*boolean added = false;*/
-////////throw IllegalArgumentException somewhere in here...		
+		boolean validValue = false;
 		for (int i = 0; i < NUM_SLOTS; i++) {
 			if (currency[i].getValue() == value) {
 				currency[i].modifyCount(count);
-						//added = true;
+				validValue = true;
 						break;
 			}
+		}
+		if (!validValue) {
+			throw new IllegalArgumentException();//Invalid Value
 		}
 	}
 	
