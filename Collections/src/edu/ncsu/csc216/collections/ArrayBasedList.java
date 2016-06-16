@@ -2,7 +2,7 @@ package edu.ncsu.csc216.collections;
 
 import java.util.AbstractList;
 
-public class ArrayBasedList extends AbstractList {
+public class ArrayBasedList<E> extends AbstractList {
 
 	/* (non-Javadoc)
 	 * @see java.util.AbstractList#get(int)
