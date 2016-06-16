@@ -81,7 +81,7 @@ public class CourseTest {
 			fail("An exception should have been thrown due to an invalid course name.");
 		} catch(IllegalArgumentException e)
 		{
-			assertEquals("Invalid FSM Transition.", e.getMessage());
+			assertEquals("Invalid FSM Transition", e.getMessage());
 		}
 		
 		// Test invalid Course credits
