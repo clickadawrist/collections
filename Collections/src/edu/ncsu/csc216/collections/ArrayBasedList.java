@@ -65,11 +65,10 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 	}
 
 	/**
-	 *
+	 * Returns the size of the ArrayBasedList.
 	 */
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return arrayBasedList.length;
 	}
 }
