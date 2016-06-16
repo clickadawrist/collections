@@ -11,7 +11,7 @@ import edu.ncsu.csc216.lab.fsm.exception.InvalidFSMTransitionException;
  * Tests the CourseNameValidator class
  * @author Jason King and Manaka Green and Jerry Zhang
  */
-public class CourseNameValidatorTest {
+public class CourseNameValidator_StatePatternTest {
 
 	/** Keeps track of the CourseNameValidator object */
 	private Validatable validator;
@@ -23,7 +23,7 @@ public class CourseNameValidatorTest {
 	@Before
 	public void setUp()
 	{
-		validator = new CourseNameValidator();
+		validator = new CourseNameValidator_StatePattern();
 	}
 	
 	/**
@@ -65,38 +65,14 @@ public class CourseNameValidatorTest {
 			assertEquals("Course name can only contain letters and digits.", e.getMessage());
 		}
 		
-		// STATE_INITIAL
-				// Transition: Symbol
-				try
-				{
-					validator.isValid("C!SC116");
-					fail("STATE_INITIAL, symbol: Course name can only contain letters and digits.");
-				} catch(InvalidFSMTransitionException e)
-				{
-					assertEquals("Course name can only contain letters and digits.", e.getMessage());
-				}
 		
-				try
-				{
-					validator.isValid("CS!C116");
-					fail("STATE_INITIAL, symbol: Course name can only contain letters and digits.");
-				} catch(InvalidFSMTransitionException e)
-				{
-					assertEquals("Course name can only contain letters and digits.", e.getMessage());
-				}
 		
-				try
-				{
-					validator.isValid("CSC!116");
-					fail("STATE_INITIAL, symbol: Course name can only contain letters and digits.");
-				} catch(InvalidFSMTransitionException e)
-				{
-					assertEquals("Course name can only contain letters and digits.", e.getMessage());
-				}	
-				
+		
+		
 		//TODO create the rest of the tests for the isValid() method
-		// STATE_L
-
+		
+		
+		
 		
 		// Test valid course names
 		try{

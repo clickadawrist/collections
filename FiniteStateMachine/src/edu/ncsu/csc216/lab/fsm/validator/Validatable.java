@@ -16,6 +16,7 @@ public interface Validatable {
 	 * Returns false if the given input String is invalid.
 	 * @return true if the input String is valid
 	 * @throws InvalidFSMTransitionException if an attempted transition is illegal
+	 * @param input The class name
 	 */
 	boolean isValid(String input) throws InvalidFSMTransitionException;
 	

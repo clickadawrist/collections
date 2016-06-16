@@ -1,7 +1,7 @@
 package edu.ncsu.csc216.lab.fsm.course;
 
 import edu.ncsu.csc216.lab.fsm.exception.InvalidFSMTransitionException;
-import edu.ncsu.csc216.lab.fsm.validator.CourseNameValidator;
+import edu.ncsu.csc216.lab.fsm.validator.CourseNameValidator_StatePattern;
 import edu.ncsu.csc216.lab.fsm.validator.Validatable;
 
 /**
@@ -30,7 +30,7 @@ public class Course {
 	 */
 	public Course(String name, int credits, int capacity)
 	{
-		validator = new CourseNameValidator();
+		validator = new CourseNameValidator_StatePattern();
 		setName(name);
 		setCredits(credits);
 		setCapacity(capacity);

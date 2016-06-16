@@ -11,28 +11,28 @@ import edu.ncsu.csc216.lab.fsm.exception.InvalidFSMTransitionException;
 public class CourseNameValidator implements Validatable {
 
 	/** Initial state before input is examined */
-	private final int STATE_INITIAL = 0;
+	private final int stateINITIAL = 0;
 	
 	/** State at which one letter has been identified */
-	private final int STATE_L = 1;
+	private final int stateL = 1;
 	
 	/** State at which two letters have been identified */
-	private final int STATE_LL = 2;
+	private final int stateLL = 2;
 	
 	/** State at which three letters have been identified */
-	private final int STATE_LLL = 3;
+	private final int stateLLL = 3;
 	
 	/** State at which one digit has been identified */
-	private final int STATE_D = 4;
+	private final int stateD = 4;
 	
 	/** State at which two digits have been identified */
-	private final int STATE_DD = 5;
+	private final int stateDD = 5;
 	
 	/** State at which three digits have been identified */
-	private final int STATE_DDD = 6;
+	private final int stateDDD = 6;
 	
 	/** State at which a suffix letter has been identified */
-	private final int STATE_SUFFIX = 7;
+	private final int stateSUFFIX = 7;
 	
 	/** The state variable keeps track of the current FSM state we are in */
 	private int state;
@@ -54,7 +54,7 @@ public class CourseNameValidator implements Validatable {
 	public boolean isValid(String courseName) throws InvalidFSMTransitionException
 	{
 		// Set the state field to be the initial FSM state
-		state = STATE_INITIAL;
+		state = stateINITIAL;
 		
 		// Create a variable to track the current character index
 		int charIndex = 0;
@@ -80,10 +80,10 @@ public class CourseNameValidator implements Validatable {
 			// Use a switch statement for the current state
 			switch(state)
 			{
-				case STATE_INITIAL:
+				case stateINITIAL:
 					if(Character.isLetter(c))
 					{
-						state = STATE_L;
+						state = stateL;
 					}
 					else if(Character.isDigit(c))
 					{
@@ -91,66 +91,66 @@ public class CourseNameValidator implements Validatable {
 					}
 					break;
 				
-				case STATE_L:
+				case stateL:
 					if(Character.isLetter(c))
 					{
-						state = STATE_LL;
+						state = stateLL;
 					}
 					else if (Character.isDigit(c))
 					{
-						state = STATE_D;
+						state = stateD;
 					}
 					break;
 					
-				case STATE_LL:
+				case stateLL:
 					if(Character.isLetter(c))
 					{
-						state = STATE_LLL;
+						state = stateLLL;
 					}
 					else if (Character.isDigit(c))
 					{
-						state = STATE_D;
+						state = stateD;
 					}
 					break;
 					
-				case STATE_LLL:
+				case stateLLL:
 					if(Character.isLetter(c))
 					{
 						throw new InvalidFSMTransitionException("Course name cannot start with more than 3 letters.");
 					}
 					else if (Character.isDigit(c))
 					{
-						state = STATE_D;
+						state = stateD;
 					}
 					break;
 					
-				case STATE_D:
+				case stateD:
 					if(Character.isLetter(c))
 					{
 						throw new InvalidFSMTransitionException("Course name must have 3 digits.");
 					}
 					else if (Character.isDigit(c))
 					{
-						state = STATE_DD;
+						state = stateDD;
 					}
 					break;
 					
-				case STATE_DD:
+				case stateDD:
 					if(Character.isLetter(c))
 					{
 						throw new InvalidFSMTransitionException("Course name must have 3 digits.");
 					}
 					else if (Character.isDigit(c))
 					{
-						state = STATE_DDD;
+						state = stateDDD;
 						validEndState = true;
 					}
 					break;
 					
-				case STATE_DDD:
+				case stateDDD:
 					if(Character.isLetter(c))
 					{
-						state = STATE_SUFFIX;
+						state = stateSUFFIX;
 						validEndState = true;
 					}
 					else if (Character.isDigit(c))
@@ -159,7 +159,7 @@ public class CourseNameValidator implements Validatable {
 					}
 					break;
 					
-				case STATE_SUFFIX:
+				case stateSUFFIX:
 					if(Character.isLetter(c))
 					{
 						throw new InvalidFSMTransitionException("Course name can only have a 1 letter suffix.");
@@ -169,6 +169,9 @@ public class CourseNameValidator implements Validatable {
 						throw new InvalidFSMTransitionException("Course name cannot contain digits after the suffix.");
 					}
 					break;
+				
+				default:
+					return false;
 			}
 			
 			charIndex++;
