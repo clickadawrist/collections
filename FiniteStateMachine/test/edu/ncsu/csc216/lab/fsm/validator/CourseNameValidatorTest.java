@@ -288,7 +288,6 @@ public class CourseNameValidatorTest {
 		{
 			assertEquals("Course name can only contain letters and digits.", e.getMessage());
 		}
-		//TODO create the rest of the tests for the isValid() method
 		
 		
 		
@@ -297,7 +296,7 @@ public class CourseNameValidatorTest {
 		try{
 			assertTrue(validator.isValid("CSC216"));
 			
-			//TODO Create additional valid path tests here
+		
 		} catch(InvalidFSMTransitionException e1)
 		{
 			fail("Valid course names were provided.");
