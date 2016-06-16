@@ -7,6 +7,7 @@ import edu.ncsu.csc216.lab.fsm.state.State;
  * Finite State Machine for checking whether
  * a Course Name is valid.
  * @author Manaka Green and Jerry Zhang
+ * 
  */
 public class CourseNameValidator_StatePattern implements Validatable {
 

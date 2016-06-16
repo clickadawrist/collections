@@ -169,9 +169,9 @@ public class CourseNameValidator implements Validatable {
 						throw new InvalidFSMTransitionException("Course name cannot contain digits after the suffix.");
 					}
 					break;
-				
-				default:
-					return false;
+			default:
+				break;	
+			/*	return false;*/
 			}
 			
 			charIndex++;
