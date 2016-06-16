@@ -65,7 +65,67 @@ public class CourseNameValidatorTest {
 			assertEquals("Course name can only contain letters and digits.", e.getMessage());
 		}
 		
+		// STATE_L
+		// Transition: Letter
+		try
+		{
+			assertTrue(validator.isValid("MA141"));
+		} catch(InvalidFSMTransitionException e)
+		{
+			fail("STATE_L, letter: A valid course name was provided.");
+		}
 		
+		// STATE_L
+		// Transition: Digit
+		try
+		{
+			assertTrue(validator.isValid("MA141"));
+		} catch(InvalidFSMTransitionException e)
+		{
+			fail("STATE_L, letter: A valid course name was provided.");
+		}
+		
+		// STATE_L
+		// Transition: Symbol
+		try
+		{
+			validator.isValid("M!A141");
+			fail("STATE_L, symbol: Course name can only contain letters and digits.");
+		} catch(InvalidFSMTransitionException e)
+		{
+			assertEquals("Course name can only contain letters and digits.", e.getMessage());
+		}
+		
+		// STATE_LL
+		// Transition: Letter
+		try
+		{
+			assertTrue(validator.isValid("MA141"));
+		} catch(InvalidFSMTransitionException e)
+		{
+			fail("STATE_LL, letter: A valid course name was provided.");
+		}
+		
+		// STATE_LL
+		// Transition: Digit
+		try
+		{
+			assertTrue(validator.isValid("MA141"));
+		} catch(InvalidFSMTransitionException e)
+		{
+			fail("STATE_LL, letter: A valid course name was provided.");
+		}
+		
+		// STATE_LL
+		// Transition: Symbol
+		try
+		{
+			validator.isValid("M!A141");
+			fail("STATE_LL, symbol: Course name can only contain letters and digits.");
+		} catch(InvalidFSMTransitionException e)
+		{
+			assertEquals("Course name can only contain letters and digits.", e.getMessage());
+		}
 		
 		
 		
