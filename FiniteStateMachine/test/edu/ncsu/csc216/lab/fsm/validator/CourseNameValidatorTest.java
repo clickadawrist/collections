@@ -9,8 +9,7 @@ import edu.ncsu.csc216.lab.fsm.exception.InvalidFSMTransitionException;
 
 /**
  * Tests the CourseNameValidator class
- * @author Jason King
- *
+ * @author Jason King and Manaka Green and Jerry Zhang
  */
 public class CourseNameValidatorTest {
 
