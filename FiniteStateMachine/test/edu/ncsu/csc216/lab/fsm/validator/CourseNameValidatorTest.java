@@ -164,11 +164,11 @@ public class CourseNameValidatorTest {
 		// Transition: Letter
 		try
 		{
-			validator.isValid("MAS14");
-			fail("STATE_D, letter: Course name must have 3 digits.");
+			validator.isValid("MASS14");
+			fail("STATE_D, letter: Course name cannot start with more than 3 letters.");
 		} catch(InvalidFSMTransitionException e)
 		{
-			assertEquals("Course name must have 3 digits.", e.getMessage());
+			assertEquals("Course name cannot start with more than 3 letters.", e.getMessage());
 		}
 		
 		// STATE_D
@@ -196,11 +196,11 @@ public class CourseNameValidatorTest {
 		// Transition: Letter
 		try
 		{
-			validator.isValid("MAS14");
-			fail("STATE_DD, letter: Course name must have 3 digits.");
+			validator.isValid("MASS14");
+			fail("STATE_DD, letter: Course name cannot start with more than 3 letters.");
 		} catch(InvalidFSMTransitionException e)
 		{
-			assertEquals("Course name must have 3 digits.", e.getMessage());
+			assertEquals("Course name cannot start with more than 3 letters.", e.getMessage());
 		}
 		
 		// STATE_DD
@@ -272,10 +272,10 @@ public class CourseNameValidatorTest {
 		try
 		{
 			validator.isValid("MA141S2");
-			fail("STATE_SUFFIX, digit: Course name cannot contain digits after the suffix.");
+			fail("STATE_SUFFIX, digit: Course name can only have a 1 letter suffix.");
 		} catch(InvalidFSMTransitionException e1)
 		{
-			assertEquals("Course name cannot contain digits after the suffix.", e.getMessage());
+			assertEquals("Course name can only have a 1 letter suffix.", e.getMessage());
 		}
 		
 		// STATE_SUFFIX
@@ -283,10 +283,10 @@ public class CourseNameValidatorTest {
 		try
 		{
 			validator.isValid("M!A141");
-			fail("STATE_SUFFIX, symbol: Course name can only contain letters and digits.");
+			fail("STATE_SUFFIX, symbol: Course name can only have a 1 letter suffix.");
 		} catch(InvalidFSMTransitionException e1)
 		{
-			assertEquals("Course name can only contain letters and digits.", e.getMessage());
+			assertEquals("Course name can only have a 1 letter suffix.", e.getMessage());
 		}
 		//TODO create the rest of the tests for the isValid() method
 		
