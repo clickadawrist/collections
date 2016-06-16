@@ -18,6 +18,7 @@ public class Main {
 	private String promptForCourseName()
 	{
 		System.out.println("Please enter a course name:");
+		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
 		return scan.next();
 	}
@@ -41,11 +42,12 @@ public class Main {
 			try
 			{
 				// Try to construct a Course object with the user-provided name
+				@SuppressWarnings("unused")
 				Course c = new Course(name, 5, 100);
-				System.out.println(name +" is valid!");
+				System.out.println(name + " is valid!");
 			} catch(IllegalArgumentException e)
 			{
-				System.out.println(name+": "+e.getMessage());
+				System.out.println(name+ ": "+e.getMessage());
 			}
 		}
 	}

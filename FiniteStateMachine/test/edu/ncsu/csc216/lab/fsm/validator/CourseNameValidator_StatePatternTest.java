@@ -11,7 +11,7 @@ import edu.ncsu.csc216.lab.fsm.exception.InvalidFSMTransitionException;
  * Tests the CourseNameValidator class
  * @author Jason King and Manaka Green and Jerry Zhang
  */
-public class CourseNameValidatorTest {
+public class CourseNameValidator_StatePatternTest {
 
 	/** Keeps track of the CourseNameValidator object */
 	private Validatable validator;
@@ -23,7 +23,7 @@ public class CourseNameValidatorTest {
 	@Before
 	public void setUp()
 	{
-		validator = new CourseNameValidator();
+		validator = new CourseNameValidator_StatePattern();
 	}
 	
 	/**
@@ -64,7 +64,6 @@ public class CourseNameValidatorTest {
 		{
 			assertEquals("Course name can only contain letters and digits.", e.getMessage());
 		}
-		
 		// STATE_L
 		// Transition: Letter
 		try
@@ -164,11 +163,11 @@ public class CourseNameValidatorTest {
 		// Transition: Letter
 		try
 		{
-			validator.isValid("MASS14");
-			fail("STATE_D, letter: Course name cannot start with more than 3 letters.");
+			validator.isValid("MAS14");
+			fail("STATE_D, letter: Course name must have 3 digits.");
 		} catch(InvalidFSMTransitionException e)
 		{
-			assertEquals("Course name cannot start with more than 3 letters.", e.getMessage());
+			assertEquals("Course name must have 3 digits.", e.getMessage());
 		}
 		
 		// STATE_D
@@ -196,11 +195,11 @@ public class CourseNameValidatorTest {
 		// Transition: Letter
 		try
 		{
-			validator.isValid("MASS14");
-			fail("STATE_DD, letter: Course name cannot start with more than 3 letters.");
+			validator.isValid("MAS14");
+			fail("STATE_DD, letter: Course name must have 3 digits.");
 		} catch(InvalidFSMTransitionException e)
 		{
-			assertEquals("Course name cannot start with more than 3 letters.", e.getMessage());
+			assertEquals("Course name must have 3 digits.", e.getMessage());
 		}
 		
 		// STATE_DD
@@ -272,10 +271,10 @@ public class CourseNameValidatorTest {
 		try
 		{
 			validator.isValid("MA141S2");
-			fail("STATE_SUFFIX, digit: Course name can only have a 1 letter suffix.");
+			fail("STATE_SUFFIX, digit: Course name cannot contain digits after the suffix.");
 		} catch(InvalidFSMTransitionException e1)
 		{
-			assertEquals("Course name can only have a 1 letter suffix.", e.getMessage());
+			assertEquals("Course name cannot contain digits after the suffix.", e.getMessage());
 		}
 		
 		// STATE_SUFFIX
@@ -283,11 +282,12 @@ public class CourseNameValidatorTest {
 		try
 		{
 			validator.isValid("M!A141");
-			fail("STATE_SUFFIX, symbol: Course name can only have a 1 letter suffix.");
+			fail("STATE_SUFFIX, symbol: Course name can only contain letters and digits.");
 		} catch(InvalidFSMTransitionException e1)
 		{
-			assertEquals("Course name can only have a 1 letter suffix.", e.getMessage());
+			assertEquals("Course name can only contain letters and digits.", e.getMessage());
 		}
+		
 		
 		
 		
@@ -304,4 +304,3 @@ public class CourseNameValidatorTest {
 	}
 }
 }
-
