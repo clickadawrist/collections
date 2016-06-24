@@ -24,13 +24,15 @@ public class ArrayBasedListTest {
 	}
 
 	/**
-	 * Tests that a ArrayBasedList is constructed correctly.  A ArrayBasedList of
-	 * any generic type should be not null and empty, which implies a size of 0.
+	 * Tests that a ArrayBasedList is constructed correctly.  
+	 * A ArrayBasedList of any generic type should be not null. 
+	 * Initially constructed ArrayBasedList will have a size of 0,
+	 * and capacity of 10.
 	 */
 	@Test
 	public void testArrayBasedList() {
 		//Test that the list is created correctly.
-		try {
+/*		try {
 			list.remove(0);
 			list.set(0, "fruit");
 			list.get(0);
@@ -47,6 +49,7 @@ public class ArrayBasedListTest {
 			assertEquals(0, list.size());
 			assertNotNull(list);
 		}
+	*/
 	}
 
 	/**
@@ -57,7 +60,8 @@ public class ArrayBasedListTest {
 	 * initial capacity of 10 grows when an 11th element is added.
 	 */
 	@Test
-	public void testAddIntE() {
+//	public void testAddIntE() {
+	public void testAdd() {
 		//Attempt to add an element to index 1 in an empty list.
 		//Check that the element was not added.
 		try {
@@ -141,7 +145,8 @@ public class ArrayBasedListTest {
 	 * checked for the appropriate exceptions.
 	 */
 	@Test
-	public void testRemoveInt() {
+	//testRemoveInt()
+	public void testRemove() {
 		//Attempt to remove an element from an empty list
 		try {
 			list.remove(0);
@@ -222,7 +227,8 @@ public class ArrayBasedListTest {
 	 * of the list.  The set() method is also passed null.
 	 */
 	@Test
-	public void testSetIntE() {
+	//testSetIntE()
+	public void testSet() {
 		//Attempt to set a value in an empty list
 		try {
 			list.set(0, "asparagus");
@@ -313,7 +319,8 @@ public class ArrayBasedListTest {
 	 * focus on testing the exceptions associated with bounds.
 	 */
 	@Test
-	public void testGetInt() {
+	//testGetInt()
+	public void testGet() {
 		//Add 4 elements to the list and test that the contents are correct.
 		//Reuse code from your testAddIntE.
 		list.add(0, "banana");
@@ -331,6 +338,7 @@ public class ArrayBasedListTest {
 		//a negative index.  Make sure the list is unchanged.
 		try {
 			list.get(-1);
+			fail("Didn't catch IndexOutOfBoundsException.");
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(4, list.size());
 			assertEquals("banana", list.get(0));
