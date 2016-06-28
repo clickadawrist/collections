@@ -66,13 +66,6 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 			throw new NullPointerException();
 		}
 
-		if (get(index) == null) {
-			// You can't set/substitute null. You have to set/substitute an
-			// element.
-			// Null elements would be ones beyond the scope of
-			throw new NullPointerException();
-		}
-
 		E elementBeingReplaced = arrayBasedList[index];
 		// vvv sets element at specified index as the element passed in.
 		// (replacement)
