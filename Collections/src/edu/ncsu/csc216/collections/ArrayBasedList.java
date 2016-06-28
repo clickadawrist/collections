@@ -5,12 +5,11 @@ import java.util.Arrays;
 
 /**
  * Implementation of a generic array list extending a generic abstract list.
- * 
  * @author Manaka Green and Jerry Zhang
- * @param <E>
- *            Generic
+ * @param <E> Generic
  */
 public class ArrayBasedList<E> extends AbstractList<E> {
+	
 	/*
 	 * Capacity = null placeholders in array Size = number of elements in array
 	 * Length = same as capacity Empty = size is 0
@@ -26,7 +25,7 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 	 */
 	@SuppressWarnings("unchecked")
 	public ArrayBasedList() {
-		super();// do I need this
+		super();
 		arrayBasedList = (E[]) (new Object[10]);
 		this.size = 0;
 	}
@@ -51,17 +50,11 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 	/**
 	 * Replaces the element at the specified position in this list with the
 	 * specified element.
-	 * 
-	 * @param index
-	 *            Index of the element to replace
-	 * @param element
-	 *            Element to be stored at the specified position
+	 * @param index Index of the element to replace
+	 * @param element Element to be stored at the specified position
 	 * @return the element previously at the specified position
-	 * @throws IndexOutOfBoundsException
-	 *             If the index is out of range
-	 * @throws NullPointerException
-	 *             If the specified element is null and this list does not
-	 *             permit null elements
+	 * @throws IndexOutOfBoundsException If the index is out of range
+	 * @throws NullPointerException If the specified element is null and this list does not permit null elements
 	 */
 	@Override
 	public E set(int index, E element) {
@@ -90,19 +83,13 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 
 	/**
 	 * Inserts the specified element at the specified position in this list.
-	 * Shifts the element currently at that position (if any) and any subsequent
-	 * elements to the right (adds one to their indices). Can grow list (add
-	 * element at the end of the list).
-	 * 
-	 * @param index
-	 *            Index at which the specified element is to be inserted
-	 * @param element
-	 *            Element to be inserted
-	 * @throws IndexOutOfBoundsException
-	 *             If the index is out of range
-	 * @throws NullPointerException
-	 *             If the specified element is null and this list does not
-	 *             permit null elements
+	 * Shifts the element currently at that position (if any) and any 
+	 * subsequent elements to the right (adds one to their indices). 
+	 * Can grow list (add element at the end of the list).
+	 * @param index Index at which the specified element is to be inserted
+	 * @param element Element to be inserted
+	 * @throws IndexOutOfBoundsException If the index is out of range
+	 * @throws NullPointerException If the specified element is null and this list does not permit null elements
 	 */
 	@Override
 	public void add(int index, E element) {
@@ -151,12 +138,9 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 	 * Removes the element at the specified position in this list. Shifts any
 	 * subsequent elements to the left (subtracts one from their indices).
 	 * Returns the element that was removed from the list.
-	 * 
-	 * @param index
-	 *            The index of the element to be removed
+	 * @param index The index of the element to be removed
 	 * @return element The element previously at the specified position
-	 * @throws IndexOutOfBoundsException
-	 *             If the index is out of range
+	 * @throws IndexOutOfBoundsException If the index is out of range
 	 */
 	@Override
 	public E remove(int index) {
