@@ -6,8 +6,15 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+/**
+ * Tests ArrayListExercises.
+ * @author Manaka Green
+ */
 public class ArrayListExercisesTest {
 
+	/**
+	 * Tests removePlurals method.
+	 */
 	@Test
 	public void testRemovePlurals() {
 		ArrayList<String> list = new ArrayList<String>();
@@ -34,6 +41,9 @@ public class ArrayListExercisesTest {
 		assertEquals("cotton", list.get(6));
 	}
 	
+	/**
+	 * Tests calculateAverage method.
+	 */
 	@Test
 	public void testCalculateAverage() {
 		int [] array = {32, 62, 22, 74, 64, 55, 90, 32, 12, 17};
@@ -46,6 +56,9 @@ public class ArrayListExercisesTest {
 		assertEquals(46.0, ex.calculateAverage(list), 0.001);
 	}
 	
+	/**
+	 * Tests mystery1 method.
+	 */
 	@Test
 	public void testMystery1() {
 		ArrayList<Integer> list = new ArrayList<Integer>();
@@ -63,6 +76,9 @@ public class ArrayListExercisesTest {
 		assertEquals(Integer.valueOf(100), list.get(4));
 	}
 	
+	/**
+	 * Tests mystery2 method.
+	 */
 	@Test
 	public void testMystery2() {
 		ArrayList<Integer> list = new ArrayList<Integer>();
