@@ -66,7 +66,7 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 			throw new NullPointerException();
 		}
 
-		if (arrayBasedList[index] == null) {
+		if (get(index) == null) {
 			// You can't set/substitute null. You have to set/substitute an
 			// element.
 			// Null elements would be ones beyond the scope of
