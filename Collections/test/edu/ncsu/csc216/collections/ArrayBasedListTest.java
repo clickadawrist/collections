@@ -40,21 +40,21 @@ public class ArrayBasedListTest {
 			fail("Didn't catch IndexOutOfBoundsException.");
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(0, list.size());
-			for (int index = 0; index <= list.size(); index++) {
-				assertEquals(null, list.get(index));
-			}
+//			for (int index = 0; index <= list.size(); index++) {
+//				assertEquals(null, list.get(index));
+//			}
 		}
 
 		// Try to set an element as null. Shouldn't work at all.//
 		try {
 			list.set(0, null);
-			fail("Didn't catch NullPointerException.");
-		} catch (NullPointerException e) {
+			fail("Didn't catch IndexOutOfBoundsException.");
+		} catch (IndexOutOfBoundsException e) {
 			assertEquals(0, list.size());
 			// All elements should be null initially.
-			for (int index = 0; index <= list.size(); index++) {
-				assertEquals(null, list.get(index));
-			}
+//			for (int index = 0; index <= list.size(); index++) {
+//				assertEquals(null, list.get(index));
+//			}
 		}
 	}
 
@@ -105,8 +105,8 @@ public class ArrayBasedListTest {
 		assertEquals("F", list.get(5));
 		assertEquals("G", list.get(6));
 		assertEquals("H", list.get(7));
-		assertEquals(null, list.get(8));
-		assertEquals(null, list.get(9));
+//		assertEquals(null, list.get(8));
+//		assertEquals(null, list.get(9));
 
 		// Add element to the front of a list
 		list.add(0, "front");
@@ -119,7 +119,7 @@ public class ArrayBasedListTest {
 		assertEquals("F", list.get(6));
 		assertEquals("G", list.get(7));
 		assertEquals("H", list.get(8));
-		assertEquals(null, list.get(9));
+//		assertEquals(null, list.get(9));
 
 		//Add element to the middle of a list
 		list.add(list.size() / 2, "middle");
@@ -199,7 +199,8 @@ public class ArrayBasedListTest {
 		list.add(7, "H");
 		list.add(8, "I");
 		list.add(9, "J");
-
+		assertEquals(10, list.size());
+		
 		// Test that IndexOutOfBoundsException is thrown when remove() is passed
 		// a negative index. Make sure the list is unchanged.
 		try {
@@ -238,7 +239,7 @@ public class ArrayBasedListTest {
 			assertEquals("J", list.get(9));
 		}
 
-		// remove the font element
+		// remove the front element
 		list.remove(0);
 		assertEquals("B", list.get(0));
 		assertEquals("C", list.get(1));
@@ -249,25 +250,33 @@ public class ArrayBasedListTest {
 		assertEquals("H", list.get(6));
 		assertEquals("I", list.get(7));
 		assertEquals("J", list.get(8));
-		assertEquals(null, list.get(9));
+		assertEquals(9, list.size());
+		//assertEquals(null, list.get(9));
 
-		// remove the middle element
+		//(return the front element) remove the middle element
 		list.add(0, "A");
-		list.remove(4);
+		assertEquals(10, list.size());
+		String s1 = list.remove(list.size() / 2);
+		assertEquals("F", s1);	
 		assertEquals("A", list.get(0));
 		assertEquals("B", list.get(1));
 		assertEquals("C", list.get(2));
 		assertEquals("D", list.get(3));
-		assertEquals("F", list.get(4));
+		assertEquals("E", list.get(4));
 		assertEquals("G", list.get(5));
 		assertEquals("H", list.get(6));
 		assertEquals("I", list.get(7));
 		assertEquals("J", list.get(8));
-		assertEquals(null, list.get(9));
+		assertEquals(9, list.size());
+//		assertEquals(null, list.get(9));
 
-		// remove the back element
-		list.add(4, "E");
-		list.remove(9);
+		//(return middle) remove the back element
+		list.add((list.size() + 1) / 2, "F");
+		assertEquals(10, list.size());
+		assertEquals("F", list.get(5));
+		
+		String s2 = list.remove(list.size() - 1);
+		assertEquals("J", s2);
 		assertEquals("A", list.get(0));
 		assertEquals("B", list.get(1));
 		assertEquals("C", list.get(2));
@@ -277,8 +286,8 @@ public class ArrayBasedListTest {
 		assertEquals("G", list.get(6));
 		assertEquals("H", list.get(7));
 		assertEquals("I", list.get(8));
-		assertEquals(null, list.get(9));
-
+		assertEquals(9, list.size());
+//		assertEquals(null, list.get(9));
 	}
 
 	/**
@@ -288,11 +297,11 @@ public class ArrayBasedListTest {
 	 */
 	@Test
 	public void testSet() {
-		// Try to set an element as null. Shouldn't work at all.
+		// Try to set an element as null in an empty list. Shouldn't work at all.
 		try {
 			list.set(0, null);
-			fail("Didn't catch NullPointerException.");
-		} catch (NullPointerException e) {
+			fail("Didn't catch IndexOutOfBoundsException.");
+		} catch (IndexOutOfBoundsException e) {
 			assertEquals(0, list.size());
 			// All elements should be null initially. }
 		}
@@ -406,17 +415,19 @@ public class ArrayBasedListTest {
 	public void testGet() {
 		// Add 8 elements to the list and test that the contents are correct.
 		// Reuse code from your testAdd.
+		
+		// Attempt to get an element in bounds of an empty list
 		try {
-			list.set(0, null);
-			fail("Didn't catch NullPointerException.");
-		} catch (NullPointerException e) {
+			list.get(1);
+			fail("Didn't catch IndexOutOfBoundsException.");
+		} catch (IndexOutOfBoundsException e) {
 			assertEquals(0, list.size());
 			// All elements should be null initially. }
 		}
 
-		// Attempt to set an element out of bounds
+		// Attempt to get an element out of bounds of an empty list
 		try {
-			list.set(11, "asparagus");
+			list.get(11);
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(0, list.size());
 		}
@@ -439,8 +450,19 @@ public class ArrayBasedListTest {
 		assertEquals("F", list.get(5));
 		assertEquals("G", list.get(6));
 		assertEquals("H", list.get(7));
-		assertEquals(null, list.get(8));
-		assertEquals(null, list.get(9));
+		try {
+			list.get(8);
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(8, list.size());
+		}
+//		assertEquals(null, list.get(8));
+		
+		try {
+			list.get(9);
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(8, list.size());
+		}
+//		assertEquals(null, list.get(9));	
 
 		// Test that IndexOutOfBoundsException is thrown when get() is passed
 		// a negative index. Make sure the list is unchanged.
@@ -457,8 +479,8 @@ public class ArrayBasedListTest {
 			assertEquals("F", list.get(5));
 			assertEquals("G", list.get(6));
 			assertEquals("H", list.get(7));
-			assertEquals(null, list.get(8));
-			assertEquals(null, list.get(9));
+//			assertEquals(null, list.get(8));
+//			assertEquals(null, list.get(9));
 		}
 
 		// Test that IndexOutOfBoundsException is thrown when get() is passed
@@ -478,8 +500,8 @@ public class ArrayBasedListTest {
 			assertEquals("F", list.get(5));
 			assertEquals("G", list.get(6));
 			assertEquals("H", list.get(7));
-			assertEquals(null, list.get(8));
-			assertEquals(null, list.get(9));
+//			assertEquals(null, list.get(8));
+//			assertEquals(null, list.get(9));
 		}
 
 ////////return a null?! may not need this
@@ -495,8 +517,8 @@ public class ArrayBasedListTest {
 			assertEquals("F", list.get(5));
 			assertEquals("G", list.get(6));
 			assertEquals("H", list.get(7));
-			assertEquals(null, list.get(8));
-			assertEquals(null, list.get(9));
+//			assertEquals(null, list.get(8));
+//			assertEquals(null, list.get(9));
 		}
 	}
 
@@ -506,20 +528,21 @@ public class ArrayBasedListTest {
 	 */
 	@Test
 	public void testIntegerArrayBasedList() {
-		// Create an empty ArryaBasedList of Integers
+		// Create an empty ArrayBasedList of Integers
 		ArrayBasedList<Integer> intList = new ArrayBasedList<Integer>();
-		assertEquals(null, intList.get(0));
-		assertEquals(null, intList.get(1));
-		assertEquals(null, intList.get(2));
-		assertEquals(null, intList.get(3));
-		assertEquals(null, intList.get(4));
-		assertEquals(null, intList.get(5));
-		assertEquals(null, intList.get(6));
-		assertEquals(null, intList.get(7));
-		assertEquals(null, intList.get(8));
-		assertEquals(null, intList.get(9));
+//		assertEquals(null, intList.get(0));
+//		assertEquals(null, intList.get(1));
+//		assertEquals(null, intList.get(2));
+//		assertEquals(null, intList.get(3));
+//		assertEquals(null, intList.get(4));
+//		assertEquals(null, intList.get(5));
+//		assertEquals(null, intList.get(6));
+//		assertEquals(null, intList.get(7));
+//		assertEquals(null, intList.get(8));
+//		assertEquals(null, intList.get(9));
+		assertEquals(0, intList.size());
 
-		// Add 5 number to the list
+		// Add 5 numbers to the list
 		intList.add(0, 1);
 		intList.add(1, 2);
 		intList.add(2, 3);
@@ -537,7 +560,8 @@ public class ArrayBasedListTest {
 		assertEquals((Integer) 2, intList.get(1));
 		assertEquals((Integer) 4, intList.get(2));
 		assertEquals((Integer) 5, intList.get(3));
-		assertEquals(null, intList.get(4));
+		//assertEquals(null, intList.get(4));
+		assertEquals(4, intList.size());
 
 		// Add 2 more numbers
 		intList.add(4, 6);
@@ -548,7 +572,8 @@ public class ArrayBasedListTest {
 		assertEquals((Integer) 5, intList.get(3));
 		assertEquals((Integer) 6, intList.get(4));
 		assertEquals((Integer) 7, intList.get(5));
-
+		assertEquals(6, intList.size());
+		
 		// Remove the first number
 		intList.remove(0);
 		assertEquals((Integer) 2, intList.get(0));
@@ -556,7 +581,8 @@ public class ArrayBasedListTest {
 		assertEquals((Integer) 5, intList.get(2));
 		assertEquals((Integer) 6, intList.get(3));
 		assertEquals((Integer) 7, intList.get(4));
-
+		assertEquals(5, intList.size());
+		
 		// Add a number (index 3)
 		intList.add(3, 100);
 		assertEquals((Integer) 2, intList.get(0));
@@ -565,7 +591,8 @@ public class ArrayBasedListTest {
 		assertEquals((Integer) 100, intList.get(3));
 		assertEquals((Integer) 6, intList.get(4));
 		assertEquals((Integer) 7, intList.get(5));
-
+		assertEquals(6, intList.size());
+		
 		// Remove the last number
 		intList.remove(intList.size() - 1);
 		assertEquals((Integer) 2, intList.get(0));
@@ -573,8 +600,9 @@ public class ArrayBasedListTest {
 		assertEquals((Integer) 5, intList.get(2));
 		assertEquals((Integer) 100, intList.get(3));
 		assertEquals((Integer) 6, intList.get(4));
-		assertEquals(null, intList.get(5));
-
+//		assertEquals(null, intList.get(5));
+		assertEquals(5, intList.size());
+		
 		// Add a number (index 2)
 		intList.add(2, 101);
 		assertEquals((Integer) 2, intList.get(0));
@@ -583,7 +611,8 @@ public class ArrayBasedListTest {
 		assertEquals((Integer) 5, intList.get(3));
 		assertEquals((Integer) 100, intList.get(4));
 		assertEquals((Integer) 6, intList.get(5));
-
+		assertEquals(6, intList.size());
+		
 		// Remove the second number
 		intList.remove(1);
 		assertEquals((Integer) 2, intList.get(0));
@@ -591,24 +620,26 @@ public class ArrayBasedListTest {
 		assertEquals((Integer) 5, intList.get(2));
 		assertEquals((Integer) 100, intList.get(3));
 		assertEquals((Integer) 6, intList.get(4));
-		assertEquals(null, intList.get(5));
-
+//		assertEquals(null, intList.get(5));
+		assertEquals(5, intList.size());
+		
 		// Remove the remaining number in the list
 		intList.remove(0);
 		intList.remove(0);
 		intList.remove(0);
 		intList.remove(0);
 		intList.remove(0);
-
-		assertEquals(null, intList.get(0));
-		assertEquals(null, intList.get(1));
-		assertEquals(null, intList.get(2));
-		assertEquals(null, intList.get(3));
-		assertEquals(null, intList.get(4));
-		assertEquals(null, intList.get(5));
-		assertEquals(null, intList.get(6));
-		assertEquals(null, intList.get(7));
-		assertEquals(null, intList.get(8));
-		assertEquals(null, intList.get(9));
+		assertEquals(0, intList.size());
+		
+//		assertEquals(null, intList.get(0));
+//		assertEquals(null, intList.get(1));
+//		assertEquals(null, intList.get(2));
+//		assertEquals(null, intList.get(3));
+//		assertEquals(null, intList.get(4));
+//		assertEquals(null, intList.get(5));
+//		assertEquals(null, intList.get(6));
+//		assertEquals(null, intList.get(7));
+//		assertEquals(null, intList.get(8));
+//		assertEquals(null, intList.get(9));
 	}
 }

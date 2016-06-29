@@ -40,9 +40,9 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 	@Override
 	public E get(int index) {
 		
-/*		if (arrayBasedList[index] == null) {
-			throw new IndexOutOfBoundsException();
-		}*/
+		if (arrayBasedList[index] == null) {
+			throw new IndexOutOfBoundsException();		
+		}
 		
 		if (index < 0 || index >= arrayBasedList.length) {
 			throw new IndexOutOfBoundsException();
@@ -63,8 +63,8 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 	public E set(int index, E element) {
 		
 		if (arrayBasedList[index] == null) {
-			throw new NullPointerException();
-			//changed to NullPointerException
+			throw new IndexOutOfBoundsException();
+			//changed from NPE to IndexOutOfBounds
 		}
 		
 		if (index < 0 || index >= arrayBasedList.length) {
