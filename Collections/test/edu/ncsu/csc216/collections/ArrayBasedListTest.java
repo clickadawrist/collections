@@ -40,7 +40,7 @@ public class ArrayBasedListTest {
 			fail("Didn't catch IndexOutOfBoundsException.");
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(0, list.size());
-			for (int index = list.size(); index - 1 >= 0; index--) {
+			for (int index = 0; index <= list.size(); index++) {
 				assertEquals(null, list.get(index));
 			}
 		}
@@ -52,6 +52,9 @@ public class ArrayBasedListTest {
 		} catch (NullPointerException e) {
 			assertEquals(0, list.size());
 			// All elements should be null initially.
+			for (int index = 0; index <= list.size(); index++) {
+				assertEquals(null, list.get(index));
+			}
 		}
 	}
 
@@ -304,7 +307,8 @@ public class ArrayBasedListTest {
 		}
 
 		// Set the first element
-		list.set(0, "front");
+		String s1 = list.set(0, "front");
+		assertEquals("A", s1);
 		assertEquals(10, list.size());
 		assertEquals("front", list.get(0));
 		assertEquals("B", list.get(1));
@@ -318,26 +322,45 @@ public class ArrayBasedListTest {
 		assertEquals("J", list.get(9));
 
 		// set the middle element
-		list.set(4, "middle");
+		String s2 = list.set(list.size() / 2, "midway");
+		assertEquals("F", s2);
+		assertEquals(10, list.size());
 		assertEquals("front", list.get(0));
 		assertEquals("B", list.get(1));
 		assertEquals("C", list.get(2));
 		assertEquals("D", list.get(3));
-		assertEquals("middle", list.get(4));
-		assertEquals("F", list.get(5));
+		assertEquals("E", list.get(4));
+		assertEquals("midway", list.get(5));
 		assertEquals("G", list.get(6));
 		assertEquals("H", list.get(7));
 		assertEquals("I", list.get(8));
 		assertEquals("J", list.get(9));
 
-		// set the last element
-		list.set(9, "back");
+		// set the middle element again
+		String s3 = list.set(list.size() / 2, "middle");
+		assertEquals("midway", s3);
+		assertEquals(10, list.size());
 		assertEquals("front", list.get(0));
 		assertEquals("B", list.get(1));
 		assertEquals("C", list.get(2));
 		assertEquals("D", list.get(3));
-		assertEquals("middle", list.get(4));
-		assertEquals("F", list.get(5));
+		assertEquals("E", list.get(4));
+		assertEquals("middle", list.get(5));
+		assertEquals("G", list.get(6));
+		assertEquals("H", list.get(7));
+		assertEquals("I", list.get(8));
+		assertEquals("J", list.get(9));
+		
+		// set the last element
+		String s4 = list.set(list.size() - 1, "back");
+		assertEquals("J", s4);
+		assertEquals(10, list.size());
+		assertEquals("front", list.get(0));
+		assertEquals("B", list.get(1));
+		assertEquals("C", list.get(2));
+		assertEquals("D", list.get(3));
+		assertEquals("E", list.get(4));
+		assertEquals("middle", list.get(5));
 		assertEquals("G", list.get(6));
 		assertEquals("H", list.get(7));
 		assertEquals("I", list.get(8));
