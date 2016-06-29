@@ -12,8 +12,9 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 	
 	/*
 	 * Capacity = null placeholders in array Size = number of elements in array
-	 * Length = same as capacity Empty = size is 0
+	 * Length = same as capacity Empty = size is 0    
 	 */
+	
 	/** Array of generic type elements. */
 	private E[] arrayBasedList;
 	/** Size (the amount) of elements in the collection. */
@@ -38,6 +39,11 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 	 */
 	@Override
 	public E get(int index) {
+		
+/*		if (arrayBasedList[index] == null) {
+			throw new IndexOutOfBoundsException();
+		}*/
+		
 		if (index < 0 || index >= arrayBasedList.length) {
 			throw new IndexOutOfBoundsException();
 		}
@@ -55,6 +61,12 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 	 */
 	@Override
 	public E set(int index, E element) {
+		
+		if (arrayBasedList[index] == null) {
+			throw new NullPointerException();
+			//changed to NullPointerException
+		}
+		
 		if (index < 0 || index >= arrayBasedList.length) {
 			throw new IndexOutOfBoundsException();
 		}
@@ -84,7 +96,12 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 	@Override
 	public void add(int index, E element) {
 		ensureCapacity(size + 1);
-		// index @8 example: [A, B, C, D, E, F, G, H] index 0-7, length=8
+
+		/*if (arrayBasedList[index] == null) {
+			throw new IndexOutOfBoundsException();
+		}*/
+
+		// index @8 example:  [A, B, C, D, E, F, G, H] index 0-7, length=8
 		// index @8 added: [A, B, C, D, E, F, G, H, I] index 0-8, length=9
 		if (index < 0 || index > arrayBasedList.length) {
 			// you can add at index 8 (to make list "grow")
@@ -96,6 +113,15 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 			throw new NullPointerException();
 		}
 
+		if (index > 0 && index < arrayBasedList.length) {
+			for (int i = 0; i < index; i++) {
+				if (arrayBasedList[i] == null) {
+					throw new IndexOutOfBoundsException();
+					//throw new NullPointerException();
+				}
+			}
+		}
+		
 		// adds element to the end of the list (capacity 10 or more)
 		// before example: [A, B, C, D, E, F, G, H] index 0-7, length=8
 		/*

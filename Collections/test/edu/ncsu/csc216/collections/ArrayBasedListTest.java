@@ -68,7 +68,7 @@ public class ArrayBasedListTest {
 	 */
 	@Test
 	public void testAdd() {
-		// Attempt to add an element to index out of bounds.
+		// Attempt to add an element to index out of bounds of an empty list.
 		// Check that the element was not added.
 		try {
 			list.add(11, "A");
@@ -76,7 +76,17 @@ public class ArrayBasedListTest {
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(0, list.size());
 		}
-
+		
+		// Attempt to add an element to a middle index within bounds of an empty list.
+		// Check that the element was not added.
+		try {
+			list.add(5, "A");
+			System.out.println(list);
+			fail("Didn't catch the IndexOutOfBoundsException.");
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(0, list.size());
+		}
+		
 		// Add element to end of list list.add(0, "A"); list.add(1, "B");
 		list.add(0, "A");
 		list.add(1, "B");
