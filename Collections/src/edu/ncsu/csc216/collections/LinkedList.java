@@ -1,12 +1,9 @@
-/**
- * 
- */
 package edu.ncsu.csc216.collections;
 
 import java.util.AbstractList;
 
 /**
- * @author yijiezhang
+ * @author yijiezhang and Manaka Green
  *
  */
 public class LinkedList<E> extends AbstractList<E> {
