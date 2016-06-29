@@ -111,8 +111,8 @@ public class ArrayBasedListTest {
 		assertEquals("H", list.get(8));
 		assertEquals(null, list.get(9));
 
-		// Add element to the middle of a list
-		list.add(4, "middle");
+		//Add element to the middle of a list
+		list.add(list.size() / 2, "middle");
 		assertEquals("front", list.get(0));
 		assertEquals("A", list.get(1));
 		assertEquals("B", list.get(2));
@@ -139,7 +139,27 @@ public class ArrayBasedListTest {
 		assertEquals("H", list.get(9));
 		assertEquals("back", list.get(10));
 		assertEquals(11, list.size());
-
+		
+		//Add element to the middle at capacity 
+		//(setup)
+		list.set(10, "J");
+		list.remove(4);
+		list.add(10, "K");
+		list.add(11, "L");
+		list.add(12, "M");
+		list.add(13, "N");
+		list.add(14, "O");
+		list.add(15, "P");
+		list.add(16, "Q");
+		list.add(17, "R");
+		list.add(18, "S");
+		list.add(19, "T");
+		list.add(20, "U");
+		assertEquals(21, list.size());
+		
+		list.add(list.size() / 2, "middle");
+		assertEquals("middle", list.get(10));
+		assertEquals(22, list.size());
 	}
 
 	/**
@@ -289,7 +309,7 @@ public class ArrayBasedListTest {
 		assertEquals(10, list.size());
 
 		// Test that IndexOutOfBoundsException is thrown when set() is passed
-		// anegative index. Make sure the list is unchanged.
+		// a negative index. Make sure the list is unchanged.
 		try {
 			list.set(-1, "broccoli");
 		} catch (IndexOutOfBoundsException e) {
@@ -376,6 +396,21 @@ public class ArrayBasedListTest {
 	public void testGet() {
 		// Add 8 elements to the list and test that the contents are correct.
 		// Reuse code from your testAdd.
+		try {
+			list.set(0, null);
+			fail("Didn't catch NullPointerException.");
+		} catch (NullPointerException e) {
+			assertEquals(0, list.size());
+			// All elements should be null initially. }
+		}
+
+		// Attempt to set an element out of bounds
+		try {
+			list.set(11, "asparagus");
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(0, list.size());
+		}
+		
 		list.add(0, "A");
 		list.add(1, "B");
 		list.add(2, "C");
@@ -437,7 +472,7 @@ public class ArrayBasedListTest {
 			assertEquals(null, list.get(9));
 		}
 
-		// return a null?!
+////////return a null?! may not need this
 		try {
 			list.get(9);
 		} catch (IndexOutOfBoundsException e) {

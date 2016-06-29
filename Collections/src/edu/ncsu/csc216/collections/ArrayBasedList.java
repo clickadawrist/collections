@@ -25,19 +25,16 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 	 */
 	@SuppressWarnings("unchecked")
 	public ArrayBasedList() {
-		super();
+		//super();
 		arrayBasedList = (E[]) (new Object[10]);
 		this.size = 0;
 	}
 
 	/**
 	 * Returns the element at the specified position in the array-based list.
-	 * 
-	 * @param index
-	 *            Index of the element to return
+	 * @param index Index of the element to return
 	 * @return the element at the specified position in this list
-	 * @throws IndexOutOfBoundsException
-	 *             If the index is out of range
+	 * @throws IndexOutOfBoundsException If the index is out of range
 	 */
 	@Override
 	public E get(int index) {
