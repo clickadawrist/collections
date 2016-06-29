@@ -6,22 +6,22 @@ package edu.ncsu.csc216.collections;
 import java.util.AbstractList;
 
 /**
- * @author yijiezhang
- *
+ * @author yijiezhang and Manaka Green
+ * Implementation of a generic linked list 
+ * extending a generic abstract list.
+ * @param <E> generic 
  */
 public class LinkedList<E> extends AbstractList<E> {
-	private class Node<E> {
-		private E data;
-	    private Node<E> next;
-
-	    public Node(E d) {
-	        data = d;
-	        next = null;
-	    }
-	    public Node(E d, Node<E> n) {
-	        data = d;
-	        next = n;
-	    }
+	/** List node in the linked list always points to the front */
+	private Node front;
+	/** The number of nodes in the linked list */
+	private int size;
+	/**
+	 * Constructor of an empty list.
+	 */
+	public LinkedList() {
+		front = null;
+		size = 0;
 	}
 	/* (non-Javadoc)
 	 * @see java.util.AbstractList#get(int)
@@ -66,5 +66,34 @@ public class LinkedList<E> extends AbstractList<E> {
 	public int size() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	/**
+	 * A node for linked list.
+	 * @author yijiezhang
+	 *
+	 * @param <E> generic
+	 */
+	private class Node {
+		/** Generic data type of a node */
+		public E data;
+	    /** Generic reference to the next node */
+		public Node next;
+		/**
+		 * Constructs a node.
+		 * @param d generic data
+		 */
+	    public Node(E d) {
+	        data = d;
+	        next = null;
+	    }
+	    /**
+	     * Constructs a node with reference.
+	     * @param d generic data
+	     * @param n reference to next generic node
+	     */
+	    public Node(E d, Node n) {
+	        data = d;
+	        next = n;
+	    }
 	}
 }
