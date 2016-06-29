@@ -1,14 +1,11 @@
-/**
- * 
- */
 package edu.ncsu.csc216.collections;
 
 import java.util.AbstractList;
 
 /**
- * @author yijiezhang and Manaka Green
  * Implementation of a generic linked list 
  * extending a generic abstract list.
+ * @author yijiezhang and Manaka Green
  * @param <E> generic 
  */
 public class LinkedList<E> extends AbstractList<E> {
@@ -59,25 +56,31 @@ public class LinkedList<E> extends AbstractList<E> {
 		return super.remove(index);
 	}
 
-	/* (non-Javadoc)
-	 * @see java.util.AbstractCollection#size()
+	/**
+	 * Returns size of the linked list.
 	 */
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+/*		Node current = front;
+		while(current != null) {
+			current = current.next;
+			size++;
+		}*/
+		return size;
 	}
 	/**
 	 * A node for linked list.
-	 * @author yijiezhang
-	 *
-	 * @param <E> generic
+	 * @author yijiezhang and Manaka Green
+	 * @param <E> Generic
 	 */
 	private class Node {
+		
 		/** Generic data type of a node */
 		public E data;
-	    /** Generic reference to the next node */
+	    
+		/** Generic reference to the next node */
 		public Node next;
+		
 		/**
 		 * Constructs a node.
 		 * @param d generic data
@@ -86,6 +89,7 @@ public class LinkedList<E> extends AbstractList<E> {
 	        data = d;
 	        next = null;
 	    }
+	    
 	    /**
 	     * Constructs a node with reference.
 	     * @param d generic data
