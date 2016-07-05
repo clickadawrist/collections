@@ -3,18 +3,28 @@ package edu.ncsu.csc216.course_manager.utils;
 import java.util.ArrayList;
 
 /**
+ * 
  * @author Manaka Green and Jerry Zhang
  *
  */
-public class ArrayStack<E> implements Stack {
+public class ArrayStack<E> implements Stack<E> {
 
-	private ArrayList<E> list = new ArrayList<E>();
 
+	private ArrayList<E> list;
+
+	/**
+	 * 
+	 */
+	public ArrayStack() {
+		list = new ArrayList<E>();
+	}
+
+	
 	/**
 	 * Pushes the given element to the top of the stack.
 	 */
 	@Override
-	public void push(Object element) {
+	public void push(E element) {
 		
 	}
 
@@ -23,7 +33,7 @@ public class ArrayStack<E> implements Stack {
 	 * @throws EmptyStackException If the stack is empty
 	 */
 	@Override
-	public Object pop() {
+	public E pop() {
 		/*
 		 * throws an EmptyStackException if the stack is empty
 		 */
@@ -32,14 +42,16 @@ public class ArrayStack<E> implements Stack {
 
 	/**
 	 * Returns, but does not remove, the element at the top of the stack.
+	 * It is basically get.
 	 * @throws EmptyStackException If the stack is empty
 	 */
 	@Override
-	public Object peek() {
+	public E peek() {
 		/* 
+		 * Use arraylist methods to utilize stack class
 		 * throws an EmptyStackException if the stack is empty
 		 */
-		return null;
+		return list.get(list.size() - 1);
 	}
 
 	/**
@@ -47,6 +59,9 @@ public class ArrayStack<E> implements Stack {
 	 */
 	@Override
 	public boolean isEmpty() {
+		if (list.isEmpty()) {
+			return true;
+		}
 		return false;
 	}
 }

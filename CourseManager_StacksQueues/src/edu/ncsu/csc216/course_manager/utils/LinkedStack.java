@@ -1,18 +1,27 @@
 package edu.ncsu.csc216.course_manager.utils;
 
+import java.util.ArrayList;
+
 /**
  * 
  * @author Manaka Green and Jerry Zhang
  */
-public class LinkedStack<E> implements Stack {
+public class LinkedStack<E> implements Stack<E> {
 
-	private LinkedList<E> list = new LinkedList<E>();
+	private LinkedList<E> list;
 
+	/**
+	 * 
+	 */
+	public LinkedStack() {
+		list = new LinkedList<E>();
+	}
+	
 	/**
 	 * Pushes the given element to the top of the stack.
 	 */
 	@Override
-	public void push(Object element) {
+	public void push(E element) {
 		// TODO Auto-generated method stub
 		
 	}
