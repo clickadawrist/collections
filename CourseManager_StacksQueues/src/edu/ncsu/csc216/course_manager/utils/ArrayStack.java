@@ -11,38 +11,42 @@ public class ArrayStack<E> implements Stack {
 	private ArrayList<E> list = new ArrayList<E>();
 
 	/**
-	 * 
+	 * Pushes the given element to the top of the stack.
 	 */
 	@Override
 	public void push(Object element) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	/**
-	 * 
+	 * Removes and returns the element at the top of the stack.
+	 * @throws EmptyStackException If the stack is empty
 	 */
 	@Override
 	public Object pop() {
-		// TODO Auto-generated method stub
+		/*
+		 * throws an EmptyStackException if the stack is empty
+		 */
 		return null;
 	}
 
 	/**
-	 * 
+	 * Returns, but does not remove, the element at the top of the stack.
+	 * @throws EmptyStackException If the stack is empty
 	 */
 	@Override
 	public Object peek() {
-		// TODO Auto-generated method stub
+		/* 
+		 * throws an EmptyStackException if the stack is empty
+		 */
 		return null;
 	}
 
 	/**
-	 * 
+	 * Returns true if the stack is empty.
 	 */
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

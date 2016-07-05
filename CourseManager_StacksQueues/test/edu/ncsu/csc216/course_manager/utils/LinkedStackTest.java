@@ -10,7 +10,15 @@ import org.junit.Test;
  *
  */
 public class LinkedStackTest {
-
+/*
+ Inserting a single element into the stack
+ Inserting multiple elements into the stack
+ Removing a single element from the stack
+ Removing multiple elements from the stack
+ Removing the last element from the stack
+ Interleaved inserts and removes
+ Attempting to remove an element from an empty stack	
+*/
 	/**
 	 * @throws java.lang.Exception
 	 */

@@ -9,7 +9,7 @@ public class LinkedStack<E> implements Stack {
 	private LinkedList<E> list = new LinkedList<E>();
 
 	/**
-	 * 
+	 * Pushes the given element to the top of the stack.
 	 */
 	@Override
 	public void push(Object element) {
@@ -18,7 +18,8 @@ public class LinkedStack<E> implements Stack {
 	}
 
 	/**
-	 * 
+	 * Removes and returns the element at the top of the stack.
+	 * @throws EmptyStackException If the stack is empty
 	 */
 	@Override
 	public E pop() {
@@ -27,7 +28,8 @@ public class LinkedStack<E> implements Stack {
 	}
 
 	/**
-	 * 
+	 * Returns, but does not remove, the element at the top of the stack.
+	 * @throws EmptyStackException If the stack is empty
 	 */
 	@Override
 	public E peek() {
@@ -36,7 +38,7 @@ public class LinkedStack<E> implements Stack {
 	}
 
 	/**
-	 * 
+	 * Returns true if the stack is empty.
 	 */
 	@Override
 	public boolean isEmpty() {
