@@ -41,7 +41,7 @@ public class ArrayStack<E> implements Stack {
 	 * 
 	 */
 	@Override
-	public boolean isEmplty() {
+	public boolean isEmpty() {
 		// TODO Auto-generated method stub
 		return false;
 	}

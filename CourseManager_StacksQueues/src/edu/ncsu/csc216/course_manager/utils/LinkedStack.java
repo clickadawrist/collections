@@ -21,7 +21,7 @@ public class LinkedStack<E> implements Stack {
 	 * 
 	 */
 	@Override
-	public Object pop() {
+	public E pop() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -30,7 +30,7 @@ public class LinkedStack<E> implements Stack {
 	 * 
 	 */
 	@Override
-	public Object peek() {
+	public E peek() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -39,7 +39,7 @@ public class LinkedStack<E> implements Stack {
 	 * 
 	 */
 	@Override
-	public boolean isEmplty() {
+	public boolean isEmpty() {
 		// TODO Auto-generated method stub
 		return false;
 	}

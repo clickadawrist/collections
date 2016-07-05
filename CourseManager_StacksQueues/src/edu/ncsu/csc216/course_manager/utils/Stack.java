@@ -13,5 +13,5 @@ public interface Stack<E> {
 	
 	public E peek();
 	
-	public boolean isEmplty();
+	public boolean isEmpty();
 }
