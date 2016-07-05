@@ -140,43 +140,25 @@ public class LinkedList<E> extends AbstractList<E> {
 	 */
 	@Override
 	public E remove(int index) {
-		Node current = front;
-		
-		if (index < 0 || index >= size()) {
+		// TODO Auto-generated method stub
+		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException();
 		}
-		
-////////THE STUFF BELOW WAS COPY AND PASTED FROM ADD METHOD (STILL UNCHANGED except for comments)
-		//remove from empty list
-		if (front == null) {
-			//create a new node and attach it at the front of the list
-		//	front = new Node(element);
-		}
-		//remove at front of non-empty list
-		else if (index == 0) {
-		//	front = new Node(element, front);
-		}
-		//remove at end of non-empty list
-		else if (index == size()) {
-			while (current.next != null) {
+		E removedElement = null;
+		if (index == 0) {
+			removedElement = front.data;
+			front = front.next;
+		}else {
+			Node current = front;
+			for(int i = 0; i < index - 1; i++) {
 				current = current.next;
 			}
-		//	current.next = new Node(element);
+			removedElement = current.next.data;
+			current.next = current.next.next;
 		}
-		//remove in middle of non-empty list
-		else {
-			for (int i = 0; i < index - 1; i++) {
-				current = current.next;
-			}
-		//	current.next = new Node(element, current.next);
-		}
-////////		
 		size--;
-		
-		return current.data;
-		
+		return removedElement;
 	}
-
 	/**
 	 * Returns size of the linked list.
 	 */
