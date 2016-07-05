@@ -101,7 +101,23 @@ public class LinkedList<E> extends AbstractList<E> {
 	@Override
 	public E remove(int index) {
 		// TODO Auto-generated method stub
-		return super.remove(index);
+		if (index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException();
+		}
+		E removedElement = null;
+		if (index == 0) {
+			removedElement = front.data;
+			front = front.next;
+		}else {
+			Node current = front;
+			for(int i = 0; i < index - 1; i++) {
+				current = current.next;
+			}
+			removedElement = current.next.data;
+			current.next = current.next.next;
+		}
+		size--;
+		return removedElement;
 	}
 
 	/**
