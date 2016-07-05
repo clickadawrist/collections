@@ -9,10 +9,12 @@ import java.util.AbstractList;
  * @param <E> generic 
  */
 public class LinkedList<E> extends AbstractList<E> {
+	
 	/** List node in the linked list always points to the front */
 	private Node front;
 	/** The number of nodes in the linked list */
 	private int size;
+	
 	/**
 	 * Constructor of an empty list.
 	 */
@@ -23,7 +25,6 @@ public class LinkedList<E> extends AbstractList<E> {
 	/**
 	 * Gets generic data at index.
 	 * @throws IndexOutOfBoundsException if data is null or index is out of bounds
-	 * @see java.util.AbstractList#get(int)
 	 */
 	@Override
 	public E get(int index) {
@@ -48,8 +49,11 @@ public class LinkedList<E> extends AbstractList<E> {
 		return current.data;
 	}
 
-	/** (non-Javadoc)
-	 * @see java.util.AbstractList#set(int, java.lang.Object)
+	/**
+	 * Sets the element at the specified index.
+	 * @throws NullPointerException if the specified element is null and this list does not permit null elements 
+	 * @throws IndexOutOfBoundsException if data is null or index is out of bounds
+	 * @index sets element at specified index
 	 */
 	@Override
 	public E set(int index, E element) {
@@ -95,11 +99,12 @@ public class LinkedList<E> extends AbstractList<E> {
 		}
 	}
 
-	/** (non-Javadoc)
-	 * @see java.util.AbstractList#add(int, java.lang.Object)
+	/** 
+	 * Adds element to specified index.
 	 * @throws NullPointerException if the specified element is null and this list does not permit null elements
-	 * @throws IllegalArgumentException if some property of the specified element prevents it from being added to this list
 	 * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > size())
+	 * @param index Specified index to add to
+	 * @param element to add at specified index
 	 */
 	@Override
 	public void add(int index, E element) {
@@ -111,9 +116,6 @@ public class LinkedList<E> extends AbstractList<E> {
 		if (index < 0 || index > size()) {
 			throw new IndexOutOfBoundsException();
 		}
-		
-		//"throws IllegalArgumentException if some property of the specified element prevents it from being added to this list"
-//////////^^I don't know exactly what to do there
 		
 		//insert in empty list
 		if (front == null) {
@@ -141,12 +143,13 @@ public class LinkedList<E> extends AbstractList<E> {
 		size++;
 	}
 
-	/** (non-Javadoc)
-	 * @see java.util.AbstractList#remove(int)
+	/** 
+	 * Removes element at specified index.
+	 * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size())
+	 * @param index Specified index to remove from
 	 */
 	@Override
 	public E remove(int index) {
-		// TODO Auto-generated method stub
 		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException();
 		}
@@ -154,7 +157,7 @@ public class LinkedList<E> extends AbstractList<E> {
 		if (index == 0) {
 			removedElement = front.data;
 			front = front.next;
-		}else {
+		} else {
 			Node current = front;
 			for(int i = 0; i < index - 1; i++) {
 				current = current.next;
@@ -176,7 +179,7 @@ public class LinkedList<E> extends AbstractList<E> {
 	/**
 	 * A node for linked list.
 	 * @author yijiezhang and Manaka Green
-	 * @param <E> Generic
+	 * @param E Generic Node with generic elements
 	 */
 	private class Node {
 		
