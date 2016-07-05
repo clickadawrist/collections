@@ -63,8 +63,36 @@ public class LinkedList<E> extends AbstractList<E> {
 	 */
 	@Override
 	public void add(int index, E element) {
-		// TODO Auto-generated method stub
-		super.add(index, element);
+		Node current = front;
+////definitely not finished
+		
+		//insert in empty list
+		if (front == null) {
+			//create a new node and attach it as the front of the list
+			front = new Node(element, front);
+		}
+		//insert at front of non-empty list
+		else if (index == 0) {
+			current = new Node(element, current.next);
+			
+			current = current.next;
+			
+		}
+		//insert at end of non-empty list
+		else if (index == (size() - 1)) {
+			while(current.next.data != element) {
+				current = current.next;
+			}
+			current.next = new Node(element, current.next);
+		}
+		//insert in middle of non-empty list
+		else {
+			for (int i = 0; i < index - 1; i++) {
+				current = current.next;
+			}
+			current.next = new Node(element, current.next);
+		}
+		size++;
 	}
 
 	/* (non-Javadoc)
