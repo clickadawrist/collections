@@ -53,6 +53,8 @@ public class LinkedList<E> extends AbstractList<E> {
 	 */
 	@Override
 	public E set(int index, E element) {
+		Node current = front;
+		
 		if (element == null) {
 			throw new NullPointerException();
 		}
@@ -60,7 +62,6 @@ public class LinkedList<E> extends AbstractList<E> {
 		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException();
 		}
-
 		
 		//set in empty list
 		//supposed to throw IOOBE right?
@@ -68,25 +69,30 @@ public class LinkedList<E> extends AbstractList<E> {
 			throw new IndexOutOfBoundsException();
 			//front = new Node(element);
 		}
-		//insert at front of non-empty list
+		//set at front of non-empty list
 		else if (index == 0) {
-			front = new Node(element, front);
+			E ddata = current.data; 
+			current.data = element;
+			return ddata;
 		}
-		//insert at end of non-empty list
-		else if (index == size()) {
-		//	while (current.next != null) {
-		//		current = current.next;
+		//set at end of non-empty list
+		else if (index == size() - 1) {
+			while (current.next != null) {
+				current = current.next;
 			}
-		//	current.next = new Node(element);
-		//}
+			E ddata = current.data;
+			current.data = element;
+			return ddata;
+		}
 		//insert in middle of non-empty list
-		//else {
-		//	for (int i = 0; i < index - 1; i++) {
-		//		current = current.next;
-		//	}
-		//	current.next = new Node(element, current.next);
-		//}
-		return element;
+		else {
+			for (int i = 0; i < index; i++) {
+				current = current.next;
+			}
+			E ddata = current.data;
+			current.data = element;
+			return ddata;
+		}
 	}
 
 	/** (non-Javadoc)
