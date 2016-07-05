@@ -179,7 +179,7 @@ public class LinkedList<E> extends AbstractList<E> {
 	/**
 	 * A node for linked list.
 	 * @author yijiezhang and Manaka Green
-	 * @param E Generic Node with generic elements
+	 * @param Generic Node with generic elements
 	 */
 	private class Node {
 		
