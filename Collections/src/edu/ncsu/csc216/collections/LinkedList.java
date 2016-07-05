@@ -28,11 +28,10 @@ public class LinkedList<E> extends AbstractList<E> {
 	@Override
 	public E get(int index) {
 		Node current = front;
-				
-		if (index < 0 || index > size()) {
+//changed from index > size() to index >= size()				
+		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException();
 		}
-		
 		if (index == size()) {
 			throw new IndexOutOfBoundsException();
 		}	
@@ -49,41 +48,81 @@ public class LinkedList<E> extends AbstractList<E> {
 		return current.data;
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see java.util.AbstractList#set(int, java.lang.Object)
 	 */
 	@Override
 	public E set(int index, E element) {
-		// TODO Auto-generated method stub
-		return super.set(index, element);
+		if (element == null) {
+			throw new NullPointerException();
+		}
+		
+		if (index < 0 || index > size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		return element;
+		
+		/*//insert in empty list
+		if (front == null) {
+			//create a new node and attach it at the front of the list
+			front = new Node(element);
+		}
+		//insert at front of non-empty list
+		else if (index == 0) {
+			front = new Node(element, front);
+		}
+		//insert at end of non-empty list
+		else if (index == size()) {
+			while (current.next != null) {
+				current = current.next;
+			}
+			current.next = new Node(element);
+		}
+		//insert in middle of non-empty list
+		else {
+			for (int i = 0; i < index - 1; i++) {
+				current = current.next;
+			}
+			current.next = new Node(element, current.next);
+		}
+*/		
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see java.util.AbstractList#add(int, java.lang.Object)
+	 * @throws NullPointerException if the specified element is null and this list does not permit null elements
+	 * @throws IllegalArgumentException if some property of the specified element prevents it from being added to this list
+	 * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > size())
 	 */
 	@Override
 	public void add(int index, E element) {
 		Node current = front;
-////definitely not finished
+		if (element == null) {
+			throw new NullPointerException();
+		}
+		
+		if (index < 0 || index > size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		//"throws IllegalArgumentException if some property of the specified element prevents it from being added to this list"
+//////////^^I don't know exactly what to do there
 		
 		//insert in empty list
 		if (front == null) {
-			//create a new node and attach it as the front of the list
-			front = new Node(element, front);
+			//create a new node and attach it at the front of the list
+			front = new Node(element);
 		}
 		//insert at front of non-empty list
 		else if (index == 0) {
-			current = new Node(element, current.next);
-			
-			current = current.next;
-			
+			front = new Node(element, front);
 		}
 		//insert at end of non-empty list
-		else if (index == (size() - 1)) {
-			while(current.next.data != element) {
+		else if (index == size()) {
+			while (current.next != null) {
 				current = current.next;
 			}
-			current.next = new Node(element, current.next);
+			current.next = new Node(element);
 		}
 		//insert in middle of non-empty list
 		else {
@@ -95,7 +134,7 @@ public class LinkedList<E> extends AbstractList<E> {
 		size++;
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see java.util.AbstractList#remove(int)
 	 */
 	@Override
@@ -119,7 +158,6 @@ public class LinkedList<E> extends AbstractList<E> {
 		size--;
 		return removedElement;
 	}
-
 	/**
 	 * Returns size of the linked list.
 	 */

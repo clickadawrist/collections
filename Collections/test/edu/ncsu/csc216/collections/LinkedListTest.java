@@ -339,16 +339,23 @@ public class LinkedListTest {
 		
 		
 		//Add 4 elements to the list and test that the contents are correct.
+		//list.add(0, "banana");
+		list.add(0, "cherry");
+		list.add(1, "apple");
+		list.add(2, "dragonfruit");
+		
+		//Add element to the front of a list
 		list.add(0, "banana");
-		list.add(1, "cherry");
-		list.add(2, "apple");
-		list.add(3, "dragonfruit");
+		assertEquals(4, list.size());
+		assertEquals("banana", list.get(0));
+		
+		
+		//Make sure everything's in order
 		assertEquals(4, list.size());
 		assertEquals("banana", list.get(0));
 		assertEquals("cherry", list.get(1));
 		assertEquals("apple", list.get(2));
-		assertEquals("dragonfruit", list.get(3));
-		
+		assertEquals("dragonfruit", list.get(3));	
 		
 		//Test that IndexOutOfBoundsException is thrown when get() is passed
 		//a negative index.  Make sure the list is unchanged.
@@ -377,4 +384,6 @@ public class LinkedListTest {
 			assertEquals("dragonfruit", list.get(3));
 		}
 	}
+
+	
 }
