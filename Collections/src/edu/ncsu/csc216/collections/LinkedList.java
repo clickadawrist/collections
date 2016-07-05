@@ -48,13 +48,44 @@ public class LinkedList<E> extends AbstractList<E> {
 		return current.data;
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see java.util.AbstractList#set(int, java.lang.Object)
 	 */
 	@Override
 	public E set(int index, E element) {
-		// TODO Auto-generated method stub
-		return super.set(index, element);
+		if (element == null) {
+			throw new NullPointerException();
+		}
+		
+		if (index < 0 || index > size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		return element;
+		
+		/*//insert in empty list
+		if (front == null) {
+			//create a new node and attach it at the front of the list
+			front = new Node(element);
+		}
+		//insert at front of non-empty list
+		else if (index == 0) {
+			front = new Node(element, front);
+		}
+		//insert at end of non-empty list
+		else if (index == size()) {
+			while (current.next != null) {
+				current = current.next;
+			}
+			current.next = new Node(element);
+		}
+		//insert in middle of non-empty list
+		else {
+			for (int i = 0; i < index - 1; i++) {
+				current = current.next;
+			}
+			current.next = new Node(element, current.next);
+		}
+*/		
 	}
 
 	/** (non-Javadoc)
