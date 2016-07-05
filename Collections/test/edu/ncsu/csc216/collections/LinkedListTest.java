@@ -32,9 +32,10 @@ public class LinkedListTest {
 	public void testLinkedList() {
 		//Test that the list is created correctly.
 		try {
+			list.get(0);
 			list.remove(0);
 			list.set(0, "fruit");
-			list.get(0);
+			//list.get(0);
 			fail("Didn't catch IndexOutOfBoundsException.");
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(0, list.size());
@@ -315,8 +316,29 @@ public class LinkedListTest {
 	 */
 	@Test
 	public void testGetInt() {
+		
+		//Checking indexes out of bounds before adding to the list
+		try {
+			list.get(-1);
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(0, list.size());
+		}
+		
+		try {
+			list.get(1);
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(0, list.size());
+		}
+		
+
+		try {
+			list.get(0);
+		} catch (IndexOutOfBoundsException e) {
+			assertEquals(0, list.size());
+		}
+		
+		
 		//Add 4 elements to the list and test that the contents are correct.
-		//Reuse code from your testAddIntE.
 		list.add(0, "banana");
 		list.add(1, "cherry");
 		list.add(2, "apple");

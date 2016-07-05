@@ -20,13 +20,33 @@ public class LinkedList<E> extends AbstractList<E> {
 		front = null;
 		size = 0;
 	}
-	/* (non-Javadoc)
+	/**
+	 * Gets generic data at index.
+	 * @throws IndexOutOfBoundsException if data is null or index is out of bounds
 	 * @see java.util.AbstractList#get(int)
 	 */
 	@Override
 	public E get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		Node current = front;
+				
+		if (index < 0 || index > size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		if (index == size()) {
+			throw new IndexOutOfBoundsException();
+		}	
+		if (index == 0) {
+				return current.data;
+		} else {
+			for (int i = 0; i < index; i++) {
+				current = current.next;
+				if (current.data == null) {
+					throw new IndexOutOfBoundsException();		
+				}
+			}
+		}
+		return current.data;
 	}
 
 	/* (non-Javadoc)
@@ -61,13 +81,9 @@ public class LinkedList<E> extends AbstractList<E> {
 	 */
 	@Override
 	public int size() {
-/*		Node current = front;
-		while(current != null) {
-			current = current.next;
-			size++;
-		}*/
 		return size;
 	}
+	
 	/**
 	 * A node for linked list.
 	 * @author yijiezhang and Manaka Green
