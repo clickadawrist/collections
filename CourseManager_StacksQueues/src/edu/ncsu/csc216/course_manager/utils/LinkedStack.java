@@ -1,6 +1,6 @@
 package edu.ncsu.csc216.course_manager.utils;
 
-import java.util.ArrayList;
+import java.util.EmptyStackException;
 
 /**
  * 
@@ -8,10 +8,11 @@ import java.util.ArrayList;
  */
 public class LinkedStack<E> implements Stack<E> {
 
+	/** */
 	private LinkedList<E> list;
 
 	/**
-	 * 
+	 * Creates an instance of a linked list.
 	 */
 	public LinkedStack() {
 		list = new LinkedList<E>();
@@ -22,7 +23,8 @@ public class LinkedStack<E> implements Stack<E> {
 	 */
 	@Override
 	public void push(E element) {
-		// TODO Auto-generated method stub
+		
+		list.add(list.size() - 1, element);
 		
 	}
 
@@ -32,8 +34,10 @@ public class LinkedStack<E> implements Stack<E> {
 	 */
 	@Override
 	public E pop() {
-		// TODO Auto-generated method stub
-		return null;
+		if (list.isEmpty()) {
+			throw new EmptyStackException();
+		}
+		return list.remove(list.size() - 1);
 	}
 
 	/**
@@ -42,8 +46,10 @@ public class LinkedStack<E> implements Stack<E> {
 	 */
 	@Override
 	public E peek() {
-		// TODO Auto-generated method stub
-		return null;
+		if (list.isEmpty()) {
+			throw new EmptyStackException();
+		}
+		return list.get(list.size() - 1);
 	}
 
 	/**
@@ -51,7 +57,9 @@ public class LinkedStack<E> implements Stack<E> {
 	 */
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
+		if (list.isEmpty()) {
+			return true;
+		}
 		return false;
 	}
 }

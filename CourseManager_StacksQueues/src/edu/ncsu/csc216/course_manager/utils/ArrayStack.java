@@ -1,6 +1,7 @@
 package edu.ncsu.csc216.course_manager.utils;
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 
 /**
  * 
@@ -9,11 +10,11 @@ import java.util.ArrayList;
  */
 public class ArrayStack<E> implements Stack<E> {
 
-
+	/** */
 	private ArrayList<E> list;
 
 	/**
-	 * 
+	 * Creates an instance of a generic array list.
 	 */
 	public ArrayStack() {
 		list = new ArrayList<E>();
@@ -34,10 +35,10 @@ public class ArrayStack<E> implements Stack<E> {
 	 */
 	@Override
 	public E pop() {
-		/*
-		 * throws an EmptyStackException if the stack is empty
-		 */
-		return null;
+		if (list.isEmpty()) {
+			throw new EmptyStackException();
+		}
+		return list.remove(list.size() - 1);
 	}
 
 	/**
@@ -47,10 +48,9 @@ public class ArrayStack<E> implements Stack<E> {
 	 */
 	@Override
 	public E peek() {
-		/* 
-		 * Use arraylist methods to utilize stack class
-		 * throws an EmptyStackException if the stack is empty
-		 */
+		if (list.isEmpty()) {
+			throw new EmptyStackException();
+		}
 		return list.get(list.size() - 1);
 	}
 
