@@ -76,13 +76,19 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	 */
 	private class LinkedListIterator implements ListIterator<E> {
 
+		//not sure what type the previous and next is supposed to be
+		private ListNode previous;
+		private ListNode next;
+		private int previousIndex;
+		private int nextIndex;
+		
 		/**
 		 * 
 		 */
 		public LinkedListIterator() {
-			
+			this(0);
 		}
-		
+
 		/**
 		 * 
 		 * @param index
