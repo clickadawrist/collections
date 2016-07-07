@@ -31,21 +31,21 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	
 	/**
 	 * Returns a list iterator over the elements in this list (in proper sequence).
-	 * @param index index of first element to be returned 
+	 * @param idx Index of first element to be returned 
 	 * from the list iterator (by a call to the next method)
-	 * @return a list iterator over the elements in this list (in proper sequence)
-	 * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > size())
+	 * @return linkedListIterator Which is the value at the given index
+	 * @throws IndexOutOfBoundsException If the index is out of range (index < 0 || index > size())
 	 */
 	@Override
 	public ListIterator<E> listIterator(int idx) {
-		// TODO Auto-generated method stub
-		return null;
+		LinkedListIterator linkedListIterator = new LinkedListIterator(idx);
+		return linkedListIterator;
 	}
 
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 	
 	/**
