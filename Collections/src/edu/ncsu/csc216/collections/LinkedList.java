@@ -30,5 +30,24 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
+	/**
+	 * 
+	 * @author Manaka Green and Jerry Zhang
+	 *
+	 */
+	private class ListNode {
+		public E data;
+		public ListNode prev;
+		public ListNode next;
+		public ListNode(E data) {
+			this(data, null, null);
+		}
+		
+		public ListNode(E data, ListNode prev, ListNode next) {
+			this.data = data;
+			this.prev = prev;
+			this.next = next;
+		}
+	}
 }
