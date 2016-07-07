@@ -12,6 +12,23 @@ import java.util.ListIterator;
  */
 public class LinkedList<E> extends AbstractSequentialList<E> {
 	
+	private ListNode front;
+	private ListNode back;
+	private int size;
+	
+	/**
+	 * Creates a ListNode with null data that front will point to.
+	 * Creates a ListNode with null data that back will point to.
+	 * Sets front's next to point to back, and back's prev point to front.
+	 * Initializes size to 0.
+	 */
+	public LinkedList() {
+		//ListNode(data, prev, next)
+		this.front = new ListNode(null, null, back);
+		this.back = new ListNode(null, front, null);
+		this.size = 0;
+	}
+	
 	/**
 	 * Returns a list iterator over the elements in this list (in proper sequence).
 	 * @param index index of first element to be returned 
