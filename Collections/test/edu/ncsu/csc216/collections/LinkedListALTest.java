@@ -2,19 +2,18 @@ package edu.ncsu.csc216.collections;
 
 import static org.junit.Assert.*;
 
-import java.util.LinkedList;
-
 import org.junit.Before;
 import org.junit.Test;
+import edu.ncsu.csc216.collections.LinkedListAL;
 
 /**
  * Tests CSC216LinkedList class.
  * @author SarahHeckman and Manaka Green and Jerry Zhang
  */
-public class LinkedListTest {
+public class LinkedListALTest {
 	
 	/** CSC216LinkedList named list for testing methods. */
-	private LinkedList<String> list;
+	private LinkedListAL<String> list;
 	
 	/**
 	 * Sets up variables for testing CSC216LinkedList class.
@@ -22,7 +21,7 @@ public class LinkedListTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		list = new LinkedList<String>();
+		list = new LinkedListAL<String>();
 	}
 
 	/**

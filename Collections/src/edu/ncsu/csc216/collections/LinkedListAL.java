@@ -8,7 +8,7 @@ import java.util.AbstractList;
  * @author yijiezhang and Manaka Green
  * @param <E> generic 
  */
-public class LinkedList<E> extends AbstractList<E> {
+public class LinkedListAL<E> extends AbstractList<E> {
 	
 	/** List node in the linked list always points to the front */
 	private Node front;
@@ -18,7 +18,7 @@ public class LinkedList<E> extends AbstractList<E> {
 	/**
 	 * Constructor of an empty list.
 	 */
-	public LinkedList() {
+	public LinkedListAL() {
 		front = null;
 		size = 0;
 	}
