@@ -23,9 +23,7 @@ public class LinkedStack<E> implements Stack<E> {
 	 */
 	@Override
 	public void push(E element) {
-		
-		list.add(list.size() - 1, element);
-		
+		list.add(element);
 	}
 
 	/**

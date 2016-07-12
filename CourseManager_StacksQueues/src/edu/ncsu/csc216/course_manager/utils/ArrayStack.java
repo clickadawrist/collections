@@ -26,7 +26,7 @@ public class ArrayStack<E> implements Stack<E> {
 	 */
 	@Override
 	public void push(E element) {
-		
+		list.add(element);
 	}
 
 	/**
