@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.ncsu.csc216.course_manager.utils;
 
 import static org.junit.Assert.*;
@@ -23,7 +20,9 @@ public class ArrayQueueTest {
 	 Attempting to remove an element from an empty queue	
 	*/
 	private ArrayQueue<String> queue;
+	
 	/**
+	 * Sets up tests.
 	 * @throws java.lang.Exception
 	 */
 	@Before
@@ -31,6 +30,9 @@ public class ArrayQueueTest {
 		queue = new ArrayQueue<String>();
 	}
 
+	/**
+	 * Tests arrayQueue constructor.
+	 */
 	@Test 
 	public void testArrayQueue() {
         assertTrue(queue.isEmpty());

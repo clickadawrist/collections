@@ -31,6 +31,9 @@ public class LinkedQueueTest {
 		queue = new LinkedQueue<String>();
 	}
 
+	/**
+	 * Tests linkedQueue.
+	 */
 	@Test
 	public void testLinkedQueue() {
         assertTrue(queue.isEmpty());

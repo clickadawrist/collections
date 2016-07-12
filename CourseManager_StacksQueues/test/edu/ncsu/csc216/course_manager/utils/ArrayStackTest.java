@@ -18,8 +18,10 @@ public class ArrayStackTest {
 	 Removing the last element from the stack
 	 Interleaved inserts and removes
 	 Attempting to remove an element from an empty stack*/
-	private ArrayStack<String> stack; 
+	private ArrayStack<String> stack;
+	
 	/**
+	 * Sets up tests.
 	 * @throws java.lang.Exception
 	 */
 	@Before
@@ -27,6 +29,9 @@ public class ArrayStackTest {
 		stack = new ArrayStack<String>();
 	}
 
+	/**
+	 * Test push method.
+	 */
 	@Test
 	public void testPush() {
         assertTrue(stack.isEmpty());
@@ -39,6 +44,10 @@ public class ArrayStackTest {
         stack.push("dog");
         assertEquals("dog", stack.peek());
     }
+	
+	/**
+	 * Tests pop method.
+	 */
 	public void testPop() {
         // Add elements to the stack
         stack.push("apple");
@@ -54,6 +63,10 @@ public class ArrayStackTest {
         assertEquals("apple", stack.pop());
         assertTrue(stack.isEmpty());
 	}
+	
+	/**
+	 * Tests peek method.
+	 */
 	public void testPeek() {
         // Add and remove elements to the stack
         assertTrue(stack.isEmpty());

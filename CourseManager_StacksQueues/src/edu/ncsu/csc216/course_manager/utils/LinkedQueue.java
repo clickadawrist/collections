@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 /**
  * Uses LinkedList as a queue.
  * @author Manaka Green and Jerry Zhang
+ * @param <E>
  */
 public class LinkedQueue<E> implements Queue<E> {
 

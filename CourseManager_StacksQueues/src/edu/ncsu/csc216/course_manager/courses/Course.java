@@ -159,7 +159,7 @@ public class Course implements Enrollable {
 		//waitlist counter to keep track of how many students are in the waitlist
 		if (!enrolledStudents.contains(user)) {
 			int waitListCounter = 0;
-			if(canEnroll(user) == false && waitListCounter < 5) {
+			if(!canEnroll(user) && waitListCounter < 5) {
 				waitlist.enqueue(user);
 				waitListCounter++;
 				return true;
