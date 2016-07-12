@@ -6,8 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * Test cases for LinkedStack class.
  * @author Manaka Green and Jerry Zhang
- *
  */
 public class LinkedStackTest {
 /*

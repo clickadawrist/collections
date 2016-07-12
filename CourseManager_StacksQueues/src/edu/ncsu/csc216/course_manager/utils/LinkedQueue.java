@@ -1,5 +1,7 @@
 package edu.ncsu.csc216.course_manager.utils;
 
+import java.util.NoSuchElementException;
+
 /**
  * 
  * @author Manaka Green and Jerry Zhang
@@ -18,19 +20,19 @@ public class LinkedQueue<E> implements Queue<E> {
 	@Override
 	public void enqueue(E element) {
 		list.add(element);
-		
 	}
 
 	@Override
 	public E dequeue() {
-		// TODO Auto-generated method stub
-		return null;
+		if (this.isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        return list.remove(0);
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return (list.size() == 0);
 	}
 
 }
