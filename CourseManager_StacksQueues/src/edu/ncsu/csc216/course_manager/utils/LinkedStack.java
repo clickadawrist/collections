@@ -8,7 +8,7 @@ import java.util.EmptyStackException;
  */
 public class LinkedStack<E> implements Stack<E> {
 
-	/** */
+	/** Accesses LinkedList's methods. */
 	private LinkedList<E> list;
 
 	/**
@@ -23,9 +23,7 @@ public class LinkedStack<E> implements Stack<E> {
 	 */
 	@Override
 	public void push(E element) {
-		
-		list.add(list.size() - 1, element);
-		
+		list.add(list.size(), element);	
 	}
 
 	/**
