@@ -3,7 +3,7 @@ package edu.ncsu.csc216.course_manager.utils;
 import java.util.EmptyStackException;
 
 /**
- * 
+ * Uses LinkedList as a stack.
  * @author Manaka Green and Jerry Zhang
  */
 public class LinkedStack<E> implements Stack<E> {

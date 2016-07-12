@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import edu.ncsu.csc216.course_manager.users.Student;
 import edu.ncsu.csc216.course_manager.users.User;
+import edu.ncsu.csc216.course_manager.utils.Queue;
 
 /**
  * @author SarahHeckman
@@ -14,10 +15,12 @@ import edu.ncsu.csc216.course_manager.users.User;
  */
 public class Course implements Enrollable {
 	
-	//TODO Add your data structure for the Course wait list here.
-	//TODO Provide a reasoning for WHY you selected a Stack vs. Queue
-	//and why you selected the ArrayList or LinkedList version of the 
-	//Stack or Queue as a comment on the field.
+	/** A queue for students who want to enroll into a specific class. */
+	private Queue waitlist;
+	//Chose queue because the first waitlisted student should be the first one to
+	//enroll into the class aka leave the waitlist.
+	//Chose linkedList version of the queue since runtime is shorter for linked list
+	//with queues
 	
 	/** Course name */
 	private String name;
@@ -44,6 +47,7 @@ public class Course implements Enrollable {
 		setName(name);
 		setCredits(credits);
 		setCapacity(capacity);
+		//waitlist = new LinkedList<>();
 	}
 
 	/**
@@ -138,6 +142,10 @@ public class Course implements Enrollable {
 		return false;
 	}
 	
+	/*public Queue getWaitlist() {
+		return waitlist;
+	}*/
+	
 	/**
 	 * Enroll the user in the course if there is room.
 	 * @param user user to enroll
@@ -145,6 +153,7 @@ public class Course implements Enrollable {
 	 */
 	public boolean enroll(User user) {
 		return canEnroll(user) && enrolledStudents.add(user);
+		
 	}
 	
 	/**
