@@ -1,22 +1,21 @@
-/**
- * 
- */
 package edu.ncsu.csc216.course_manager.courses;
 
 import java.util.ArrayList;
 
 import edu.ncsu.csc216.course_manager.users.Student;
 import edu.ncsu.csc216.course_manager.users.User;
+import edu.ncsu.csc216.course_manager.utils.LinkedQueue;
 import edu.ncsu.csc216.course_manager.utils.Queue;
 
 /**
- * @author SarahHeckman
- *
+ * Course contains a list of enrolled students and a waitlist.
+ * @author SarahHeckman and Manaka Green and Jerry Zhang
  */
 public class Course implements Enrollable {
 	
 	/** A queue for students who want to enroll into a specific class. */
-	private Queue waitlist;
+	//added <User> to fix warnings
+	private Queue<User> waitlist;
 	//Chose queue because the first waitlisted student should be the first one to
 	//enroll into the class aka leave the waitlist.
 	//Chose linkedList version of the queue since runtime is shorter for linked list
@@ -47,7 +46,7 @@ public class Course implements Enrollable {
 		setName(name);
 		setCredits(credits);
 		setCapacity(capacity);
-		//waitlist = new LinkedList<>();
+		waitlist = new LinkedQueue<User>();
 	}
 
 	/**
@@ -142,26 +141,55 @@ public class Course implements Enrollable {
 		return false;
 	}
 	
-	/*public Queue getWaitlist() {
-		return waitlist;
-	}*/
-	
 	/**
-	 * Enroll the user in the course if there is room.
-	 * @param user user to enroll
-	 * @return true if user is enrolled.
+	 * Returns a Queue so that we can check the contents of the waitlist.
+	 * @return waitlist
 	 */
-	public boolean enroll(User user) {
-		return canEnroll(user) && enrolledStudents.add(user);
-		
+	public Queue<User> getWaitlist() {
+		return waitlist;
 	}
 	
 	/**
-	 * Drops the student from the course.
+	 * Enroll the user in the course if there is room, and the waitlist up to 5 students
+	 * if there is no room in the course.
+	 * @param user user to enroll
+	 * @return true if user is enrolled into the class or enrolled into the waitlist
+	 */
+	public boolean enroll(User user) {
+		//waitlist counter to keep track of how many students are in the waitlist
+		if (!enrolledStudents.contains(user)) {
+			int waitListCounter = 0;
+			if(canEnroll(user) == false && waitListCounter < 5) {
+				waitlist.enqueue(user);
+				waitListCounter++;
+				return true;
+			}
+		}
+		return canEnroll(user) && enrolledStudents.add(user);
+	}
+	
+	
+	/**
+	 * Drops the student from the course or from the waitlist.
 	 * @param user student to drop
-	 * @return true if the student is dropped
+	 * @return true if the student is dropped from the class or dropped from the waitlist
 	 */
 	public boolean drop(User user) {
+		//make temp queue
+		//if they're not already enrolled, then check waitlist
+		Queue<User> temp = new LinkedQueue<User>();
+		if (!enrolledStudents.contains(user)) {
+			User student = null;
+			while(!waitlist.isEmpty()) {
+				//dequeued student is returned from this method
+				student = waitlist.dequeue();
+				if(!waitlist.equals(user)) {
+					temp.enqueue(student);
+					return true;
+				}
+				waitlist = temp;
+			}
+		}
 		return enrolledStudents.remove(user);
 	}
 
