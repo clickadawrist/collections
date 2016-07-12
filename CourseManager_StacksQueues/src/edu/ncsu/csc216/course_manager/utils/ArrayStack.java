@@ -6,11 +6,10 @@ import java.util.EmptyStackException;
 /**
  * 
  * @author Manaka Green and Jerry Zhang
- *
  */
 public class ArrayStack<E> implements Stack<E> {
 
-	/** */
+	/** Accesses ArrayList's methods.*/
 	private ArrayList<E> list;
 
 	/**
@@ -20,7 +19,6 @@ public class ArrayStack<E> implements Stack<E> {
 		list = new ArrayList<E>();
 	}
 
-	
 	/**
 	 * Pushes the given element to the top of the stack.
 	 */

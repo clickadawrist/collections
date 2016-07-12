@@ -8,7 +8,7 @@ import java.util.EmptyStackException;
  */
 public class LinkedStack<E> implements Stack<E> {
 
-	/** */
+	/** Accesses LinkedList's methods. */
 	private LinkedList<E> list;
 
 	/**
