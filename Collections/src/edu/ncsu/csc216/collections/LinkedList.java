@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.ncsu.csc216.collections;
 
 import java.util.AbstractSequentialList;
@@ -12,8 +9,11 @@ import java.util.ListIterator;
  */
 public class LinkedList<E> extends AbstractSequentialList<E> {
 	
+	/** */
 	private ListNode front;
+	/** */
 	private ListNode back;
+	/** */
 	private int size;
 	
 	/**
@@ -40,28 +40,46 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	public ListIterator<E> listIterator(int idx) {
 		LinkedListIterator linkedListIterator = new LinkedListIterator(idx);
 		return linkedListIterator;
+		/* Implement listIterator() to return a ListIterator<E> that will return the 
+		 * value at the given index when next() is called
+		 */
 	}
 
+	/**
+	 * @return 
+	 */
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
 		return size;
 	}
-	
+
 	/**
 	 * 
 	 * @author Manaka Green and Jerry Zhang
 	 *
 	 */
 	private class ListNode {
+		/** */
 		public E data;
+		/** */
 		public ListNode prev;
+		/** */
 		public ListNode next;
-		
+
+		/**
+		 * 
+		 * @param data
+		 */
 		public ListNode(E data) {
 			this(data, null, null);
 		}
 		
+		/**
+		 * 
+		 * @param data
+		 * @param prev
+		 * @param next
+		 */
 		public ListNode(E data, ListNode prev, ListNode next) {
 			this.data = data;
 			this.prev = prev;
@@ -77,9 +95,13 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	private class LinkedListIterator implements ListIterator<E> {
 
 		//not sure what type the previous and next is supposed to be
+		/** */
 		private ListNode previous;
+		/** */
 		private ListNode next;
+		/** */
 		private int previousIndex;
+		/** */
 		private int nextIndex;
 		
 		/**
@@ -96,60 +118,86 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		public LinkedListIterator(int index) {
 			
 		}
-		
+
+		/**
+		 * 
+		 */
 		@Override
 		public void add(E arg0) {
 			// TODO Auto-generated method stub
 			
 		}
 
+		/**
+		 * 
+		 */
 		@Override
 		public boolean hasNext() {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
+		/**
+		 * 
+		 */
 		@Override
 		public boolean hasPrevious() {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
+		/**
+		 * 
+		 */
 		@Override
 		public E next() {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
+		/**
+		 * 
+		 */
 		@Override
 		public int nextIndex() {
 			// TODO Auto-generated method stub
 			return 0;
 		}
 
+		/**
+		 * 
+		 */
 		@Override
 		public E previous() {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
+		/**
+		 * 
+		 */
 		@Override
 		public int previousIndex() {
 			// TODO Auto-generated method stub
 			return 0;
 		}
 
+		/**
+		 * 
+		 */
 		@Override
 		public void remove() {
 			// TODO Auto-generated method stub
 			
 		}
 
+		/**
+		 * 
+		 */
 		@Override
 		public void set(E arg0) {
 			// TODO Auto-generated method stub
 			
-		}
-		
+		}		
 	}
 }
