@@ -159,12 +159,12 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 				throw new IllegalArgumentException();
 			}
 			
-			ListNode newNode = new ListNode(element, previous, previous.next);
-			previous.next = newNode;
-			next.prev = newNode;
+			ListNode newNode = new ListNode(element, previous, next);
+			/*previous = previous.next;
+			next.prev = newNode;*/
 			size++;
-			previousIndex++;
-			nextIndex++;
+			/*nextIndex++;
+			previousIndex++;*/
 			removeCheck = false;
 		}
 
