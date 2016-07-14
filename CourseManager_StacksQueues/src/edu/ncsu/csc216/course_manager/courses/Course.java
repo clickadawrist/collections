@@ -157,17 +157,26 @@ public class Course implements Enrollable {
 	 */
 	public boolean enroll(User user) {
 		//waitlist counter to keep track of how many students are in the waitlist
+		int waitListCounter = 0;
+		//max number of student allowed in course's waitlist
+		int waitListCapacity = 5;
+		//First check if student is already enrolled
 		if (!enrolledStudents.contains(user)) {
-			int waitListCounter = 0;
-			if(!canEnroll(user) && waitListCounter < 5) {
+			//If there is space to enroll, add the student to the course's list of students
+			if(canEnroll(user)) {
+				enrolledStudents.add(user);
+				return true;
+			}
+			
+			//If there is no space to enroll, add the student to the course's waitlist
+			while (waitListCounter < waitListCapacity) {
 				waitlist.enqueue(user);
 				waitListCounter++;
 				return true;
 			}
 		}
-		return canEnroll(user) && enrolledStudents.add(user);
+		return false;
 	}
-	
 	
 	/**
 	 * Drops the student from the course or from the waitlist.
@@ -178,15 +187,15 @@ public class Course implements Enrollable {
 		//make temp queue
 		//if they're not already enrolled, then check waitlist
 		Queue<User> temp = new LinkedQueue<User>();
+		User student = null;
 		if (!enrolledStudents.contains(user)) {
-			User student = null;
 			while(!waitlist.isEmpty()) {
-				//dequeued student is returned from this method
+				//dequeued student is returned from dequeued method
 				student = waitlist.dequeue();
-				if(!waitlist.equals(user)) {
-					temp.enqueue(student);
+				if (student.equals(user)) {
 					return true;
 				}
+				temp.enqueue(student);
 				waitlist = temp;
 			}
 		}
