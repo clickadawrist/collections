@@ -7,13 +7,15 @@ import java.util.NoSuchElementException;
 /**
  * Linked List that behaves sequentially.
  * @author Yijie zhang and Manaka Green
+ * @param <E> Generic linked list 
  */
 public class LinkedList<E> extends AbstractSequentialList<E> {
-	
+	//Had to initialize them to node so that in the constructor
+	//front can initialize back .
 	/** Points to front node. */
-	private ListNode front;
+	private ListNode front = null;
 	/** Points to back node. */
-	private ListNode back;
+	private ListNode back = null;
 	/** Size of linked list. */
 	private int size;
 	
@@ -25,7 +27,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	 */
 	public LinkedList() {
 		//ListNode(data, prev, next)
-		this.front = new ListNode(null, null, back);
+		front = new ListNode(null, null, back);
 		this.back = new ListNode(null, front, null);
 		this.size = 0;
 	}
@@ -47,7 +49,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	}
 
 	/**
-	 * @return 
+	 * Gets size of the linked list.
+	 * @return size Number of elements in linked list
 	 */
 	@Override
 	public int size() {
@@ -55,29 +58,29 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	}
 
 	/**
-	 * 
+	 * Inner node class that constructs generic nodes.
 	 * @author Manaka Green and Jerry Zhang
-	 *
 	 */
 	private class ListNode {
-		/** */
+		
+		/** Generic data in a node. */
 		public E data;
-		/** */
+		/** Type list node pointer to previous node. */
 		public ListNode prev;
-		/** */
+		/** Type list node pointer to next node. */
 		public ListNode next;
 
 		/**
-		 * 
-		 * @param data
+		 * Calls default node that has prev and next parameters.
+		 * @param data Generic element in list node
 		 */
 		public ListNode(E data) {
 			this(data, null, null);
 		}
 		
 		/**
-		 * 
-		 * @param data
+		 * Creates a node with a next.
+		 * @param data Generic element in 
 		 * @param prev
 		 * @param next
 		 */
@@ -94,6 +97,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	 */
 	private class LinkedListIterator implements ListIterator<E> {
 
+		private static final int INITIAL_FRONT = 0;
 		//not sure what type the previous and next is supposed to be
 		/** Points to node to the left of index of interest. */
 		private ListNode previous;
@@ -110,7 +114,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		 * Constructor that passes 0 into parameterized constructor.
 		 */
 		public LinkedListIterator() {
-			this(0);
+			this(INITIAL_FRONT);
 		}
 
 		/**
@@ -122,7 +126,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			//front and back don't move.
 			
 			//throws IOOBE if index is < 0 || >= size
-			if(index < 0 || index >= size) {
+			if(index < 0 || index > size()) {
+				//changed from size to size()
 				throw new IndexOutOfBoundsException();
 			}
 
@@ -193,7 +198,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		@Override
 		public E next() {
 			// throws NoSuchElementException if there are none left to examine
-			if (hasNext() == false) {
+			if (!hasNext()) {
 				throw new NoSuchElementException();
 			}
 			//move forward one
@@ -224,7 +229,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		@Override
 		public E previous() {
 		// throws NoSuchElementException if there are none left to examine
-			if (hasPrevious() == false) {
+			if (!hasPrevious()) {
 				throw new NoSuchElementException();
 			}
 			//move back one
@@ -256,7 +261,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			if (next() == null || previous() == null) {
 				throw new IllegalStateException();
 			}
-			if(removeCheck == false) {
+			if(!removeCheck) {
 				throw new IllegalArgumentException();
 			}
 			ListNode relevantNext = previous.next;
@@ -279,7 +284,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			if (element == null) {
 				throw new IllegalArgumentException();
 			}
-			if (removeCheck == false) {
+			
+			if (!removeCheck) {
 				throw new IllegalArgumentException();
 			}
 			previous.next.data = element;
