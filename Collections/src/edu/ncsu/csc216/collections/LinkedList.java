@@ -112,15 +112,31 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		}
 
 		/**
-		 * 
+		 * Constructs an empty list with front and back buffers.
 		 * @param index
 		 */
 		public LinkedListIterator(int index) {
+			//front and back don't move.
+			
+			//throws IOOBE if index is < 0 || >= size
+			if(index < 0 || index >= size) {
+				throw new IndexOutOfBoundsException();
+			}
+
+			//set previous to front
+			previous = front;
+			//previous.next is the same as back. Set next to back. 
+			next = previous.next;
+			//for loop
+			for (int i = 0; i < index; i++) {
+				previous = previous.next;
+				next = next.next;
+			}
 			
 		}
 
 		/**
-		 * 
+		 * Inserts the specified element into the list
 		 */
 		@Override
 		public void add(E arg0) {
@@ -129,7 +145,9 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		}
 
 		/**
-		 * 
+		 * Returns true if this list iterator has more elements 
+		 * when traversing the list in the forward direction.
+		 * @return true If there are more elements in the forward direction
 		 */
 		@Override
 		public boolean hasNext() {
@@ -138,7 +156,9 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		}
 
 		/**
-		 * 
+		 * Returns true if this list iterator has more elements 
+		 * when traversing the list in the reverse direction.
+		 * @return true If there are more elements in the reverse direction
 		 */
 		@Override
 		public boolean hasPrevious() {
@@ -147,16 +167,18 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		}
 
 		/**
-		 * 
+		 * Returns the next element in the list and advances the cursor position.
+		 * @return element NEXT element in the list
 		 */
 		@Override
 		public E next() {
-			// TODO Auto-generated method stub
+			// throws NoSuchElementException if there are none left to examine
 			return null;
 		}
 
 		/**
-		 * 
+		 * Returns the index of the element that would be returned by a subsequent call to next().
+		 * @return index Int of next index 
 		 */
 		@Override
 		public int nextIndex() {
@@ -165,7 +187,9 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		}
 
 		/**
-		 * 
+		 * Returns the previous element in the list 
+		 * and moves the cursor position backwards.
+		 * @return element PREVIOUS element in the list
 		 */
 		@Override
 		public E previous() {
@@ -174,7 +198,9 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		}
 
 		/**
-		 * 
+		 * Returns the index of the element that would be 
+		 * returned by a subsequent call to previous().
+		 * @return index Int of previous index
 		 */
 		@Override
 		public int previousIndex() {
@@ -183,19 +209,21 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		}
 
 		/**
-		 * 
+		 * Removes from the list the last element that was returned by next() or previous().
 		 */
 		@Override
 		public void remove() {
-			// TODO Auto-generated method stub
+			// throws IllegalStateException if haven't called next() yet.
 			
 		}
 
 		/**
-		 * 
+		 * Replaces the last element returned by next() 
+		 * or previous() with the specified element.
+		 * @param 
 		 */
 		@Override
-		public void set(E arg0) {
+		public void set(E element) {
 			// TODO Auto-generated method stub
 			
 		}		
