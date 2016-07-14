@@ -35,18 +35,21 @@ public class LinkedListTest {
 		try {
 			list.get(0);
 			list.remove(0);
-			list.set(0, "fruit");
-			//list.get(0);
+			//moved list.set(0, "fruit"); to the next try catch block
 			fail("Didn't catch IndexOutOfBoundsException.");
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(0, list.size());
 			assertNotNull(list);
 		}
 		
+		//added apple
+		list.add(0, "apple");
+		
 		try {
 			list.set(0, null);
-			fail("Didn't catch NullPointerException.");
-		} catch (NullPointerException e) {
+			list.set(1, "fruit");
+			fail("Didn't catch IllegalArgumentException.");
+		} catch (IllegalArgumentException e) {
 			assertEquals(0, list.size());
 			assertNotNull(list);
 		}
@@ -305,7 +308,7 @@ public class LinkedListTest {
 		//was not modified.
 		try {
 			list.set(0, null);
-		} catch (NullPointerException e) {
+		} catch (IllegalArgumentException e) {
 			assertEquals(4, list.size());
 			assertEquals("blueberry", list.get(0));
 		}
@@ -384,7 +387,5 @@ public class LinkedListTest {
 			assertEquals("apple", list.get(2));
 			assertEquals("dragonfruit", list.get(3));
 		}
-	}
-
-	
+	}	
 }
