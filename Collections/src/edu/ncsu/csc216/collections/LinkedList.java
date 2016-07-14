@@ -2,6 +2,7 @@ package edu.ncsu.csc216.collections;
 
 import java.util.AbstractSequentialList;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 /**
  * 
@@ -138,12 +139,21 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		}
 
 		/**
-		 * Inserts the specified element into the list
+		 * Inserts the specified element into the list before 
+		 * the element that would be returned by next().
+		 * @throws IllegalArgumentException If element is null
 		 */
 		@Override
-		public void add(E arg0) {
-			// TODO Auto-generated method stub
+		public void add(E element) {
+			if (element == null) {
+				throw new IllegalArgumentException();
+			}
 			
+			ListNode temp = new ListNode(element, previous, previous.next);
+			previous.next = temp;
+			
+			next.prev = temp;
+			size++;
 		}
 
 		/**
@@ -175,11 +185,21 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		/**
 		 * Returns the next element in the list and advances the cursor position.
 		 * @return element NEXT element in the list
+		 * @throws NoSuchElementException When next has null data
 		 */
 		@Override
 		public E next() {
 			// throws NoSuchElementException if there are none left to examine
-			return null;
+			if (hasNext() == false) {
+				throw new NoSuchElementException();
+			}
+			//move forward one
+			next = next.next;
+			//advances cursor position
+			nextIndex++;
+			previousIndex++;
+			//return value at new next
+			return next.prev.data;
 		}
 
 		/**
@@ -188,19 +208,28 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		 */
 		@Override
 		public int nextIndex() {
-			// TODO Auto-generated method stub
-			return 0;
+			return nextIndex;
 		}
 
 		/**
 		 * Returns the previous element in the list 
 		 * and moves the cursor position backwards.
 		 * @return element PREVIOUS element in the list
+		 * @throws
 		 */
 		@Override
 		public E previous() {
-			// TODO Auto-generated method stub
-			return null;
+		// throws NoSuchElementException if there are none left to examine
+			if (hasPrevious() == false) {
+				throw new NoSuchElementException();
+			}
+			//move back one
+			previous = previous.prev;
+			//moves cursor position back
+			nextIndex--;
+			previousIndex--;
+			//return value at new previous
+			return previous.next.data;
 		}
 
 		/**
@@ -210,8 +239,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		 */
 		@Override
 		public int previousIndex() {
-			// TODO Auto-generated method stub
-			return 0;
+			return previousIndex;
 		}
 
 		/**
@@ -220,18 +248,30 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		@Override
 		public void remove() {
 			// throws IllegalStateException if haven't called next() yet.
+			if (next() == null || previous() == null) {
+				throw new IllegalStateException();
+			}
 			
+			ListNode relevantNext = previous.next;
+			
+			previous = previous.prev;
+			previous.next = relevantNext;
+			size--;
 		}
 
 		/**
 		 * Replaces the last element returned by next() 
 		 * or previous() with the specified element.
 		 * @param 
+		 * @throws
 		 */
 		@Override
 		public void set(E element) {
-			// TODO Auto-generated method stub
-			
+			if (element == null) {
+				throw new IllegalArgumentException();
+			}
+
+			previous.next.data = element;
 		}		
 	}
 }
