@@ -100,7 +100,7 @@ public class LinkedListTest {
 		try {
 			list.add(0, null);
 			fail();
-		} catch (NullPointerException e) {
+		} catch (IllegalArgumentException e) {
 			assertEquals(4, list.size());
 			assertNotNull(list.get(0));
 		}
