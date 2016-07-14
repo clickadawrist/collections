@@ -4,16 +4,16 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import edu.ncsu.csc216.collections.LinkedListAL;
+import edu.ncsu.csc216.collections.LinkedListRecursive;
 
 /**
- * Tests CSC216LinkedList class.
+ * Tests LinkedListRecursive class.
  * @author SarahHeckman and Manaka Green and Jerry Zhang
  */
 public class LinkedListRecursiveTest {
 	
-	/** CSC216LinkedList named list for testing methods. */
-	private LinkedListAL<String> list;
+	/** LinkedList named list for testing methods. */
+	private LinkedListRecursive<String> list;
 	
 	/**
 	 * Sets up variables for testing CSC216LinkedList class.
@@ -21,7 +21,7 @@ public class LinkedListRecursiveTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		list = new LinkedListAL<String>();
+		list = new LinkedListRecursive<String>();
 	}
 
 	/**
@@ -29,7 +29,7 @@ public class LinkedListRecursiveTest {
 	 * any generic type should be not null and empty, which implies a size of 0.
 	 */
 	@Test
-	public void testLinkedList() {
+	public void testLinkedListRecursive() {
 		//Test that the list is created correctly.
 		try {
 			list.get(0);
