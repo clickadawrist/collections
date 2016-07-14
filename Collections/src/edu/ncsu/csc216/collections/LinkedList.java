@@ -5,16 +5,16 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
- * 
+ * Linked List that behaves sequentially.
  * @author Yijie zhang and Manaka Green
  */
 public class LinkedList<E> extends AbstractSequentialList<E> {
 	
-	/** */
+	/** Points to front node. */
 	private ListNode front;
-	/** */
+	/** Points to back node. */
 	private ListNode back;
-	/** */
+	/** Size of linked list. */
 	private int size;
 	
 	/**
@@ -89,24 +89,25 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	}
 	
 	/**
-	 * 
+	 * List iterator which iterates through linked lists.
 	 * @author Manaka Green and Jerry Zhang
-	 *
 	 */
 	private class LinkedListIterator implements ListIterator<E> {
 
 		//not sure what type the previous and next is supposed to be
-		/** */
+		/** Points to node to the left of index of interest. */
 		private ListNode previous;
-		/** */
+		/** Points to node to the right of index of interest. */
 		private ListNode next;
-		/** */
+		/** Used to update previousIndex location. */
 		private int previousIndex;
-		/** */
+		/** Used to update nextIndex location. */
 		private int nextIndex;
+		/** Check whether element was removed. */
+		private boolean removeCheck;
 		
 		/**
-		 * 
+		 * Constructor that passes 0 into parameterized constructor.
 		 */
 		public LinkedListIterator() {
 			this(0);
@@ -149,11 +150,13 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 				throw new IllegalArgumentException();
 			}
 			
-			ListNode temp = new ListNode(element, previous, previous.next);
-			previous.next = temp;
-			
-			next.prev = temp;
+			ListNode newNode = new ListNode(element, previous, previous.next);
+			previous.next = newNode;
+			next.prev = newNode;
 			size++;
+			previousIndex++;
+			nextIndex++;
+			removeCheck = false;
 		}
 
 		/**
@@ -198,6 +201,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			//advances cursor position
 			nextIndex++;
 			previousIndex++;
+			removeCheck = true;
 			//return value at new next
 			return next.prev.data;
 		}
@@ -228,6 +232,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			//moves cursor position back
 			nextIndex--;
 			previousIndex--;
+			removeCheck = true;
 			//return value at new previous
 			return previous.next.data;
 		}
@@ -251,11 +256,15 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			if (next() == null || previous() == null) {
 				throw new IllegalStateException();
 			}
-			
+			if(removeCheck == false) {
+				throw new IllegalArgumentException();
+			}
 			ListNode relevantNext = previous.next;
-			
+			removeCheck = false;
 			previous = previous.prev;
 			previous.next = relevantNext;
+			previousIndex--;
+			nextIndex--;
 			size--;
 		}
 
@@ -270,7 +279,9 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			if (element == null) {
 				throw new IllegalArgumentException();
 			}
-
+			if (removeCheck == false) {
+				throw new IllegalArgumentException();
+			}
 			previous.next.data = element;
 		}		
 	}
