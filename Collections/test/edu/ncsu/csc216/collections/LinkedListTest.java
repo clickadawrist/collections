@@ -36,6 +36,7 @@ public class LinkedListTest {
 			list.get(0);
 			list.remove(0);			
 			//moved list.set(0, "fruit"); to the next try catch block
+			list.set(1, null);
 			fail("Didn't catch IndexOutOfBoundsException.");
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(0, list.size());
@@ -47,7 +48,7 @@ public class LinkedListTest {
 		
 		try {
 			list.set(0, null);
-			list.set(1, "fruit");
+			//list.set(1, null);
 			fail("Didn't catch IllegalArgumentException.");
 		} catch (IllegalArgumentException e) {
 			assertEquals(0, list.size());

@@ -107,8 +107,12 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		private int previousIndex;
 		/** Used to update nextIndex location. */
 		private int nextIndex;
-		/** Check whether element was removed. */
-		private boolean removeCheck;
+		/** Check whether next element was removed. */
+		private boolean removeNextCheck = false;
+		/** Check whether previous element was removed. */
+		private boolean removePreviousCheck = false;
+		/** Check whether the element was removed. */
+		private boolean removeCheck = false;
 		
 		/**
 		 * Constructor that passes 0 into parameterized constructor.
@@ -206,7 +210,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			//advances cursor position
 			nextIndex++;
 			previousIndex++;
-			removeCheck = true;
+			removeNextCheck = true;
+			removePreviousCheck = false;
 			//return value at new next
 			return next.prev.data;
 		}
@@ -237,7 +242,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			//moves cursor position back
 			nextIndex--;
 			previousIndex--;
-			removeCheck = true;
+			removeNextCheck = false;
+			removePreviousCheck = true;
 			//return value at new previous
 			return previous.next.data;
 		}
@@ -276,8 +282,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		/**
 		 * Replaces the last element returned by next() 
 		 * or previous() with the specified element.
-		 * @param 
-		 * @throws
+		 * @param element Generic element
+		 * @throws IllegalArgumentException If the element is null
 		 */
 		@Override
 		public void set(E element) {
@@ -285,7 +291,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 				throw new IllegalArgumentException();
 			}
 			
-			if (!removeCheck) {
+			if (!removeNextCheck && !removePreviousCheck) {
 				throw new IllegalArgumentException();
 			}
 			previous.next.data = element;
