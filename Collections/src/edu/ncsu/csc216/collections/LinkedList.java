@@ -112,8 +112,9 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		}
 
 		/**
-		 * Constructs an empty list with front and back buffers.
-		 * @param index
+		 * Constructs an an iterator which points to front and 2nd front node.
+		 * Previous points to front, and next points to front.next.
+		 * @param index Index that the iterator will return at the next call
 		 */
 		public LinkedListIterator(int index) {
 			//front and back don't move.
@@ -123,16 +124,17 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 				throw new IndexOutOfBoundsException();
 			}
 
-			//set previous to front
+			//set previous to front so that we are behind of the index of interest
 			previous = front;
-			//previous.next is the same as back. Set next to back. 
+			//set next to previous.next so that we are in front of the index of interest
 			next = previous.next;
-			//for loop
+			
+			//The following loop initializes iterator to that index to improve runtime effiency
+			//because there's a high chance the next get call is near that index. (b4 or after)
 			for (int i = 0; i < index; i++) {
 				previous = previous.next;
 				next = next.next;
 			}
-			
 		}
 
 		/**
@@ -151,8 +153,10 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		 */
 		@Override
 		public boolean hasNext() {
-			// TODO Auto-generated method stub
-			return false;
+			if (next.next == null) {
+				return false;
+			}
+			return true;
 		}
 
 		/**
@@ -162,8 +166,10 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		 */
 		@Override
 		public boolean hasPrevious() {
-			// TODO Auto-generated method stub
-			return false;
+			if (previous.prev == null) {
+				return false;
+			}
+			return true;
 		}
 
 		/**
