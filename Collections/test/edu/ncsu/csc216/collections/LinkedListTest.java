@@ -34,7 +34,7 @@ public class LinkedListTest {
 		//Test that the list is created correctly.
 		try {
 			list.get(0);
-			list.remove(0);
+			list.remove(0);			
 			//moved list.set(0, "fruit"); to the next try catch block
 			fail("Didn't catch IndexOutOfBoundsException.");
 		} catch (IndexOutOfBoundsException e) {
