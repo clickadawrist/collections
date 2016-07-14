@@ -2,7 +2,7 @@ package edu.ncsu.csc216.collections;
 
 import static org.junit.Assert.*;
 
-import java.util.LinkedList;
+import edu.ncsu.csc216.collections.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -334,14 +334,6 @@ public class LinkedListTest {
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(0, list.size());
 		}
-		
-
-		try {
-			list.get(0);
-		} catch (IndexOutOfBoundsException e) {
-			assertEquals(0, list.size());
-		}
-		
 		
 		//Add 4 elements to the list and test that the contents are correct.
 		//list.add(0, "banana");
