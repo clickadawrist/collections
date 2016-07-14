@@ -65,5 +65,30 @@ public class LinkedListRecursive<E> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	/**
+	 * Inner node class that constructs generic nodes.
+	 * @author Manaka Green and Jerry Zhang
+	 */
+	private class ListNode {
+		/** Generic data in a node. */
+		public E data;
+		/** Type list node pointer to next node. */
+		public ListNode next;
+		/**
+		 * Constructs a node.
+		 * @param data A generic data
+		 */
+		public ListNode(E data) {
+			this(data, null);
+		}
+		/**
+		 * Constructs a node with reference.
+		 * @param data Generic data
+		 * @param next Reference to next generic node
+		 */
+		public ListNode(E data, ListNode next) {
+			this.data = data;
+			this.next = next;
+		}
+	}
 }
