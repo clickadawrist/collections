@@ -6,11 +6,17 @@ package edu.ncsu.csc216.collections;
  */
 public class LinkedListRecursive<E> {
 
+	/** A reference to the front of the list. */
+	private ListNode front;
+	/** The amount of elements in the list. */
+	private int size;
+	
 	/**
 	 * Constructs a recursive linked list.
 	 */
 	public LinkedListRecursive() {
-		// TODO Auto-generated constructor stub
+		front = new ListNode(null);
+		size = 0;
 	}
 	
 	/**
@@ -59,12 +65,26 @@ public class LinkedListRecursive<E> {
 
 	/**
 	 * Returns the number of elements in this list.
-	 * @return the number of elements in this list.
+	 * @return size The number of elements in the list
 	 */
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+	//Rely on the size field and don't implement recursively.		
+		return size;
 	}
+	
+	/**
+	 * Returns true if the linked list is empty.
+	 * @return true If the list is empty
+	 */
+	public boolean isEmpty() {
+	//Rely on the size field and don't implement recursively.
+		if (size() == 0) {
+			return false;
+		}
+		return true;
+	}
+	
+	
 	/**
 	 * Inner node class that constructs generic nodes.
 	 * @author Manaka Green and Jerry Zhang
