@@ -259,6 +259,16 @@ public class LinkedListRecursive<E> {
 				//and the add() method would be called on that node
 			}			
 		}
+
+		/**
+		 * Uses recursion to get to element and remove.
+		 * @param idx Index of the element
+		 * @return data Generic element being removed
+		 */
+		private E remove(int idx) {
+			return data;
+			
+		}
 		
 		/**
 		 * Constructs a node.
