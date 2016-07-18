@@ -5,7 +5,6 @@ package edu.ncsu.csc216.collections;
  * @author Manaka Green and Jerry Zhang
  */
 public class LinkedListRecursive<E> {
-
 	/** A reference to the front of the list. */
 	private ListNode front;
 	/** The amount of elements in the list. */
@@ -21,8 +20,8 @@ public class LinkedListRecursive<E> {
 	
 	/**
 	 * Returns the element at the specified position in this list.
-	 * @param index index of the element
-	 * @return the element at the specified position in this list.
+	 * @param index Index of the element
+	 * @return element At the specified position in this list.
 	 */
 	public E get(int index) {
 		return null;
@@ -32,9 +31,9 @@ public class LinkedListRecursive<E> {
 	
 	/**
 	 * Replaces the element at the specified position in this list with the specified element.
-	 * @param index index of the element
-	 * @param element the element will be replaced
-	 * @return the element at the specified position in this list with the specified element.
+	 * @param index Index of the element
+	 * @param element The element will be replaced
+	 * @return element At the specified position in this list with the specified element
 	 */
 	public E set(int index, E element) {
 		return element;
@@ -44,18 +43,50 @@ public class LinkedListRecursive<E> {
 		
 	/**
 	 * Inserts the specified element at the specified position in this list.
-	 * @param index index of the element
-	 * @param element The element that will be inserted.
+	 * @param index Index of the element
+	 * @param element The element that will be inserted
 	 */
 	public void add(int index, E element) {
-		// TODO Auto-generated method stub
+		ListNode current = front;
+
+		if (element == null) {
+			throw new NullPointerException();
+		}
 		
+		if (index < 0 || index > size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		//insert in empty list
+		if (front == null) {
+			//create a new node and attach it at the front of the list
+			front = new ListNode(element);
+		}
+		//insert at front of non-empty list
+		else if (index == 0) {
+			front = new ListNode(element, front);
+		}
+		//insert at end of non-empty list
+		else if (index == size()) {
+			while (current.next != null) {
+				current = current.next;
+			}
+			current.next = new ListNode(element);
+		}
+		//insert in middle of non-empty list
+		else {
+			for (int i = 0; i < index - 1; i++) {
+				current = current.next;
+			}
+			current.next = new ListNode(element, current.next);
+		}
+		size++;
 	}
 
 	/**
 	 * Removes the element at the specified position in this list.
-	 * @param index index of the element
-	 * @return element that was removed
+	 * @param index Index of the element
+	 * @return element The element that was removed
 	 */
 	public E remove(int index) {
 		return null;
@@ -94,6 +125,7 @@ public class LinkedListRecursive<E> {
 		public E data;
 		/** Type list node pointer to next node. */
 		public ListNode next;
+
 		/**
 		 * Constructs a node.
 		 * @param data A generic data
@@ -101,6 +133,7 @@ public class LinkedListRecursive<E> {
 		public ListNode(E data) {
 			this(data, null);
 		}
+
 		/**
 		 * Constructs a node with reference.
 		 * @param data Generic data
