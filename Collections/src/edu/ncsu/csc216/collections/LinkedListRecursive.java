@@ -40,7 +40,36 @@ public class LinkedListRecursive<E> {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	/**
+	 * Inserts the specified element at the end of this list.
+	 * This method handles the special case of adding a node to an empty list. 
+	 * If the list is not empty, then this method transfers the flow of control
+	 * to the private ListNode.add(E element) method, which completes the recursion 
+	 * to add the element to the end of the list.
+	 * @param element The element that will be inserted
+	 * @return true If element is added to the list
+	 */
+	public boolean add(E element) {
+		//looked at lecture notes...
+		if (element == null) {
+			return false;
+		}
 		
+		//insert in empty list
+		if (front == null) {
+			//create a new node and attach it at the front of the list
+			front = new ListNode(element);
+			size++;
+		}
+		//insert in nonempty list
+		if (!(front == null)) {
+			front.add(element);
+			size++;
+		}
+		return true;
+	}
+	
 	/**
 	 * Inserts the specified element at the specified position in this list.
 	 * @param index Index of the element
@@ -57,11 +86,14 @@ public class LinkedListRecursive<E> {
 			throw new IndexOutOfBoundsException();
 		}
 		
+////////vvv may not need this, idk vvv 
 		//insert in empty list
 		if (front == null) {
-			//create a new node and attach it at the front of the list
-			front = new ListNode(element);
-		}
+			//go to the other add method
+			add(element);
+		}		
+////////^^^ may not need this, idk ^^^
+		
 		//insert at front of non-empty list
 		else if (index == 0) {
 			front = new ListNode(element, front);
@@ -126,6 +158,27 @@ public class LinkedListRecursive<E> {
 		/** Type list node pointer to next node. */
 		public ListNode next;
 
+		/**
+		 * 
+		 */
+		private void add(E element) {
+			ListNode current = front;
+			//base case:
+			//When there is one element? (checked from public LLRecursive.add method)
+/*			if (front == null) {
+				//create a new node and attach it at the front of the list
+				front = new ListNode(element);
+			}*/
+////////////////////////////////
+			//recursive case:
+			//When next is not null
+			if (current.next == null) {
+				current.next = new ListNode(element);
+			} else {
+				current.next.add(element);
+			}
+		}
+		
 		/**
 		 * Constructs a node.
 		 * @param data A generic data
