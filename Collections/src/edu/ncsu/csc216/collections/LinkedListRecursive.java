@@ -21,12 +21,17 @@ public class LinkedListRecursive<E> {
 	
 	/**
 	 * Returns the element at the specified position in this list.
-	 * @param index Index of the element
+	 * @param index Index of the element to return
+	 * @throws IndexOutOfBoundsException If the index is out of range 
+	 * (index < 0 || index >= size())
 	 * @return element At the specified position in this list.
 	 */
 	public E get(int index) {
+		if (index < 0 || index >= size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		
 		return null;
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -34,12 +39,21 @@ public class LinkedListRecursive<E> {
 	 * Replaces the element at the specified position in this list with the specified element.
 	 * @param index Index of the element
 	 * @param element The element will be replaced
-	 * @return element At the specified position in this list with the specified element
+	 * @throws NullPointerException If the specified element is null 
+	 * and this list does not permit null elements
+	 * @throws IndexOutOfBoundsException If the index is out of range 
+	 * (index < 0 || index >= size())
+	 * @return elementBeingReplaced At the specified position in this list with the specified element
 	 */
 	public E set(int index, E element) {
-		return element;
-		// TODO Auto-generated method stub
-		
+		E elementBeingReplaced = null;
+		if(element == null) {
+			throw new NullPointerException();
+		}
+		if (index < 0 || index >= size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		return elementBeingReplaced;	
 	}
 	
 	/**
@@ -49,6 +63,8 @@ public class LinkedListRecursive<E> {
 	 * to the private ListNode.add(E element) method, which completes the recursion 
 	 * to add the element to the end of the list.
 	 * @param element The element that will be inserted
+	 * @throws NullPointerException If the specified element is null 
+	 * and this list does not permit null elements
 	 * @return true If element is added to the list
 	 */
 	public boolean add(E element) {
@@ -76,6 +92,10 @@ public class LinkedListRecursive<E> {
 	 * Inserts the specified element at the specified position in this list.
 	 * @param index Index of the element
 	 * @param element The element that will be inserted
+	 * @throws NullPointerException If the specified element is null 
+	 * and this list does not permit null elements
+	 * @throws IndexOutOfBoundsException If the index is out of range 
+	 * (index < 0 || index > size()) 
 	 * @return true If element is added to the index
 	 */
 	public boolean add(int index, E element) {
@@ -114,12 +134,15 @@ public class LinkedListRecursive<E> {
 	/**
 	 * Removes the element at the specified position in this list.
 	 * @param index Index of the element
+	 * @throws IndexOutOfBoundsException If the index is out of range 
+	 * (index < 0 || index >= size()) 
 	 * @return element The element that was removed
 	 */
 	public E remove(int index) {
+		if (index < 0 || index >= size()) {
+			throw new IndexOutOfBoundsException();
+		}
 		return null;
-		// TODO Auto-generated method stub
-		
 	}
 
 	/**
@@ -143,6 +166,36 @@ public class LinkedListRecursive<E> {
 		return true;
 	}
 	
+	/**
+	 * Returns true if this list contains the specified element. 
+	 * @param element Element to search for in the list
+	 * @throws NullPointerException If the specified element is null 
+	 * and this list doesn't permit null elements
+	 * @return true If this list contains the specified element
+	 */
+	public boolean contains(E element) {
+		if (element == null) {
+			throw new NullPointerException();
+		}
+		return true;
+	}
+
+	/**
+	 * Returns the index of the first occurrence of the specified element in this list, 
+	 * or -1 if this list does not contain the element.
+	 * @param element Element to search for in the list
+	 * @throws NullPointerException If the specified element is null
+	 * and this list doesn't permit null elements
+	 * @return location Index of the first occurrence of the specified element in this list, 
+	 * or -1 if this list does not contain the element
+	 */
+	public int indexOf(E element) {
+		if (element == null) {
+			throw new NullPointerException();
+		}
+		int location = 0;
+		return location;
+	}
 	
 	/**
 	 * Inner node class that constructs generic nodes.
