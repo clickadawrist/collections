@@ -3,6 +3,7 @@ package edu.ncsu.csc216.collections;
 /**
  * A linkedlist behaves recursively.
  * @author Manaka Green and Jerry Zhang
+ * @param <E> Generic list 
  */
 public class LinkedListRecursive<E> {
 	/** A reference to the front of the list. */
@@ -65,7 +66,6 @@ public class LinkedListRecursive<E> {
 		//insert in nonempty list
 		if (!(front == null)) {
 			front.add(element);
-			size++;
 		}
 		return true;
 	}
@@ -81,38 +81,26 @@ public class LinkedListRecursive<E> {
 		if (element == null) {
 			throw new NullPointerException();
 		}
-		
+
 		if (index < 0 || index > size()) {
 			throw new IndexOutOfBoundsException();
 		}
-		
-////////vvv may not need this, idk vvv 
+
 		//insert in empty list
 		if (front == null) {
-			//go to the other add method
-			add(element);
-		}		
-////////^^^ may not need this, idk ^^^
-		
+			//create a new node and attach it at the front of the list
+			front = new ListNode(element);
+			size++;
+		}
 		//insert at front of non-empty list
 		else if (index == 0) {
 			front = new ListNode(element, front);
+			size++;
 		}
-		//insert at end of non-empty list
-		else if (index == size()) {
-			while (current.next != null) {
-				current = current.next;
-			}
-			current.next = new ListNode(element);
+		//insert at middle or end of non-empty list
+		else  {
+			current.add(index, element);
 		}
-		//insert in middle of non-empty list
-		else {
-			for (int i = 0; i < index - 1; i++) {
-				current = current.next;
-			}
-			current.next = new ListNode(element, current.next);
-		}
-		size++;
 	}
 
 	/**
@@ -159,17 +147,54 @@ public class LinkedListRecursive<E> {
 		public ListNode next;
 
 		/**
-		 * 
+		 * Uses recursion to add to the end of the list when next is null.
+		 * @param element Generic element being added
 		 */
 		private void add(E element) {
 			if (next == null) {
 			//base case
 				next = new ListNode(element);
+				size++;
 			} else {
 			//recursive case				
 				next.add(element);
 			//Calling next.add() would make the next Node the current node 
 			//and the add() method would be called on that node
+			}
+		}
+
+		/**
+		 * Uses recursion to add to the middle or end of the list.
+		 * @param index Index of the element
+		 * @param element Generic element being added
+		 */
+		private void add(int index, E element) {
+			int position = 1;
+			//adding to the end
+			if (index == size() - 1) {
+				if (next == null) {
+					//base case
+					next = new ListNode(element);
+					size++;
+				} else {
+					//recursive case				
+					next.add(element);
+					//Calling next.add() would make the next Node the current node 
+					//and the add() method would be called on that node
+				}
+			}
+			
+			//adding to the middle
+			if (position == index) {
+				//base case
+				next = new ListNode(element, next);
+				size++;
+			} else {
+				//recursive case				
+				next.add(index, element);
+				position++;
+				//Calling next.add() would make the next Node the current node 
+				//and the add() method would be called on that node
 			}
 		}
 		
