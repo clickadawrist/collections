@@ -162,20 +162,14 @@ public class LinkedListRecursive<E> {
 		 * 
 		 */
 		private void add(E element) {
-			ListNode current = front;
-			//base case:
-			//When there is one element? (checked from public LLRecursive.add method)
-/*			if (front == null) {
-				//create a new node and attach it at the front of the list
-				front = new ListNode(element);
-			}*/
-////////////////////////////////
-			//recursive case:
-			//When next is not null
-			if (current.next == null) {
-				current.next = new ListNode(element);
+			if (next == null) {
+			//base case
+				next = new ListNode(element);
 			} else {
-				current.next.add(element);
+			//recursive case				
+				next.add(element);
+			//Calling next.add() would make the next Node the current node 
+			//and the add() method would be called on that node
 			}
 		}
 		
