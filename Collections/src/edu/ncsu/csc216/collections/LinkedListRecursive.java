@@ -54,7 +54,7 @@ public class LinkedListRecursive<E> {
 	public boolean add(E element) {
 		//looked at lecture notes...
 		if (element == null) {
-			return false;
+			throw new NullPointerException();
 		}
 		
 		//insert in empty list
@@ -62,20 +62,23 @@ public class LinkedListRecursive<E> {
 			//create a new node and attach it at the front of the list
 			front = new ListNode(element);
 			size++;
+			return true;
 		}
 		//insert in nonempty list
 		if (!(front == null)) {
 			front.add(element);
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 	/**
 	 * Inserts the specified element at the specified position in this list.
 	 * @param index Index of the element
 	 * @param element The element that will be inserted
+	 * @return true If element is added to the index
 	 */
-	public void add(int index, E element) {
+	public boolean add(int index, E element) {
 		ListNode current = front;
 
 		if (element == null) {
@@ -91,16 +94,21 @@ public class LinkedListRecursive<E> {
 			//create a new node and attach it at the front of the list
 			front = new ListNode(element);
 			size++;
+			return true;
 		}
+		
 		//insert at front of non-empty list
-		else if (index == 0) {
+		if (index == 0) {
 			front = new ListNode(element, front);
 			size++;
+			return true;
 		}
 		//insert at middle or end of non-empty list
-		else  {
+		if (index > 0 || index <= size())  {
 			current.add(index, element);
+			return true;
 		}
+		return false;
 	}
 
 	/**
@@ -189,13 +197,14 @@ public class LinkedListRecursive<E> {
 				//base case
 				next = new ListNode(element, next);
 				size++;
-			} else {
+			} 
+			else {
 				//recursive case				
 				next.add(index, element);
 				position++;
 				//Calling next.add() would make the next Node the current node 
 				//and the add() method would be called on that node
-			}
+			}			
 		}
 		
 		/**
