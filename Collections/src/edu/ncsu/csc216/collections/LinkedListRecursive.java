@@ -81,7 +81,7 @@ public class LinkedListRecursive<E> {
 		}
 		
 		//insert in empty list
-		if (front == null) {
+		if (isEmpty()) {
 			//create a new node and attach it at the front of the list
 			front = new ListNode(element);
 			size++;
@@ -117,7 +117,7 @@ public class LinkedListRecursive<E> {
 		}
 
 		//insert in empty list
-		if (front == null) {
+		if (isEmpty()) {
 			//create a new node and attach it at the front of the list
 			front = new ListNode(element);
 			size++;
@@ -148,7 +148,8 @@ public class LinkedListRecursive<E> {
 	public E remove(int index) {
 		ListNode current = front; 
 		E elementBeingRemoved = null;
-		if (front == null) {
+		
+		if (isEmpty()) {
 			throw new IndexOutOfBoundsException();
 		}
 
@@ -197,26 +198,27 @@ public class LinkedListRecursive<E> {
 	public boolean isEmpty() {
 	//Rely on the size field and don't implement recursively.
 		if (size() == 0) {
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
-	/**
+/*	*//**
 	 * Returns true if this list contains the specified element. 
 	 * @param element Element to search for in the list
 	 * @throws NullPointerException If the specified element is null 
 	 * and this list doesn't permit null elements
 	 * @return true If this list contains the specified element
-	 */
+	 *//*
 	public boolean contains(E element) {
 		if (element == null) {
 			throw new NullPointerException();
 		}
+		
 		return true;
-	}
+	}*/
 
-	/**
+/*	*//**
 	 * Returns the index of the first occurrence of the specified element in this list, 
 	 * or -1 if this list does not contain the element.
 	 * @param element Element to search for in the list
@@ -224,14 +226,14 @@ public class LinkedListRecursive<E> {
 	 * and this list doesn't permit null elements
 	 * @return location Index of the first occurrence of the specified element in this list, 
 	 * or -1 if this list does not contain the element
-	 */
+	 *//*
 	public int indexOf(E element) {
 		if (element == null) {
 			throw new NullPointerException();
 		}
 		int location = 0;
 		return location;
-	}
+	}*/
 	
 	/**
 	 * Inner node class that constructs generic nodes.
