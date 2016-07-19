@@ -10,15 +10,18 @@ public class LinkedListRecursive<E> {
 	private ListNode front;
 	/** The amount of elements in the list. */
 	private int size;
-	
+
+	private int position; 
+
 	/**
 	 * Constructs a recursive linked list.
 	 */
 	public LinkedListRecursive() {
 		front = new ListNode(null);
 		size = 0;
+		position = 0; 
 	}
-	
+
 	/**
 	 * Returns the element at the specified position in this list.
 	 * @param index Index of the element to return
@@ -34,8 +37,7 @@ public class LinkedListRecursive<E> {
 		if (index == 0) {
 			return front.data;
 		} else {
-			//return current.next.get(index - 1);
-			return current.get(index);
+			return current.get(index - 1);
 		}
 	}
 	
@@ -63,7 +65,7 @@ public class LinkedListRecursive<E> {
         	return oldElement;
         } else {
         	//return front.next.set(index - 1, element);
-        	return current.set(index, element);
+        	return current.next.set(index - 1, element);
         }
 	}
 	
@@ -248,7 +250,14 @@ public class LinkedListRecursive<E> {
 		public E data;
 		/** Type list node pointer to next node. */
 		public ListNode next;
+				
 
+		
+		private int addPosition() {
+			return position++;
+		}
+		
+		
 		/**
 		 * Uses recursion to add to the end of the list when next is null.
 		 * @param element Generic element being added
@@ -272,8 +281,7 @@ public class LinkedListRecursive<E> {
 		 * @param element Generic element being added
 		 */
 		private void add(int index, E element) {
-			int position = 1;
-			//adding to the end
+			//adding to the end (make list grow)
 			if (index == size()) {
 				//changed from size() - 1 to size()
 				if (next == null) {
@@ -289,15 +297,15 @@ public class LinkedListRecursive<E> {
 			}
 			
 			//adding to the middle
-			else if (position == index) {
+			else if (position == index - 1) {
 				//base case
 				next = new ListNode(element, next);
 				size++;
 			} 
 			else {
-				//recursive case				
+				//recursive case
+				addPosition();
 				next.add(index, element);
-				position++;
 				//Calling next.add() would make the next Node the current node 
 				//and the add() method would be called on that node
 			}			
@@ -308,42 +316,34 @@ public class LinkedListRecursive<E> {
 		 * @param index Index of the element
 		 * @return data Data in the ListNode
 		 */
-		private E get(int index) {
-			ListNode current = front;
-			int position = 1;
-			E elementAtIndex = null;
-			
-			if (position == index) {
-				//base case
-				elementAtIndex = current.data;
-				return elementAtIndex;
-			} 
-			else {
-				//recursive case
-				position++;
-				next.get(index);
+		private E get(int index) {			
+			//E elementAtIndex = null;
+			if (!(position == index)) {
 				//Calling next.add() would make the next Node the current node 
 				//and the add() method would be called on that node
-			}		
-			return elementAtIndex;			
+
+				//recursive case
+				addPosition();
+				next.get(index);
+			}
+			//base case: when the data is next
+			return next.data;
 	    }
-		
+
 		/**
 		 * Uses recursion to get to element and remove.
 		 * @param idx Index of the element
 		 * @return data Generic element being removed
 		 */
 		private E remove(int idx) {
-			ListNode current = front;
 			//return data;
-			int position = 0;
 			E removedElement = null;
 			//adding to the middle
 			if (position == idx - 1) {
 				//base case
-				current.next = current.next.next;
+				next = next.next;
 				size--;
-				removedElement = current.next.data;
+				removedElement = next.data;
 			} 
 			else {
 				//recursive case
@@ -354,7 +354,7 @@ public class LinkedListRecursive<E> {
 			}		
 			return removedElement;
 		}
-		
+
 		/**
 		 * Sets an element at an index.
 		 * @param index Index of the element
@@ -362,18 +362,17 @@ public class LinkedListRecursive<E> {
 		 * @return data The data previously in the ListNode
 		 */
 		private E set(int index, E element) {
-			ListNode current = front;
-			int position = 1;
 			E elementPreviouslyAtIndex = null;
+			
 			if (position == index) {
 				//base case
-				elementPreviouslyAtIndex = current.data;
-				current.data = element;
+				elementPreviouslyAtIndex = data;
+				data = element;
 				return elementPreviouslyAtIndex;
 			} 
 			else {
 				//recursive case
-				position++;
+				addPosition();
 				next.set(index, element);
 				//Calling next.add() would make the next Node the current node 
 				//and the add() method would be called on that node
@@ -385,8 +384,8 @@ public class LinkedListRecursive<E> {
 		 * Constructs a node.
 		 * @param data A generic data
 		 */
-		public ListNode(E data) {
-			this(data, null);
+		public ListNode(E d) {
+			this(d, null);
 		}
 
 		/**
@@ -394,9 +393,9 @@ public class LinkedListRecursive<E> {
 		 * @param data Generic data
 		 * @param next Reference to next generic node
 		 */
-		public ListNode(E data, ListNode next) {
-			this.data = data;
-			this.next = next;
+		public ListNode(E d, ListNode n) {
+			data = d;
+			next = n;
 		}
 	}
 }
