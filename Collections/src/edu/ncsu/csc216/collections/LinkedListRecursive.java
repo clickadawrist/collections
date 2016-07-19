@@ -317,22 +317,17 @@ public class LinkedListRecursive<E> {
 		 * @return data Data in the ListNode
 		 */
 		private E get(int index) {			
-			//E elementAtIndex = null;
 			if (index == 0) {
-				//base case: when the data is next
+				//base case: when index = 0
+				//(which was checked in the outer public get method)
 				return data;
 				
 			}
-
-			//Calling next.add() would make the next Node the current node 
-			//and the add() method would be called on that node
-
 			//recursive case
-			//addPosition();
 			return next.get(index - 1);
-			//go to the base case which is at index = 0
-			
-			//return data;
+			//go to the base case which is at index = 0,
+			//which was checked in the outer public get method
+			//and returned front.data
 	    }
 
 		/**
