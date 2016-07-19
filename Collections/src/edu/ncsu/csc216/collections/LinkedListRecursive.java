@@ -287,7 +287,7 @@ public class LinkedListRecursive<E> {
 			}
 			
 			//adding to the middle
-			if (position == index) {
+			else if (position == index) {
 				//base case
 				next = new ListNode(element, next);
 				size++;
