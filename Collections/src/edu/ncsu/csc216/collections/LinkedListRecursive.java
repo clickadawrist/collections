@@ -259,7 +259,23 @@ public class LinkedListRecursive<E> {
 				//and the add() method would be called on that node
 			}			
 		}
-
+		
+		/**
+		 * Gets an element at an index.
+		 * @param index Index of the element
+		 * @return data Data in the ListNode
+		 */
+		public E get(int index) {
+	        if (index < 0 || index >= size) {
+	            throw new IndexOutOfBoundsException();
+	        }
+	        if (index == 0) {
+	            return front.data;
+	        } else {
+	            return front.next.get(index - 1);
+	        }
+	    }
+		
 		/**
 		 * Uses recursion to get to element and remove.
 		 * @param idx Index of the element
@@ -269,6 +285,28 @@ public class LinkedListRecursive<E> {
 			return data;
 			
 		}
+		
+		/**
+		 * Sets an element at an index.
+		 * @param index Index of the element
+		 * @param element The element at the index
+		 * @return data The data previously in the ListNode
+		 */
+		public E set(int index, E element) {
+	        if (index < 0 || index >= size) {
+	            throw new IndexOutOfBoundsException();
+	        }
+	        if (element == null) {
+	            throw new IllegalArgumentException();
+	        }
+	        if (index == 0) {
+	            E oldElement = front.data;
+	            front.data = element;
+	            return oldElement;
+	        } else {
+	            return front.next.set(index - 1, element);
+	        }
+	    }
 		
 		/**
 		 * Constructs a node.
