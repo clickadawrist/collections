@@ -30,9 +30,11 @@ public class LinkedListRecursive<E> {
 		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException();
 		}
-		
-		return null;
-		
+		if (index == 0) {
+			return front.data;
+		} else {
+			return front.next.get(index - 1);
+		}
 	}
 	
 	/**
@@ -46,14 +48,19 @@ public class LinkedListRecursive<E> {
 	 * @return elementBeingReplaced At the specified position in this list with the specified element
 	 */
 	public E set(int index, E element) {
-		E elementBeingReplaced = null;
 		if(element == null) {
 			throw new NullPointerException();
 		}
 		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException();
 		}
-		return elementBeingReplaced;	
+        if (index == 0) {
+        	E oldElement = front.data;
+        	front.data = element;
+        	return oldElement;
+        } else {
+        	return front.next.set(index - 1, element);
+        }
 	}
 	
 	/**
@@ -148,17 +155,30 @@ public class LinkedListRecursive<E> {
 		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException();
 		}
-		//removing from front of nonempty list
-		if (index == 0) {
-			elementBeingRemoved = front.data;
-			front = front.next;
-			size--;
+		//removing from front of nonempty list of size 1
+		if (size() == 1) {
+			if (index == 0) {
+				elementBeingRemoved = front.data;
+				front = null;
+				size--;
+			}
 			return elementBeingRemoved;
 		}
-		//removing from middle or end of nonempty list
-		else {
-			return current.remove(index);
+		//removing from list of size more than 1		
+		if (size() > 1) {
+			if (index == 0) {			
+			//removing from front of nonempty list of size more than 1
+				elementBeingRemoved = front.data;
+				front = front.next;
+				size--;
+				//return elementBeingRemoved;
+			}
+			//removing from middle or end of nonempty list
+			else {
+				return current.remove(index);
+			}
 		}
+		return elementBeingRemoved;
 	}
 
 	/**
@@ -304,7 +324,7 @@ public class LinkedListRecursive<E> {
 			int position = 1;
 			E removedElement = null;
 			//adding to the middle
-			if (position == idx) {
+			if (position == idx - 1) {
 				//base case
 				current = next;
 				size--;
