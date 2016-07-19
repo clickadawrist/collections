@@ -164,16 +164,16 @@ public class LinkedListRecursive<E> {
 			}
 			return elementBeingRemoved;
 		}
-		//removing from list of size more than 1		
+		//removing from nonempty list of size more than 1		
 		if (size() > 1) {
-			if (index == 0) {			
-			//removing from front of nonempty list of size more than 1
+			if (index == 0) {
+			//removing from front
 				elementBeingRemoved = front.data;
 				front = front.next;
 				size--;
-				//return elementBeingRemoved;
+				return elementBeingRemoved;
 			}
-			//removing from middle or end of nonempty list
+			//removing from middle or end 
 			else {
 				return current.remove(index);
 			}
@@ -321,13 +321,14 @@ public class LinkedListRecursive<E> {
 		private E remove(int idx) {
 			ListNode current = front;
 			//return data;
-			int position = 1;
+			int position = 0;
 			E removedElement = null;
 			//adding to the middle
 			if (position == idx - 1) {
 				//base case
-				current = next;
+				current.next = current.next.next;
 				size--;
+				removedElement = current.next.data;
 			} 
 			else {
 				//recursive case
@@ -336,9 +337,6 @@ public class LinkedListRecursive<E> {
 				//Calling next.add() would make the next Node the current node 
 				//and the add() method would be called on that node
 			}		
-			//	}
-				removedElement = current.next.data;
-				current.next = current.next.next;
 			return removedElement;
 		}
 		
