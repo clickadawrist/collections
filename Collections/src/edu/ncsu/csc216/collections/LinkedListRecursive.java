@@ -30,14 +30,14 @@ public class LinkedListRecursive<E> {
 	 * @return element At the specified position in this list
 	 */
 	public E get(int index) {
-		ListNode current = front;
+		//ListNode current = front;
 		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException();
 		}
 		if (index == 0) {
 			return front.data;
 		} else {
-			return current.get(index - 1);
+			return front.get(index);
 		}
 	}
 	
@@ -318,16 +318,21 @@ public class LinkedListRecursive<E> {
 		 */
 		private E get(int index) {			
 			//E elementAtIndex = null;
-			if (!(position == index)) {
-				//Calling next.add() would make the next Node the current node 
-				//and the add() method would be called on that node
-
-				//recursive case
-				addPosition();
-				next.get(index);
+			if (index == 0) {
+				//base case: when the data is next
+				return data;
+				
 			}
-			//base case: when the data is next
-			return next.data;
+
+			//Calling next.add() would make the next Node the current node 
+			//and the add() method would be called on that node
+
+			//recursive case
+			//addPosition();
+			return next.get(index - 1);
+			//go to the base case which is at index = 0
+			
+			//return data;
 	    }
 
 		/**
