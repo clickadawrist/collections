@@ -24,7 +24,7 @@ public class LinkedListRecursive<E> {
 	 * @param index Index of the element to return
 	 * @throws IndexOutOfBoundsException If the index is out of range 
 	 * (index < 0 || index >= size())
-	 * @return element At the specified position in this list.
+	 * @return element At the specified position in this list
 	 */
 	public E get(int index) {
 		if (index < 0 || index >= size()) {
@@ -33,7 +33,8 @@ public class LinkedListRecursive<E> {
 		if (index == 0) {
 			return front.data;
 		} else {
-			return front.next.get(index - 1);
+			//return current.next.get(index - 1);
+			return front.get(index);
 		}
 	}
 	
@@ -59,7 +60,8 @@ public class LinkedListRecursive<E> {
         	front.data = element;
         	return oldElement;
         } else {
-        	return front.next.set(index - 1, element);
+        	//return front.next.set(index - 1, element);
+        	return front.set(index, element);
         }
 	}
 	
@@ -304,15 +306,24 @@ public class LinkedListRecursive<E> {
 		 * @param index Index of the element
 		 * @return data Data in the ListNode
 		 */
-		public E get(int index) {
-	        if (index < 0 || index >= size) {
-	            throw new IndexOutOfBoundsException();
-	        }
-	        if (index == 0) {
-	            return front.data;
-	        } else {
-	            return front.next.get(index - 1);
-	        }
+		private E get(int index) {
+			ListNode current = front;
+			int position = 1;
+			E elementAtIndex = null;
+			
+			if (position == index) {
+				//base case
+				elementAtIndex = current.data;
+				return elementAtIndex;
+			} 
+			else {
+				//recursive case
+				position++;
+				next.get(index);
+				//Calling next.add() would make the next Node the current node 
+				//and the add() method would be called on that node
+			}		
+			return elementAtIndex;			
 	    }
 		
 		/**
@@ -348,20 +359,24 @@ public class LinkedListRecursive<E> {
 		 * @param element The element at the index
 		 * @return data The data previously in the ListNode
 		 */
-		public E set(int index, E element) {
-	        if (index < 0 || index >= size) {
-	            throw new IndexOutOfBoundsException();
-	        }
-	        if (element == null) {
-	            throw new IllegalArgumentException();
-	        }
-	        if (index == 0) {
-	            E oldElement = front.data;
-	            front.data = element;
-	            return oldElement;
-	        } else {
-	            return front.next.set(index - 1, element);
-	        }
+		private E set(int index, E element) {
+			ListNode current = front;
+			int position = 1;
+			E elementPreviouslyAtIndex = null;
+			if (position == index) {
+				//base case
+				elementPreviouslyAtIndex = current.data;
+				current.data = element;
+				return elementPreviouslyAtIndex;
+			} 
+			else {
+				//recursive case
+				position++;
+				next.set(index, element);
+				//Calling next.add() would make the next Node the current node 
+				//and the add() method would be called on that node
+			}		
+			return elementPreviouslyAtIndex;
 	    }
 		
 		/**
