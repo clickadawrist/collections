@@ -83,15 +83,22 @@ public class LinkedListRecursiveTest {
 		
 		//Add element to the middle of a list
 		list.add(list.size() / 2, "cherry");
+		System.out.println(list.get(0));
+		System.out.println(list.get(1));
+		System.out.println(list.get(2));
 		//**^ the division symbol cuts off anything past the decimal point (I think)
 		assertEquals(3, list.size());
-		assertEquals("cherry", list.get(1));
+		assertEquals("cherry", list.get(2));
 		
 		//Add element to the back of a list
 		//**currently the list is size 3, last index at 2.
 		//**vv index @ 3 dragonfruit; meaning list.size() = 4th element is dragonfruit
 		list.add(list.size(), "dragonfruit");
 		assertEquals(4, list.size());
+/*		System.out.println(list.get(0));
+		System.out.println(list.get(1));
+		System.out.println(list.get(2));
+		System.out.println(list.get(3));*/
 		assertEquals("dragonfruit", list.get(3));
 		
 		//Attempt to add a null element.  Check that the element
