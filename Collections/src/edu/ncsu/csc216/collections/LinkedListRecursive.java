@@ -27,6 +27,7 @@ public class LinkedListRecursive<E> {
 	 * @return element At the specified position in this list
 	 */
 	public E get(int index) {
+		ListNode current = front;
 		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException();
 		}
@@ -34,7 +35,7 @@ public class LinkedListRecursive<E> {
 			return front.data;
 		} else {
 			//return current.next.get(index - 1);
-			return front.get(index);
+			return current.get(index);
 		}
 	}
 	
@@ -49,6 +50,7 @@ public class LinkedListRecursive<E> {
 	 * @return elementBeingReplaced At the specified position in this list with the specified element
 	 */
 	public E set(int index, E element) {
+		ListNode current = front;
 		if(element == null) {
 			throw new NullPointerException();
 		}
@@ -61,7 +63,7 @@ public class LinkedListRecursive<E> {
         	return oldElement;
         } else {
         	//return front.next.set(index - 1, element);
-        	return front.set(index, element);
+        	return current.set(index, element);
         }
 	}
 	
@@ -90,7 +92,7 @@ public class LinkedListRecursive<E> {
 			return true;
 		}
 		//insert in nonempty list
-		if (!(front == null)) {
+		if (!isEmpty()) {
 			front.add(element);
 			return true;
 		}
