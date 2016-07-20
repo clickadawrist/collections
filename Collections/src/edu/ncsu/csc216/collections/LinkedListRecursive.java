@@ -362,23 +362,16 @@ public class LinkedListRecursive<E> {
 		 * @return data The data previously in the ListNode
 		 */
 		private E set(int index, E element) {
-			E elementPreviouslyAtIndex = null;
-			
-			if (position == index) {
-				//base case
-				elementPreviouslyAtIndex = data;
-				data = element;
-				return elementPreviouslyAtIndex;
-			} 
-			else {
-				//recursive case
-				addPosition();
-				next.set(index, element);
-				//Calling next.add() would make the next Node the current node 
-				//and the add() method would be called on that node
-			}		
-			return elementPreviouslyAtIndex;
-	    }
+			//base case
+            if (index == 0) {
+                E previousElement = data;
+                data = element;
+                return previousElement;
+            } else {
+            	//go to the base which is at index 0
+                return next.set(index - 1, element);
+            }
+        }
 		
 		/**
 		 * Constructs a node.
