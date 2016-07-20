@@ -216,14 +216,23 @@ public class CourseTest {
 	 */
 	@Test
 	public void testDrop() {
-		//Attempt to drop a student not enrolled in the course
+		//Attempt to drop a student not enrolled in the course or the waitlist - should fail (see assertFalse)
 		Course c = new Course("CSC216", 3, 1);
 		Student s1 = new Student("first", "last", "flast", "first_last@ncsu.edu", "pw");
 		assertFalse(c.drop(s1));
+
+		Student s2 = new Student("firstname", "lastname", "flastname", "first_last@ncsu.edu", "pw");
 		
+		//add one student to the course
 		assertTrue(c.enroll(s1));
 		assertEquals(1, c.getEnrolledStudents().length);
-		assertTrue(c.drop(s1));
+		
+		/*//add another student to the course but that student should be waitlisted
+		assertTrue(c.enroll(s2));
+		assertEquals(1, c.getEnrolledStudents().length);
+		*/
+		c.drop(s1);
+		//assertTrue(c.drop(s1));
 		assertEquals(0, c.getEnrolledStudents().length);
 	}
 	

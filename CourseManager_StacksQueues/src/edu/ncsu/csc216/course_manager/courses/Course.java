@@ -15,7 +15,7 @@ public class Course implements Enrollable {
 	
 	/** A queue for students who want to enroll into a specific class. */
 	//added <User> to fix warnings
-	private Queue<User> waitlist;
+	private LinkedQueue<User> waitlist;
 	//Chose queue because the first waitlisted student should be the first one to
 	//enroll into the class aka leave the waitlist.
 	//Chose linkedList version of the queue since runtime is shorter for linked list
@@ -186,18 +186,23 @@ public class Course implements Enrollable {
 	public boolean drop(User user) {
 		//make temp queue
 		//if they're not already enrolled, then check waitlist
-		Queue<User> temp = new LinkedQueue<User>();
+		LinkedQueue<User> temp = new LinkedQueue<User>();
 		User student = null;
+		boolean foundUser = false;
 		if (!enrolledStudents.contains(user)) {
 			while(!waitlist.isEmpty()) {
 				//dequeued student is returned from dequeued method
 				student = waitlist.dequeue();
 				if (student.equals(user)) {
-					return true;
+					foundUser = true;
+					temp.enqueue(student);
+					//create boolean flag
+					//return true;
 				}
 				temp.enqueue(student);
-				waitlist = temp;
+				//
 			}
+			waitlist = temp;
 		}
 		return enrolledStudents.remove(user);
 	}
