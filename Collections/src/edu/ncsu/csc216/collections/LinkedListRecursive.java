@@ -152,41 +152,24 @@ public class LinkedListRecursive<E> {
 	 * @return element The element that was removed
 	 */
 	public E remove(int index) {
-		ListNode current = front; 
-		E elementBeingRemoved = null;
-		
-		if (isEmpty()) {
-			throw new IndexOutOfBoundsException();
-		}
-
-		if (index < 0 || index >= size()) {
-			throw new IndexOutOfBoundsException();
-		}
-		//removing from front of nonempty list of size 1
-		if (size() == 1) {
-			if (index == 0) {
-				elementBeingRemoved = front.data;
-				front = null;
-				size--;
-			}
-			return elementBeingRemoved;
-		}
-		//removing from nonempty list of size more than 1		
-		if (size() > 1) {
-			if (index == 0) {
-			//removing from front
-				elementBeingRemoved = front.data;
-				front = front.next;
-				size--;
-				return elementBeingRemoved;
-			}
-			//removing from middle or end 
-			else {
-				return current.remove(index);
-			}
-		}
-		return elementBeingRemoved;
-	}
+        if(index < 0 || index >= size) {
+        	throw new IndexOutOfBoundsException();
+        }
+        if(index == 0) {
+        	E previousElement = front.data;
+        	front = front.next;
+        	size--;
+        	return previousElement;
+        } else if(index == 1) {
+        	E previousElement = front.next.data;
+        	front.next = front.next.next;
+        	size--;
+        	return previousElement;
+        	
+        } else {
+        	return front.next.remove(index - 1);
+        }
+    }
 
 	/**
 	 * Returns the number of elements in this list.
@@ -336,24 +319,15 @@ public class LinkedListRecursive<E> {
 		 * @return data Generic element being removed
 		 */
 		private E remove(int idx) {
-			//return data;
-			E removedElement = null;
-			//adding to the middle
-			if (position == idx - 1) {
-				//base case
-				next = next.next;
-				size--;
-				removedElement = next.data;
-			} 
-			else {
-				//recursive case
-				position++;
-				next.remove(idx);
-				//Calling next.add() would make the next Node the current node 
-				//and the add() method would be called on that node
-			}		
-			return removedElement;
-		}
+    		if(idx == 1) {
+    			E previousElement = next.data;
+    			next = next.next;
+    			size--;
+    			return previousElement;
+    		} else {
+    			return next.remove(idx - 1);
+    		}
+    	}
 
 		/**
 		 * Sets an element at an index.
