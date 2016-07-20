@@ -167,12 +167,13 @@ public class Course implements Enrollable {
 				enrolledStudents.add(user);
 				return true;
 			}
-			
-			//If there is no space to enroll, add the student to the course's waitlist
-			while (waitListCounter < waitListCapacity) {
-				waitlist.enqueue(user);
-				waitListCounter++;
-				return true;
+			else {
+				//If there is no space to enroll, add the student to the course's waitlist
+				while (waitListCounter < waitListCapacity) {
+					waitlist.enqueue(user);
+					waitListCounter++;
+					return true;
+				}
 			}
 		}
 		return false;
