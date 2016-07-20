@@ -145,7 +145,7 @@ public class Course implements Enrollable {
 	 * Returns a Queue so that we can check the contents of the waitlist.
 	 * @return waitlist
 	 */
-	public Queue<User> getWaitlist() {
+	public LinkedQueue<User> getWaitlist() {
 		return waitlist;
 	}
 	
@@ -157,9 +157,11 @@ public class Course implements Enrollable {
 	 */
 	public boolean enroll(User user) {
 		//waitlist counter to keep track of how many students are in the waitlist
-		int waitListCounter = 0;
+		int waitListCounter = size();
 		//max number of student allowed in course's waitlist
 		int waitListCapacity = 5;
+		
+		boolean added = false;
 		//First check if student is already enrolled
 		if (!enrolledStudents.contains(user)) {
 			//If there is space to enroll, add the student to the course's list of students
@@ -172,11 +174,33 @@ public class Course implements Enrollable {
 				while (waitListCounter < waitListCapacity) {
 					waitlist.enqueue(user);
 					waitListCounter++;
-					return true;
+					added = true;
+					//return true;
 				}
+				return added;
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Gets the number of people in the waitlist.
+	 * @return numberOfUsersInWaitlist Number of users in waitlist
+	 */
+	private int size() {
+	//change to public when testing...actually I don't know
+	//Don't push as a public method though
+		int numberOfUsersInWaitlist = 0;
+		User removedUser = null;
+		LinkedQueue<User> temp = new LinkedQueue<User>();
+		while(!waitlist.isEmpty()) {
+			removedUser = waitlist.dequeue();
+			numberOfUsersInWaitlist++;
+			temp.enqueue(removedUser);
+			
+		}
+		waitlist = temp;
+		return numberOfUsersInWaitlist;
 	}
 	
 	/**

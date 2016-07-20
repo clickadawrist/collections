@@ -199,13 +199,34 @@ public class CourseTest {
 		Student s1 = new Student("first", "last", "flast", "first_last@ncsu.edu", "pw");
 		assertTrue(c.enroll(s1));
 		
-		//Set capacity to 1 so that the attempt to enroll a second student should fail
-		c.setCapacity(1);
-		Student s2 = new Student("first", "last", "flast", "first_last@ncsu.edu", "pw");
-		assertFalse(c.enroll(s2));
+		//Should be able to add this student to waitlist at 1st position
+		//c.setCapacity(1); //does not apply for this GUI lab
+		Student s2 = new Student("firstname", "last", "flast", "first_last@ncsu.edu", "pw");
+		assertTrue(c.enroll(s2));
+////////^^^ something is wrong here; it's adding this person 5 times
+		
+		//Should be able to add this student to waitlist at 2nd position
+		//c.setCapacity(2); //does not apply for this GUI lab
+		Student s3 = new Student("first", "lastname", "flast", "first_last@ncsu.edu", "pw");
+		assertTrue(c.enroll(s3));
+		
+		//Should be able to add this student to waitlist at 3rd position
+		Student s4 = new Student("first", "last", "flastname", "first_last@ncsu.edu", "pw");
+		assertTrue(c.enroll(s4));
+		
+		//Should be able to add this student to waitlist at 4th position
+		Student s5 = new Student("firstname", "lastname", "flast", "first_last@ncsu.edu", "pw");
+		assertTrue(c.enroll(s5));
+		
+		//Should be able to add this student to waitlist at 5th position
+		Student s6 = new Student("firstname", "lastname", "flastname", "first_last@ncsu.edu", "pw");
+		assertTrue(c.enroll(s6));
+		//Should be able to add this student to waitlist at 6th position
+		Student s7 = new Student("fname", "last", "flast", "first_last@ncsu.edu", "pw");
+		assertFalse(c.enroll(s7));
 		
 		//Attempt to enroll a student in the same course
-		c.setCapacity(2);
+		//c.setCapacity(2);
 		assertFalse(c.enroll(s1));
 		
 		//canEnroll() is tested through enroll()
