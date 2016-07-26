@@ -6,13 +6,23 @@ import edu.ncsu.csc216.course_manager.courses.Course;
  * A Student User in the Course Management system.  A student has a list of
  * classes they are enrolled in.
  * 
- * @author SarahHeckman
+ * @author SarahHeckman and Manaka Green
  */
 public class Student extends User {
 	
 	private int maxCredits;
 	/** Default MAX credits a student can register for */
 	public static final int MAX_CREDITS = 18;
+	
+	/**
+	 * Creates a new user with the following parameters.
+	 * @param firstName User's first name
+	 * @param lastName Users' last name
+	 * @param id User's id plus "@ncsu.edu"
+	 */
+	public Student(String firstName, String lastName, String id) {
+		this(firstName, lastName, id, id + "@ncsu.edu", id, MAX_CREDITS);
+	}
 	
 	/**
 	 * Creates a new user with the following information.  If any of the inputs are
