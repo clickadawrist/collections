@@ -10,7 +10,7 @@ public class LinkedListRecursive<E> {
 	private ListNode front;
 	/** The amount of elements in the list. */
 	private int size;
-
+	/** The number for position. */
 	private int position; 
 
 	/**
@@ -64,7 +64,6 @@ public class LinkedListRecursive<E> {
         	front.data = element;
         	return oldElement;
         } else {
-        	//return front.next.set(index - 1, element);
         	return current.next.set(index - 1, element);
         }
 	}
@@ -191,39 +190,7 @@ public class LinkedListRecursive<E> {
 		}
 		return false;
 	}
-	
-/*	*//**
-	 * Returns true if this list contains the specified element. 
-	 * @param element Element to search for in the list
-	 * @throws NullPointerException If the specified element is null 
-	 * and this list doesn't permit null elements
-	 * @return true If this list contains the specified element
-	 *//*
-	public boolean contains(E element) {
-		if (element == null) {
-			throw new NullPointerException();
-		}
-		
-		return true;
-	}*/
 
-/*	*//**
-	 * Returns the index of the first occurrence of the specified element in this list, 
-	 * or -1 if this list does not contain the element.
-	 * @param element Element to search for in the list
-	 * @throws NullPointerException If the specified element is null
-	 * and this list doesn't permit null elements
-	 * @return location Index of the first occurrence of the specified element in this list, 
-	 * or -1 if this list does not contain the element
-	 *//*
-	public int indexOf(E element) {
-		if (element == null) {
-			throw new NullPointerException();
-		}
-		int location = 0;
-		return location;
-	}*/
-	
 	/**
 	 * Inner node class that constructs generic nodes.
 	 * @author Manaka Green and Jerry Zhang
@@ -233,13 +200,10 @@ public class LinkedListRecursive<E> {
 		public E data;
 		/** Type list node pointer to next node. */
 		public ListNode next;
-				
-
 		
 		private int addPosition() {
 			return position++;
 		}
-		
 		
 		/**
 		 * Uses recursion to add to the end of the list when next is null.
