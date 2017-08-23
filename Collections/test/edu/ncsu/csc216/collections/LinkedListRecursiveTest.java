@@ -16,7 +16,7 @@ public class LinkedListRecursiveTest {
 	private LinkedListRecursive<String> list;
 	
 	/**
-	 * Sets up variables for testing CSC216LinkedList class.
+	 * Sets up variables for testing LinkedListRecursive class.
 	 * @throws java.lang.Exception
 	 */
 	@Before
@@ -25,7 +25,7 @@ public class LinkedListRecursiveTest {
 	}
 
 	/**
-	 * Tests that a CSC216LinkedList is constructed correctly.  A CSC216LinkedList of
+	 * Tests that a LinkedListRecursive is constructed correctly.  A LinkedListRecursive of
 	 * any generic type should be not null and empty, which implies a size of 0.
 	 */
 	@Test
@@ -35,7 +35,6 @@ public class LinkedListRecursiveTest {
 			list.get(0);
 			list.remove(0);
 			list.set(0, "fruit");
-			//list.get(0);
 			fail("Didn't catch IndexOutOfBoundsException.");
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(0, list.size());
@@ -52,8 +51,8 @@ public class LinkedListRecursiveTest {
 	}
 
 	/**
-	 * Tests adding elements to an empty CSC216LinkedList.  Then tests adding elements to the 
-	 * front, middle, and back of a CSC216LinkedList.  The size and contents should be checked
+	 * Tests adding elements to an empty LinkedListRecursive.  Then tests adding elements to the 
+	 * front, middle, and back of a LinkedListRecursive.  The size and contents should be checked
 	 * after each insertion.  Additionally, the bounds of the list should be checked and null
 	 * elements should not be added to the list.  Finally, test that the LinkedList with an
 	 * initial capacity of 10 grows when an 11th element is added.
@@ -92,13 +91,9 @@ public class LinkedListRecursiveTest {
 		//**vv index @ 3 dragonfruit; meaning list.size() = 4th element is dragonfruit
 		list.add(list.size(), "dragonfruit");
 		assertEquals(4, list.size());
-/*		System.out.println(list.get(0));
-		System.out.println(list.get(1));
-		System.out.println(list.get(2));
-		System.out.println(list.get(3));*/
 		assertEquals("dragonfruit", list.get(3));
 		
-		//Attempt to add a null element.  Check that the element
+		//Attempt to add a null element. Check that the element
 		//was not added.
 		try {
 			list.add(0, null);
@@ -278,7 +273,7 @@ public class LinkedListRecursiveTest {
 		//Set middle element.  Test that the element is modified correctly, set() returns the
 		//right value, and that the rest of the list is correct.
 		String s1 = list.set(list.size() / 2, "strawberry");
-		//^^ what is set doing...
+		//^^ what is set doing...nvm
 		assertEquals("apple", s1);
 		assertEquals(4, list.size());
 		assertEquals("banana", list.get(0));
@@ -340,8 +335,7 @@ public class LinkedListRecursiveTest {
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(0, list.size());
 		}
-		
-		
+			
 		//Add 4 elements to the list and test that the contents are correct.
 		//list.add(0, "banana");
 		list.add(0, "cherry");
@@ -352,7 +346,6 @@ public class LinkedListRecursiveTest {
 		list.add(0, "banana");
 		assertEquals(4, list.size());
 		assertEquals("banana", list.get(0));
-		
 		
 		//Make sure everything's in order
 		assertEquals(4, list.size());
@@ -388,6 +381,4 @@ public class LinkedListRecursiveTest {
 			assertEquals("dragonfruit", list.get(3));
 		}
 	}
-
-	
 }
