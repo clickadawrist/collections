@@ -26,7 +26,6 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 	 */
 	@SuppressWarnings("unchecked")
 	public ArrayBasedList() {
-		//super();
 		arrayBasedList = (E[]) (new Object[10]);
 		this.size = 0;
 	}
@@ -96,11 +95,6 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 	@Override
 	public void add(int index, E element) {
 		ensureCapacity(size + 1);
-
-		/*if (arrayBasedList[index] == null) {
-			throw new IndexOutOfBoundsException();
-		}*/
-
 		// index @8 example:  [A, B, C, D, E, F, G, H] index 0-7, length=8
 		// index @8 added: [A, B, C, D, E, F, G, H, I] index 0-8, length=9
 		if (index < 0 || index > arrayBasedList.length) {
@@ -122,10 +116,10 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 			}
 		}
 		
-		// adds element to the end of the list (capacity 10 or more)
-		// before example: [A, B, C, D, E, F, G, H] index 0-7, length=8
-		/*
-		 * //after example: [A, B, C, D, E, F, G, H, I] if(index ==
+		/* adds element to the end of the list (capacity 10 or more)
+		 * before example: [A, B, C, D, E, F, G, H] index 0-7, length=8
+		 *
+		 * after example: [A, B, C, D, E, F, G, H, I] if(index ==
 		 * arrayBasedList.length) { arrayBasedList[size] = element; }
 		 */
 
