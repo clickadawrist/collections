@@ -7,16 +7,16 @@ import org.junit.Test;
 import edu.ncsu.csc216.collections.LinkedListAL;
 
 /**
- * Tests CSC216LinkedList class.
+ * Tests LinkedListAL class.
  * @author SarahHeckman and Manaka Green and Jerry Zhang
  */
 public class LinkedListALTest {
 	
-	/** CSC216LinkedList named list for testing methods. */
+	/** LinkedListAL named list for testing methods. */
 	private LinkedListAL<String> list;
 	
 	/**
-	 * Sets up variables for testing CSC216LinkedList class.
+	 * Sets up variables for testing LinkedListAL class.
 	 * @throws java.lang.Exception
 	 */
 	@Before
@@ -25,7 +25,7 @@ public class LinkedListALTest {
 	}
 
 	/**
-	 * Tests that a CSC216LinkedList is constructed correctly.  A CSC216LinkedList of
+	 * Tests that a LinkedListAL is constructed correctly.  A LinkedListAL of
 	 * any generic type should be not null and empty, which implies a size of 0.
 	 */
 	@Test
@@ -35,7 +35,6 @@ public class LinkedListALTest {
 			list.get(0);
 			list.remove(0);
 			list.set(0, "fruit");
-			//list.get(0);
 			fail("Didn't catch IndexOutOfBoundsException.");
 		} catch (IndexOutOfBoundsException e) {
 			assertEquals(0, list.size());
@@ -52,8 +51,8 @@ public class LinkedListALTest {
 	}
 
 	/**
-	 * Tests adding elements to an empty CSC216LinkedList.  Then tests adding elements to the 
-	 * front, middle, and back of a CSC216LinkedList.  The size and contents should be checked
+	 * Tests adding elements to an empty LinkedListAL.  Then tests adding elements to the 
+	 * front, middle, and back of a LinkedListAL.  The size and contents should be checked
 	 * after each insertion.  Additionally, the bounds of the list should be checked and null
 	 * elements should not be added to the list.  Finally, test that the LinkedList with an
 	 * initial capacity of 10 grows when an 11th element is added.
@@ -153,7 +152,7 @@ public class LinkedListALTest {
 		}
 		
 		//Add 4 elements to the list and test that the contents are correct.
-		//Reuse code from your testAddIntE.
+		//"Reuse code from your testAddIntE."
 		list.add(0, "banana");
 		list.add(1, "cherry");
 		list.add(2, "apple");
@@ -233,7 +232,7 @@ public class LinkedListALTest {
 		}
 		
 		//Add 4 elements to the list and test that the contents are correct.
-		//Reuse code from your testAddIntE.
+		//"Reuse code from your testAddIntE."
 		list.add(0, "banana");
 		list.add(1, "cherry");
 		list.add(2, "apple");
@@ -274,7 +273,7 @@ public class LinkedListALTest {
 		//Set middle element.  Test that the element is modified correctly, set() returns the
 		//right value, and that the rest of the list is correct.
 		String s1 = list.set(list.size() / 2, "strawberry");
-		//^^ what is set doing...
+		//^^ what is set doing...nvm
 		assertEquals("apple", s1);
 		assertEquals(4, list.size());
 		assertEquals("banana", list.get(0));
@@ -337,7 +336,6 @@ public class LinkedListALTest {
 			assertEquals(0, list.size());
 		}
 		
-		
 		//Add 4 elements to the list and test that the contents are correct.
 		//list.add(0, "banana");
 		list.add(0, "cherry");
@@ -383,7 +381,5 @@ public class LinkedListALTest {
 			assertEquals("apple", list.get(2));
 			assertEquals("dragonfruit", list.get(3));
 		}
-	}
-
-	
+	}	
 }
